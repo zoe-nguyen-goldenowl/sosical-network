@@ -1,0 +1,171 @@
+.row{
+	width:100%;
+	height: 100%;
+	display: flex;
+	
+}
+
+.column1{
+	padding-top: 100px;
+	width: 50%;
+	position: relative;
+}
+
+.column2{
+	padding-top: 70px;
+	width: 50%;
+	position: relative;
+}
+
+.text{
+	position: absolute;
+	text-align: left;
+	transform: translate(50%, 50%);
+}
+.text h1{
+	color: blue;
+	font-weight: bold;
+	font-size: 65px;
+}
+
+.text p{
+	font-weight: bolder;
+	margin-bottom: 1rem;
+	text-align: left;
+	position: relative;
+	font-size: 24px;
+}
+
+.form_login{
+	position: absolute;
+	width: 400px;
+	height: 350px;
+	background-color: #fff;
+	left: 80px;
+	text-align: center;
+	border-radius: 10px;
+	box-shadow: 2px 2px 1px 1px #a69d9d38;
+}
+
+.form-group{
+	margin: 20px;
+}
+
+.form-group input{
+	height: 50px;
+	border-radius: 5px;
+	box-shadow: 2px 2px 1px 1px #a69d9d38;
+}
+
+.submit{
+	width: auto;
+}
+.submit .btn{
+	width: 360px;
+	height: 50px;
+	margin-top: 0px;
+}
+
+.create{
+	width: 180px;
+	height: 50px;
+	border-radius: 5px;
+	background-color: rgb(64, 213, 71);
+	margin-top: 15px;
+}
+
+.text-center{
+	margin-top: 10px;
+	font-size: 14px;
+	color: rgb(8, 85, 228);
+
+}
+
+.text-center text{
+	margin-top: 25px;
+	height: 40px;
+	font-size: 20px;
+}
+.create p{
+	margin-top: 0px;
+	margin-bottom: 0rem;
+	font-size: 16px;
+	font-weight: bold;
+	color: #fff;
+}
+
+#exampleModalLong{
+	width: 500px;
+	height: auto;
+	background-color: #fff;
+	border-radius: 10px;
+	top: 50px;
+	left: 30%;
+}
+
+.wrap-input100 input{
+	height: 40px;
+	width: 100%;
+	border-radius: 5px;
+	margin: 5px;
+}
+.customselect{
+	width: 100%;
+	margin-bottom: 5px;
+	height: 40px;
+	margin-left: 5px;
+	background-color: #f4f7ef;
+	margin-top: 5px;
+}
+
+.picker{
+	width: 100%;
+	border-radius: 5px;
+	position: relative;
+	margin-left: 2px;
+	margin-top: 5px;
+	height: 40px;
+	background-color: #b6bddb4f;
+}
+
+#btn_signup{
+	margin-top: 15px;
+	margin-bottom: 20px;
+	width: 200px;
+	height: 55px;
+	background-color: #25a825;
+	border-radius: 5px;
+	font-size: 35px;
+	font-weight: bold;
+	color: #fff;
+	font-style: italic;
+	box-shadow: 3px 3px #c5cecc;
+}
+.btn_signup{
+	text-align: center;
+}
+.modal h2{
+	font-size: 45px;
+	font-weight: bold;
+	margin-left: 20px;
+	color: rgb(31, 108, 223);
+	margin: 10px;
+}
+.col label{
+	display: inline-block;
+	margin-bottom: 0.5rem;
+	top: 15px;
+	position: relative;
+	margin-left: 4px;
+}
+.center{
+	width: 500px;
+height: auto;
+background-color: #fff;
+border-radius: 10px;
+left: 30%;
+position: relative;
+}
+.center h2{
+	text-align: center;
+}
