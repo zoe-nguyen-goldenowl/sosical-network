@@ -16,12 +16,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     build_resource(sign_up_params)
 
     if resource.save
-      flash[:edit] = "create account successful!"
       redirect_to home_index_path
     else
-      set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
-        expire_data_after_sign_in!
-        respond_with resource, location: after_inactive_sign_up_path_for(resource)
+      render :edit
     end
 
   end
@@ -72,7 +69,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:email,:password, :password_confirmation, :first_name,:last_name,:phone,:gender,:date_of_birth])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email,:password, :password_confirmation, :first_name,:last_name,:phone,:date_of_birth,:gender])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
@@ -96,6 +93,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
  
   private
   def sign_up_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name, :phone, :gender, :date_of_birth)
+    params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name, :phone, :date_of_birth, :gender)
   end
 end

@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  resources :votes
+  resources :posts
   get 'home/index'
-  
-  root to: "home#index"
+
+  root to: "posts#index"
   # devise_for :users
   devise_for :users, controllers: {
     registrations: 'users/registrations'

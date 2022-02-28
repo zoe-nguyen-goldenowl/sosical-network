@@ -1,145 +1,146 @@
-
-<div class="row">
-  <div class="column1">
-    <div class="text">
-      <h1>facebook</h1>
-      <p>Facebook helps you connect and share <br> <br>with the people in your life.</p>
+<div class="body_sign_in">
+  <div class="row">
+    <div class="column1">
+      <div class="text">
+        <h1>facebook</h1>
+        <p>Facebook helps you connect and share <br> <br>with the people in your life.</p>
+      </div>
     </div>
-  </div>
 
-  <div class="column2">
-    <div class="form_login">
-      
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <div class="form-group">
-          <%= f.email_field  :email, class:"form-control", id:"exampleInputEmail1", placeholder:"Email address"%>
-        </div>
-
-        <div class="form-group">
-          <%= f.password_field :password, placeholder:"Password",class:"form-control", id:"exampleInputPassword1"%>
-        </div>
-
-        <div class="submit">
-          <%= f.submit "Log in" ,class:"btn btn-primary" %>
-        </div>
-
-        <div>
-          <div class="text-center p-t-12">
-            <%= render "devise/shared/links" %>
-              <hr>
-          </div>
-
-          <button type="button" class="create " data-toggle="modal" data-target="#exampleModalLong">
-            <p>Create New Account</p>
-          </button>
-        </div>
-      <%end%>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"> 
-  <h2> Sign up</h2>
-  <hr>
-  <%= form_for(resource, as: resource_name, url: user_registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          
-          <div class="wrap-input100 validate-input" data-validate = "">
-            <%= f.text_field :first_name , placeholder: "First name", class: "input100", autofocus: true, autocomplete: "first name" %>
-              <span class="focus-input100"></span>
-              <span class="symbol-input100">
-                <i class="bi bi-info-circle"></i>
-              </span>
-          </div>
-        </div>
-        <div class="col">
-          <div class="wrap-input100 validate-input" data-validate = "">
-            <%= f.text_field :last_name, placeholder: "Last name", class: "input100", autofocus: true, autocomplete: "last name" %>
-              <span class="focus-input100"></span>
-              <span class="symbol-input100">
-                <i class="bi bi-info-circle"></i>
-              </span>
-          </div>
-        </div>
-
-        <div class="w-100"></div>
-        <div class="col">
-          <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-            <%= f.email_field :email, placeholder: "Email", class: "input100", autofocus: true, autocomplete: "email" %>
-              <span class="focus-input100"></span>
-              <span class="symbol-input100">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-              </span>
-          </div>
-        </div>
-        <div class="w-100"></div>
-        <div class="col">
-          <div class="wrap-input100 validate-input" data-validate = "">
-            <%= f.text_field :phone, placeholder: "phone", class: "input100", autofocus: true, autocomplete: "phone" %>
-              <span class="focus-input100"></span>
-              <span class="symbol-input100">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-              </span>
-          </div>
-        </div>
-
-        <div class="w-100"></div>
-        <div class="col">
-           <div class="wrap-input100 validate-input" data-validate = "Password is required">
-            <%= f.password_field :password, placeholder: "password",class: "input100", autocomplete: "new-password" %>
-            <span class="focus-input100"></span>
-            <span class="symbol-input100">
-              <i class="fa fa-lock" aria-hidden="true"></i>
-            </span>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="wrap-input100 validate-input" data-validate = "Password is required">                          
-            <%= f.password_field :password_confirmation, placeholder: "password confirm",class: "input100", autocomplete: "new-password" %>
-            <span class="focus-input100"></span>
-            <span class="symbol-input100">
-              <i class="fa fa-lock" aria-hidden="true"></i>
-            </span>
-          </div>
-        </div>
-
-        <div class="w-100"></div>
-        <div class="col">
-        <label>Gender</label>
-          <div class="wrap-input100 validate-input">
-            <%= select_tag(:gender, options_for_select([["Male",1],["Female",2]], params[:gender] ), class:"customselect", id:"inputGroupSelect01") %>
-          </div>
-        </div>
-
-        <div class="w-100"></div>
-        <div class="col">
-        <label>Date of birth</label>
-          <div class="picker validate-input" data-validate = "Date of birth invalidate">
-            <%=f.text_field :date_of_birth, placeholder:"Date of birth", id:"datepicker",class:"picker"%>
-            <script>
-              $('#datepicker').datepicker({
-                  uiLibrary: 'bootstrap4'
-              });
-            </script>
-          </div>
-        </div>
-
-        <div class="w-100"></div>
-        <div class="col">
-        </div>
-
+    <div class="column2">
+      <div class="form_login">
         
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="form-group">
+            <%= f.email_field  :email, class:"form-control", id:"exampleInputEmail1", placeholder:"Email address"%>
+          </div>
 
+          <div class="form-group">
+            <%= f.password_field :password, placeholder:"Password",class:"form-control", id:"exampleInputPassword1"%>
+          </div>
+
+          <div class="submit">
+            <%= f.submit "Log in" ,class:"btn btn-primary" %>
+          </div>
+
+          <div>
+            <div class="text-center p-t-12">
+              <%= render "devise/shared/links" %>
+                <hr>
+            </div>
+
+            <button type="button" class="create " data-toggle="modal" data-target="#exampleModalLong">
+              <p>Create New Account</p>
+            </button>
+          </div>
+        <%end%>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"> 
+    <h2> Sign up</h2>
+    <hr>
+    <%= form_for(resource, as: resource_name, url: user_registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            
+            <div class="wrap-input100 validate-input" data-validate = "">
+              <%= f.text_field :first_name , placeholder: "First name", class: "input100", autofocus: true, autocomplete: "first name" %>
+                <span class="focus-input100"></span>
+                <span class="symbol-input100">
+                  <i class="bi bi-info-circle"></i>
+                </span>
+            </div>
+          </div>
+          <div class="col">
+            <div class="wrap-input100 validate-input" data-validate = "">
+              <%= f.text_field :last_name, placeholder: "Last name", class: "input100", autofocus: true, autocomplete: "last name" %>
+                <span class="focus-input100"></span>
+                <span class="symbol-input100">
+                  <i class="bi bi-info-circle"></i>
+                </span>
+            </div>
+          </div>
+
+          <div class="w-100"></div>
+          <div class="col">
+            <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+              <%= f.email_field :email, placeholder: "Email", class: "input100", autofocus: true, autocomplete: "email" %>
+                <span class="focus-input100"></span>
+                <span class="symbol-input100">
+                  <i class="fa fa-envelope" aria-hidden="true"></i>
+                </span>
+            </div>
+          </div>
+          <div class="w-100"></div>
+          <div class="col">
+            <div class="wrap-input100 validate-input" data-validate = "">
+              <%= f.text_field :phone, placeholder: "phone", class: "input100", autofocus: true, autocomplete: "phone" %>
+                <span class="focus-input100"></span>
+                <span class="symbol-input100">
+                  <i class="fa fa-envelope" aria-hidden="true"></i>
+                </span>
+            </div>
+          </div>
+
+          <div class="w-100"></div>
+          <div class="col">
+            <div class="wrap-input100 validate-input" data-validate = "Password is required">
+              <%= f.password_field :password, placeholder: "password",class: "input100", autocomplete: "new-password" %>
+              <span class="focus-input100"></span>
+              <span class="symbol-input100">
+                <i class="fa fa-lock" aria-hidden="true"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="wrap-input100 validate-input" data-validate = "Password is required">                          
+              <%= f.password_field :password_confirmation, placeholder: "password confirm",class: "input100", autocomplete: "new-password" %>
+              <span class="focus-input100"></span>
+              <span class="symbol-input100">
+                <i class="fa fa-lock" aria-hidden="true"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="w-100"></div>
+          <div class="col">
+          <label>Gender</label>
+            <div class="wrap-input100 validate-input">
+              <%= f.select(:gender, options_for_select([["Male",1],["Female",2]], params[:gender] ), class:"customselect", id:"inputGroupSelect01") %>
+            </div>
+          </div>
+
+          <div class="w-100"></div>
+          <div class="col">
+          <label>Date of birth</label>
+            <div class="picker validate-input" data-validate = "Date of birth invalidate">
+              <%=f.text_field :date_of_birth, placeholder:"Date of birth", id:"datepicker",class:"picker"%>
+              <script>
+                $('#datepicker').datepicker({
+                    uiLibrary: 'bootstrap4'
+                });
+              </script>
+            </div>
+          </div>
+
+          <div class="w-100"></div>
+          <div class="col">
+          </div>
+
+          
+
+        </div>
+
+        <div class="btn_signup">
+              <%= f.submit "Sign up", class:"login100-form-btn", id:"btn_signup" %>
+            </div>
       </div>
 
-      <div class="btn_signup">
-            <%= f.submit "Sign up", class:"login100-form-btn", id:"btn_signup" %>
-          </div>
-    </div>
-
-  <%end%>
-</div>
+    <%end%>
+  </div>
+</div> 

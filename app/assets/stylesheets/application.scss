@@ -14,18 +14,113 @@
  *= require_self
  */
  @import "bootstrap/scss/bootstrap";
-
+ $link-hover-color:           rgb(184, 229, 255); //green
 body{
     background-color: #f0f2f5;
-    h4{
-        color: blue;
-        font-weight: bold;
-        font-size: 40px;
-        text-align: left;
-        margin-left: 20px;
-    }
-    .menu_top{
+    .top_menu{
+        background-color: #fff;
+        height: 60px;
+        .containers{
+            max-width: 100%;
+            .contain{
+                max-width: 100%;
+            }         
+        }
+    }    
+}
+.menu_top_center{
+    width: 100%;
+    position: absolute;
+    z-index: 100;
+    text-align: center;
+    margin-top: 10px;
 
-        
+}
+.menu_top_center i{
+    font-size: 25px;
+    margin: 30px;
+}
+
+.size_btn{
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    font-size: 20px;
+    padding: 5px;
+}
+.menu_top_left{
+    display: flex;
+}
+.current_account{
+    width: 150px;
+    display: flex;
+    border-radius: 10px;
+    margin-top: 5px;
+    .img_user{
+        width: 30px;
+        height: 30px;
+        border-radius: 30px;
+        text-align: center;
+        font-size: 25px;
+
+    }
+    .name_user{
+        margin-top: 5px;
+        margin-left: 10px;
     }
 }
+.current_account:hover{
+    background-color: rgb(214, 235, 236);
+}
+
+.content_left{
+    padding: 10px;
+    width: 250px;
+    overflow: hidden;
+    .menu_left{
+        list-style-type: none;
+        .item_menu_left{
+            height: 40px;
+            border-radius: 10px;
+            margin: 10px;
+            left: -35px;
+            position: relative;
+            padding: 5px;
+            font-size: 15px;
+            i{
+                padding-right: 30px;
+            }
+        }
+    }
+}
+
+.item_menu_left:hover{
+    background-color: rgba(95, 92, 104, 0.219);
+}
+.li_bg:hover{
+   list-style: none;
+}
+
+.content_rigth{
+    padding: 10px;
+    width: 270px;
+    margin-top: 10px;
+}
+
+.content_center{
+    width: 100%;
+    height: 480px;
+    margin: 20px;
+    background-color: #fff;
+    overflow: scroll;
+    border-radius: 10px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.content_center::-webkit-scrollbar { 
+    width: 0 !important;
+    display: none; 
+  }

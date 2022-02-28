@@ -17,34 +17,98 @@
   </head>
 
   <body>
-    <%if user_signed_in?%>
-    <h4>facebook</h4>
-      <div class="menu_top"></div>
-        <ul class="nav justify-content-center">
-          <li class="nav-item">
-            <%=link_to "Edit user", edit_user_registration_path%>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-        </ul>
+    <div class="containers">
+      <div class="row">
+        <div class="col">
+          <%if user_signed_in?%>
+            <div class="top_menu">
+              <div class="contain">
+                <div class="row">
+                  <div class="col-sm">
+                    <nav class="navbar navbar-light ">
+                      <form class="form-inline">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search on facebook" aria-label="Search">
+                        <button class="btn btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+                      </form>
+                    </nav>
+                  </div>
+
+                  <div class="col-sm">
+                    <div class="menu_top_center">
+                     <i class="bi bi-house-door-fill" > <%link_to %></i>
+                     <i class="bi bi-play-btn-fill"> <%link_to %></i>
+                     <i class="bi bi-person-circle"> <%link_to %></i>
+                     <i class="bi bi-chat-square-heart-fill"> <%link_to %></i>      
+                    </div>
+                  </div>
+
+                  <div class="col-sm">
+                    <div class="menu_top_left">
+                      <div class="current_account btn">
+                        <div class="img_user">
+                          <i class="bi bi-person-bounding-box"></i>
+                        </div>
+
+                        <div class="name_user">
+                          Thanh Nhi
+                        </div>
+                      </div>
+                      <button type="button" class="size_btn btn btn btn-light "><i class="bi bi-card-list"></i></button>
+                      <button type="button" class="size_btn btn btn btn-light "><i class="bi bi-chat-dots"></i></button>
+                      <button type="button" class="size_btn btn btn btn-light "><i class="bi bi-bell"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>  
+          <%end%>
+        </div>
       </div>
-    <%end%>
 
-  <div class="conten_center">
-    <div class="container-fluid">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+      <div class="row">
+      <div class="col">
+        <%if user_signed_in?%>
+          <div class="content_left">
+            <div class="current_account btn">
+              <div class="img_user">
+                <i class="bi bi-person-bounding-box"></i>
+              </div>
+
+              <div class="name_user">
+                Thanh Nhi
+              </div>
+            </div>  
+
+            <ul class="menu_left">
+              <li class="item_menu_left"><i class="bi bi-people" style="font-size: 23px; color: cornflowerblue;" ></i><%=link_to "  Friends"%></li>
+              <li class="item_menu_left"><i class="bi bi-clock-history" style="font-size: 23px; color: cornflowerblue;"></i><%=link_to "  Memories"%></li>
+              <li class="item_menu_left"><i class="bi bi-camera-video" style="font-size: 23px; color: cornflowerblue;"></i><%=link_to " Watch"%></li>
+              <li class="item_menu_left"><i class="bi bi-star" style="font-size: 23px; color: cornflowerblue;"></i><%=link_to " Farvorites"%></li>
+            </ul> 
+          </div>
+        <%end%>
+      </div>
+      <div class="col">
+        <div class="content_center">
+         <%= yield %>
+        </div>
+      </div>
+      <div class="col">
+        <%if user_signed_in?%>
+          <div class="content_rigth">
+              <div class="card" >
+                <div class="card-body">
+                  <h6 class="card-title"><i class="bi bi-people-fill"></i>  Friend requests</h6>
+                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                  <p class="card-text">Some quick example text to build on the card titl.</p>
+                  <a href="#" class="card-link">Confirm</a>
+                  <a href="#" class="card-link">Delete</a>
+                </div>
+              </div>
+          </div>
+        <%end%>  
+      </div>
+      </div>
     </div>
-
-    <%= yield %>
-  </div>
-
   </body>
 </html>
