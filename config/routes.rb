@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  resources :votes
+  resources :friends
+  resources :likes
   resources :posts
   get 'home/index'
 
   root to: "posts#index"
-  # devise_for :users
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }

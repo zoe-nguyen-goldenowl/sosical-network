@@ -1,48 +1,48 @@
 require "test_helper"
 
-class VotesControllerTest < ActionDispatch::IntegrationTest
+class LikesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @vote = votes(:one)
+    @like = likes(:one)
   end
 
   test "should get index" do
-    get votes_url
+    get likes_url
     assert_response :success
   end
 
   test "should get new" do
-    get new_vote_url
+    get new_like_url
     assert_response :success
   end
 
-  test "should create vote" do
-    assert_difference('Vote.count') do
-      post votes_url, params: { vote: {  } }
+  test "should create like" do
+    assert_difference('Like.count') do
+      post likes_url, params: { like: {  } }
     end
 
-    assert_redirected_to vote_url(Vote.last)
+    assert_redirected_to like_url(Like.last)
   end
 
-  test "should show vote" do
-    get vote_url(@vote)
+  test "should show like" do
+    get like_url(@like)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_vote_url(@vote)
+    get edit_like_url(@like)
     assert_response :success
   end
 
-  test "should update vote" do
-    patch vote_url(@vote), params: { vote: {  } }
-    assert_redirected_to vote_url(@vote)
+  test "should update like" do
+    patch like_url(@like), params: { like: {  } }
+    assert_redirected_to like_url(@like)
   end
 
-  test "should destroy vote" do
-    assert_difference('Vote.count', -1) do
-      delete vote_url(@vote)
+  test "should destroy like" do
+    assert_difference('Like.count', -1) do
+      delete like_url(@like)
     end
 
-    assert_redirected_to votes_url
+    assert_redirected_to likes_url
   end
 end

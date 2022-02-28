@@ -1,61 +1,64 @@
-<%@posts.each do |post|%>
-  <div class="container">
-    <div class="row">
-      <div class="col">
-      
-      <%=link_to "detail", edit_post_path(post)%>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col">
-        <div class="conten">
-        <%= post.content%>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col">
-        <div class="image">
+<div id="container">
+  <%@posts.each do |post|%>
+    <div class="container" >
+      <div class="row">
+        <div class="col">
         
-          <% if post.image.persisted? %>
-            <%= image_tag post.image %>
-          <%end%>
+        <%=link_to "detail", edit_post_path(post)%>
         </div>
-
-      
       </div>
-    </div>
-  
-    <div class="row">
-      <div class="count_vote">
 
-      </div>
+      <div class="row">
         <div class="col">
-
-        </div>
-        <div class="col">
-          
-        </div>
-    </div>
-
-    <div class="row">
-       <div class="col">
-          <div class="vote">
-          <%= link_to 'Like', votes_url(users_id: current_user.id, posts_id: post.id), method: :post  %> 
+          <div class="conten">
+          <%= post.content%>
           </div>
         </div>
-    </div>
-  </div>
- <%end%>
-
- <%= form_with url:posts_path, method: :post, local: false do |f| %>
-    <div class="field">
-        <%= f.text_area :content, placeholder: "Create content post ..." %>
       </div>
-      <%= f.submit "Post", class: "btn btn-primary" %>
-      <span class="picture">
-        <%= f.file_field :image, accept: "image/jpeg, image/gif, image/png, image/jpg" %>
-      </span>
-  <% end %>
+
+      <div class="row">
+        <div class="col">
+          <div class="image">
+          
+            <% if post.image.persisted? %>
+              <%= image_tag post.image %>
+            <%end%>
+          </div>
+
+        
+        </div>
+      </div>
+    
+      <div class="row">
+        <div class="count_like">
+
+        </div>
+          <div class="col">
+
+          </div>
+          <div class="col">
+            
+          </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+            <div class="like">
+            <%= link_to 'Like', likes_url(users_id: current_user.id, posts_id: post.id), method: :post  %> 
+            </div>
+          </div>
+      </div>
+    </div>
+  <%end%>
+
+  <%= form_with model: @post, method: :post, local: false do |f| %>
+    <div class="field">
+      <%= f.text_area :content, placeholder: "Create content post ..." %>
+    </div>
+    
+    <%= f.submit "Post", class: "btn btn-primary" %>
+    <span class="picture">
+      <%= f.file_field :image, accept: "image/jpeg, image/gif, image/png, image/jpg" %>
+    </span>
+  <%end%>
+</div>

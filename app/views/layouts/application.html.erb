@@ -50,7 +50,7 @@
                         </div>
 
                         <div class="name_user">
-                          Thanh Nhi
+                          <%= current_user.first_name+" "+current_user.last_name%>
                         </div>
                       </div>
                       <button type="button" class="size_btn btn btn btn-light "><i class="bi bi-card-list"></i></button>
@@ -75,7 +75,7 @@
               </div>
 
               <div class="name_user">
-                Thanh Nhi
+                <%= current_user.first_name+" "+current_user.last_name%>
               </div>
             </div>  
 
@@ -93,21 +93,104 @@
          <%= yield %>
         </div>
       </div>
+
       <div class="col">
         <%if user_signed_in?%>
           <div class="content_rigth">
-              <div class="card" >
-                <div class="card-body">
-                  <h6 class="card-title"><i class="bi bi-people-fill"></i>  Friend requests</h6>
-                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                  <p class="card-text">Some quick example text to build on the card titl.</p>
-                  <a href="#" class="card-link">Confirm</a>
-                  <a href="#" class="card-link">Delete</a>
+              <div class="box_card">
+                <div class="card" >
+                  <div class="card-body">
+                    <h6 class="card-title"><i class="bi bi-people-fill"></i>  Friend requests</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                    <p class="card-text">Some quick example text to build on the card titl.</p>
+                    <a href="#" class="card-link">Confirm</a>
+                    <a href="#" class="card-link">Delete</a>
+                  </div>
+                </div>
+
+                <div class="card" >
+                  <div class="card-body">
+                    <h6 class="card-title"><i class="bi bi-people-fill"></i>  Friend requests</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                    <p class="card-text">Some quick example text to build on the card titl.</p>
+                    <a href="#" class="card-link">Confirm</a>
+                    <a href="#" class="card-link">Delete</a>
+                  </div>
+                </div>
+
+                <div class="card" >
+                  <div class="card-body">
+                    <h6 class="card-title"><i class="bi bi-people-fill"></i>  Friend requests</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                    <p class="card-text">Some quick example text to build on the card titl.</p>
+                    <a href="#" class="card-link">Confirm</a>
+                    <a href="#" class="card-link">Delete</a>
+                  </div>
                 </div>
               </div>
+
+            <div class="box_add_friend">
+              <div class="add_card">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-sm">
+                      <i class="bi bi-people" style="font-size: 23px; color: cornflowerblue;" ></i>
+                    </div>
+
+                    <div class="col-sm">
+                      thanh nhi
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="add_card">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-sm">
+                      <i class="bi bi-people" style="font-size: 23px; color: cornflowerblue;" ></i>
+                    </div>
+
+                    <div class="col-sm">
+                      thanh nhi
+                    </div>                   
+                  </div>
+                </div>
+              </div>
+
+              <div class="add_card">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-sm">
+                      <i class="bi bi-people" style="font-size: 23px; color: cornflowerblue;" ></i>
+                    </div>
+
+                    <div class="col-sm">
+                      thanh nhi
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="add_card">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-sm">
+                      <i class="bi bi-people" style="font-size: 23px; color: cornflowerblue;" ></i>
+                    </div>
+
+                    <div class="col-sm">
+                      thanh nhi
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            
+            </div>
           </div>
         <%end%>  
-      </div>
+
       </div>
     </div>
   </body>

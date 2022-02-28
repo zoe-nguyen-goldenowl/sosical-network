@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_25_042821) do
+ActiveRecord::Schema.define(version: 2022_02_28_094019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,22 @@ ActiveRecord::Schema.define(version: 2022_02_25_042821) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "friends", force: :cascade do |t|
+    t.integer "status"
+    t.integer "self_user_id"
+    t.bigint "users_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["users_id"], name: "index_friends_on_users_id"
+  end
+
+  create_table "like", force: :cascade do |t|
+    t.bigint "users_id"
+    t.bigint "posts_id"
+    t.index ["posts_id"], name: "index_like_on_posts_id"
+    t.index ["users_id"], name: "index_like_on_users_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -76,13 +92,6 @@ ActiveRecord::Schema.define(version: 2022_02_25_042821) do
     t.string "gender"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  end
-
-  create_table "votes", force: :cascade do |t|
-    t.bigint "users_id"
-    t.bigint "posts_id"
-    t.index ["posts_id"], name: "index_votes_on_posts_id"
-    t.index ["users_id"], name: "index_votes_on_users_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

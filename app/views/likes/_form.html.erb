@@ -1,10 +1,10 @@
-<%= form_with(model: vote) do |form| %>
-  <% if vote.errors.any? %>
+<%= form_with(model: like) do |form| %>
+  <% if like.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(vote.errors.count, "error") %> prohibited this vote from being saved:</h2>
+      <h2><%= pluralize(like.errors.count, "error") %> prohibited this like from being saved:</h2>
 
       <ul>
-        <% vote.errors.each do |error| %>
+        <% like.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
