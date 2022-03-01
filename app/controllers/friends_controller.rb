@@ -3,10 +3,8 @@ class FriendsController < ApplicationController
 
   # GET /friends or /friends.json
   def index
-    
-    binding.pry
-    
-    @friend = Friend.all
+    @friends = Friend.all
+    @user = User.new
   end
 
   # GET /friends/1 or /friends/1.json
@@ -21,31 +19,37 @@ class FriendsController < ApplicationController
   # GET /friends/1/edit
   def edit
   end
-
+ 
   # POST /friends or /friends.json
   def create
-    
-    @friend = Friend.new(friend_params)
 
-    respond_to do |format|
-      if @friend.save
-        format.html { redirect_to friend_url(@friend), notice: "Friend was successfully created." }
-        format.json { render :show, status: :created, location: @friend }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @friend.errors, status: :unprocessable_entity }
+    if params[:self_user_id] != params[:user_id] 
+      
+      @friend = Friend.new(status: 0, self_user_id:params[:self_user_id], users_id: params[:user_id])
+      respond_to do |format|
+        if @friend.save
+          format.html { redirect_to posts_path, notice: "Friend was successfully created." }
+          format.json { render :show, status: :created, location: @friend }
+        else
+          format.html { redirect_to posts_path, status: :unprocessable_entity }
+          format.json { render json: @friend.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      flash[:add_friend] = "Not Add friend your self!!"
+      redirect_to posts_path
     end
   end
 
   # PATCH/PUT /friends/1 or /friends/1.json
   def update
+
     respond_to do |format|
-      if @friend.update(friend_params)
-        format.html { redirect_to friend_url(@friend), notice: "Friend was successfully updated." }
+      if @friend.update(status: 1)
+        format.html { redirect_to friends_path, notice: "Friend was successfully updated." }
         format.json { render :show, status: :ok, location: @friend }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { redirect_to friends_path, status: :unprocessable_entity }
         format.json { render json: @friend.errors, status: :unprocessable_entity }
       end
     end
@@ -54,9 +58,8 @@ class FriendsController < ApplicationController
   # DELETE /friends/1 or /friends/1.json
   def destroy
     @friend.destroy
-
     respond_to do |format|
-      format.html { redirect_to friends_url, notice: "Friend was successfully destroyed." }
+      format.html { redirect_to friends_path, notice: "Friend was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -69,6 +72,6 @@ class FriendsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def friend_params
-      params.require(:friend).permit(:status, :user_id1, :user_id2)
+      params.require(:friend).permit(:status, :self_user_id, :user_id)
     end
 end

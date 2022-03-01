@@ -1,8 +1,16 @@
 Rails.application.routes.draw do
-  resources :friends
+  
   resources :likes
   resources :posts
+
   get 'home/index'
+  get "users" =>"users#index"
+  get "friend_add" =>"friends#create"
+  get "friends" =>"friends#index"
+
+  delete "friends" => "friends#destroy"
+
+  put "friends" => "friends#update"
 
   root to: "posts#index"
   devise_for :users, controllers: {

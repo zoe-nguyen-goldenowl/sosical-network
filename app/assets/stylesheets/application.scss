@@ -121,13 +121,16 @@ body{
         height: 300px;
         overflow: scroll;
         font-size: 14px;
+        .add_card{
+            width: 150px;
+        }
         
     }
 }
 
 
 .content_center{
-    width: 100%;
+    width: 500px;
     height: 480px;
     margin: 20px;
     background-color: #fff;

@@ -2,7 +2,9 @@
 	height: 500px;
 	display: flex;
 	width: 1050px;
-	position: relative;
+	left: -230px;
+	background-color: #fff;
+	position: absolute;
 
 }
 .row{
