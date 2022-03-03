@@ -4,7 +4,6 @@ class FriendsController < ApplicationController
   # GET /friends or /friends.json
   def index
     @friends = Friend.all
-    @user = User.new
   end
 
   # GET /friends/1 or /friends/1.json
@@ -22,22 +21,28 @@ class FriendsController < ApplicationController
  
   # POST /friends or /friends.json
   def create
-
-    if params[:self_user_id] != params[:user_id] 
-      
-      @friend = Friend.new(status: 0, self_user_id:params[:self_user_id], users_id: params[:user_id])
-      respond_to do |format|
-        if @friend.save
-          format.html { redirect_to posts_path, notice: "Friend was successfully created." }
-          format.json { render :show, status: :created, location: @friend }
-        else
-          format.html { redirect_to posts_path, status: :unprocessable_entity }
-          format.json { render json: @friend.errors, status: :unprocessable_entity }
-        end
+    if Friend.exists?(self_user_id:params[:self_user_id], user_id: params[:user_id]) && Friend.exists?(self_user_id:params[:user_id], user_id: params[:self_user_id])
+       respond_to do |format|
+        flash[:create_friend] = "You have sent this person a friend request before!!"
+        format.html { redirect_to posts_path}
       end
     else
-      flash[:add_friend] = "Not Add friend your self!!"
-      redirect_to posts_path
+      if params[:self_user_id] != params[:user_id] 
+        
+        @friend = Friend.new(status: 0, self_user_id:params[:self_user_id], user_id: params[:user_id])
+        respond_to do |format|
+          if @friend.save
+            flash[:create_friend] = "Friend request has been sent successfully.!!"
+            format.html { redirect_to posts_path}
+          else
+            flash[:create_friend] = "Friend request has been sent unsuccessfully!!"
+            format.html { redirect_to posts_path, status: :unprocessable_entity }
+          end
+        end
+      else
+        flash[:add_friend] = "Not Add friend your self!!"
+        redirect_to posts_path
+      end
     end
   end
 
@@ -46,11 +51,11 @@ class FriendsController < ApplicationController
 
     respond_to do |format|
       if @friend.update(status: 1)
-        format.html { redirect_to friends_path, notice: "Friend was successfully updated." }
-        format.json { render :show, status: :ok, location: @friend }
+        flash[:confirm_friend] = "successfully added friend!!"
+        format.html { redirect_to posts_path, status: :unprocessable_entity }
       else
-        format.html { redirect_to friends_path, status: :unprocessable_entity }
-        format.json { render json: @friend.errors, status: :unprocessable_entity }
+        fflash[:confirm_friend] = "Fail added friend!!"
+        format.html { redirect_to posts_path, status: :unprocessable_entity }
       end
     end
   end

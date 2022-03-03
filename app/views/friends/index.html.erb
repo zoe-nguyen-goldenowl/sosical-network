@@ -1,18 +1,12 @@
-<% content_for :list_users do %>
   <%@friends.each do |friend|%>
-    <%if friend.self_user_id == current_user.id && friend.status == 0  %>
-      
-        <div class="card-body">
-          <h6 class="card-title"><i class="bi bi-people-fill"></i></h6>
-          <h6 class="card-subtitle mb-2 text-muted"></h6><%= friend.users_id %>
-          <p class="card-text">sent you a friend request</p>
-          <%= link_to "Confirm", friends_path(id: friend.id), method: :put%>
+    <%if (friend.user_id == current_user.id || friend.self_user_id == current_user.id ) && friend.status == 1  %>
+        <div class="tag_friend">
+          <% if(current_user.id == friend.user_id) ? id=friend.self_user_id : id=friend.user_id %>
+          <%end%>
+          <%=id%>
           <%= link_to "Delete", friends_path(id: friend.id ), data: { confirm: "Are you sure?" }, method: :delete%>
         </div>
-      
     <%end%>
   <%end%>
-  
-<%end%>
 
 

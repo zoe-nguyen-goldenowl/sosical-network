@@ -21,48 +21,37 @@ class LikesController < ApplicationController
 
   # POST /likes or /likes.json
   def create
-    if Like.exists?(users_id: params[:users_id], posts_id: params[:posts_id])
+
+    if Like.exists?(user_id: params[:user_id], post_id: params[:post_id])
      destroy
     else
-      @like= Like.new(users_id: params[:users_id], posts_id: params[:posts_id])
+      @like= Like.new(user_id: params[:user_id], post_id: params[:post_id])
       respond_to do |format|
         if @like.save
-          format.html { redirect_to like_url(@like), notice: "like was successfully created." }
-          format.json { render :show, status: :created, location: @like }
+          flash[:like] = "like was successfully created." 
+          format.html { redirect_to posts_path}
         else
-          format.html { render :new, status: :unprocessable_entity }
-          format.json { render json: @like.errors, status: :unprocessable_entity }
+          flash[:like] = "like was fail created." 
+          format.html { redirect_to posts_path}
         end
       end
     end
   end
 
-  # PATCH/PUT /likes/1 or /likes/1.json
-  def update
-    # respond_to do |format|
-    #   if @like.update(like_params)
-    #     format.html { redirect_to like_url(@like), notice: "like was successfully updated." }
-    #     format.json { render :show, status: :ok, location: @like }
-    #   else
-    #     format.html { render :edit, status: :unprocessable_entity }
-    #     format.json { render json: @like.errors, status: :unprocessable_entity }
-    #   end
-    # end
-  end
-
   # DELETE /likes/1 or /likes/1.json
   def destroy
     
-    @like= set_like
+    binding.pry
+    
     if @like.destroy
       respond_to do |format|
-        format.html { redirect_to posts_path, notice: "Like was successfully destroyed." }
-        format.json { head :no_content }
+        flash[:like] = "like was successfully destroy" 
+          format.html { redirect_to posts_path}
       end
     else
       respond_to do |format|
-        format.html { redirect_to posts_path, notice: "Like was Fail destroyed." }
-        format.json { head :no_content }
+        flash[:like] = "like was fail destroy" 
+        format.html { redirect_to posts_path}
       end
     end
   end
@@ -70,13 +59,6 @@ class LikesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_like
-      @like = Like.find_by(users_id: params[:users_id], posts_id: params[:posts_id])
+      @like = Like.find_by(user_id: params[:user_id], post_id: params[:post_id])
     end
-
-
-    # Only allow a list of trusted parameters through.
-    def like_params
-      params.require(:like).permit(:users_id, :posts_id)
-    end
-
 end

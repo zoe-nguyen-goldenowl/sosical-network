@@ -80,7 +80,7 @@
             </div>  
 
             <ul class="menu_left">
-              <li class="item_menu_left"><i class="bi bi-people" style="font-size: 23px; color: cornflowerblue;" ></i><%=link_to "  Friends"%></li>
+              <li class="item_menu_left"><i class="bi bi-people" style="font-size: 23px; color: cornflowerblue;" ></i><%=link_to "Friends", friends_path%></li>
               <li class="item_menu_left"><i class="bi bi-clock-history" style="font-size: 23px; color: cornflowerblue;"></i><%=link_to "  Memories"%></li>
               <li class="item_menu_left"><i class="bi bi-camera-video" style="font-size: 23px; color: cornflowerblue;"></i><%=link_to " Watch"%></li>
               <li class="item_menu_left"><i class="bi bi-star" style="font-size: 23px; color: cornflowerblue;"></i><%=link_to " Farvorites"%></li>
@@ -89,6 +89,14 @@
         <%end%>
       </div>
       <div class="col">
+        <% flash.each do |key, value| %>
+          <div id="error_explanation">
+            <div class="alert alert-#{key}">
+              <%= value unless value.blank? %>
+            </div>
+          </div>
+        <% end %>
+
         <div class="content_center">          
             <%= yield %>
         </div>
@@ -99,17 +107,13 @@
           <div class="content_rigth">
             <div class="box_card">
               <div class="card" >
-
-                  <%= yield :list_add_friend %>
+                <%=render "friends/form"%>
               </div>
 
             </div>
 
             <div class="box_add_friend">
-            <%= yield :list_users %>
-              <div class="add_card">
-                 
-              </div>                   
+            <%=render "users/user" %>         
             </div>
 
           </div>

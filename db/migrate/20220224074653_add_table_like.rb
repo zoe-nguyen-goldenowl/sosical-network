@@ -1,6 +1,6 @@
-class AddTableVote < ActiveRecord::Migration[6.1]
+class AddTableLike < ActiveRecord::Migration[6.1]
   def change
-    create_table :votes do |t|
+    create_table :likes do |t|
       t.references :users
       t.references :posts
     end

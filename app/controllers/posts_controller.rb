@@ -25,25 +25,24 @@ class PostsController < ApplicationController
 
   # POST /posts or /posts.json
   def create
-
+    
     @post = Post.new(post_params)
+    @post.user_id= current_user.id
     respond_to do |format|
       if @post.save
-        format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
-        format.js{}
-        format.json { render :show, status: :created, location: @post }
-        
+        flash[:create_friend] = "Post was successfully created!!"
+        format.html { redirect_to posts_path}
+              
       else
+        flash[:create_friend] = "Post was fail created!!"
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
-    # binding.pry
-    @post = Post.find_by(id: params[:id])
+    
     if @post.update(post_params)
       redirect_to posts_path
     else
@@ -55,8 +54,9 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
-      format.json { head :no_content }
+      flash[:destroy_friend] = "Post was successfully destroyed!!"
+      format.html { redirect_to posts_url}
+
     end
   end
 #=====like posts=====

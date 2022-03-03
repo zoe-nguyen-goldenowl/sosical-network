@@ -1,12 +1,5 @@
 <div id="container">
-  <% flash.each do |key, value| %>
-    <div id="error_explanation">
-      <div class="alert alert-#{key}">
-        <%= value unless value.blank? %>
-      </div>
-    </div>
-  <% end %>
-  
+
   <%@posts.each do |post|%>
     <div class="container" >
       <div class="row">
@@ -52,7 +45,7 @@
       <div class="row">
         <div class="col">
             <div class="like">
-            <%= link_to 'Like', likes_url(users_id: current_user.id, posts_id: post.id), method: :post  %> 
+            <%= link_to 'Like', likes_url(user_id: current_user.id, post_id: post.id), method: :post  %> 
             </div>
           </div>
       </div>
@@ -63,10 +56,11 @@
     <div class="field">
       <%= f.text_area :content, placeholder: "Create content post ..." %>
     </div>
-    
-    <%= f.submit "Post", class: "btn btn-primary" %>
     <span class="picture">
-      <%= f.file_field :image, accept: "image/jpeg, image/gif, image/png, image/jpg" %>
+      <%= f.file_field :image %>
     </span>
+    
+    <%= f.button "Post" %>
+    
   <%end%>
 </div>

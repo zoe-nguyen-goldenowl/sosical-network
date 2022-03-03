@@ -2,8 +2,10 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  has_many :posts
-  
+  has_many :post
+  has_many :friend
+  has_many :like
+    
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :phone, length: {is: 10}, allow_blank: true, format:{with: /\d/}
