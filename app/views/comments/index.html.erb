@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <div class="box_comment">
+          <%@comments.each do|comment|%>
+            <%user= @user.find(comment.owner.id)%>
+            <%name = user.first_name+" "+user.last_name%>
+
+            <div class="card_comment card" style="width: 100%;">
+              <div class="card-body">
+                <div class="right">
+                  <%if comment.owner_id == current_user.id%>
+                    <%= link_to "X" ,comments_path(comment.id), method: :delete%>
+                  <%end%>
+                </div>
+
+                <h5 class="card-title"><%= name %></h5>
+                <p class="card-text"><%= comment.content%></p>
+
+              </div>
+            </div>
+
+          <%end%>
+     
+
+      </div>
+    </div>
+  </div>
+
+   <%=form_with model: @comment, method: :post do |f|%>
+
+      <div class="input-group mb-3">
+          <%=f.text_field :content, class:"form-control", placeholder:"Write your comment..." %>
+          <div class="input-group-append">
+              <%=f.submit "Add", class:"btn btn-outline-secondary" %>
+          </div>
+      </div>
+  <%end%>
+</div>

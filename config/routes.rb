@@ -7,8 +7,13 @@ Rails.application.routes.draw do
   get "users" =>"users#index"
   get "friend_add" =>"friends#create"
   get "friends" =>"friends#index"
+  get "comments" => "comments#index"
+
+  post "comments" => "comments#create"
+
 
   delete "friends" => "friends#destroy"
+  delete "comments" => "comments#destroy"
 
   put "friends" => "friends#update"
 

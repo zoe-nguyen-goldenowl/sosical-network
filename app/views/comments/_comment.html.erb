@@ -1,0 +1,9 @@
+ <%=form_with model: @comment, method: :post do |f|%>
+
+      <div class="input-group mb-3">
+          <%=f.text_field :content, class:"form-control", placeholder:"Write your comment..." %>
+          <div class="input-group-append">
+              <%=f.submit "Add", class:"btn btn-outline-secondary" %>
+          </div>
+      </div>
+  <%end%>

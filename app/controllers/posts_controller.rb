@@ -3,21 +3,25 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.all
+    @friends_post= Friend.where("(user_id= '#{current_user.id}' or self_user_id='#{current_user.id}') and status='1'")
+    key_post=[current_user.id]
+    @friends_post.each do |f|
+      if f.self_user_id == current_user.id ? key_post << f.user_id : key_post << f.self_user_id
+      end
+    end
+    
+    @posts = Post.where(user_id: key_post)
     @post = Post.new
   end
 
   # GET /posts/1 or /posts/1.json
-  def show
-    
-   
-    
+  def show 
   end
 
   # GET /posts/new
   def new
     @post = Post.new
-   
+
   end
 
   # GET /posts/1/edit
@@ -31,8 +35,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
         flash[:create_friend] = "Post was successfully created!!"
-        format.html { redirect_to posts_path}
-              
+        format.html { redirect_to posts_path}    
       else
         flash[:create_friend] = "Post was fail created!!"
         format.html { render :new, status: :unprocessable_entity }
