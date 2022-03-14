@@ -17,7 +17,7 @@ class PostsController < ApplicationController
       format.js{}
     end
     @post = Post.new
-    @likes =Like.all
+    
 
 
   end
