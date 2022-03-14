@@ -3,6 +3,7 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
+    
     @friends_post= Friend.where("(user_id= '#{current_user.id}' or self_user_id='#{current_user.id}') and status='1'")
     key_post=[current_user.id]
     @friends_post.each do |f|
@@ -10,8 +11,15 @@ class PostsController < ApplicationController
       end
     end
     
-    @posts = Post.where(user_id: key_post)
+    @pagy, @posts = pagy(Post.where(user_id: key_post).order(created_at: :desc))
+    respond_to do |format|
+      format.html
+      format.js{}
+    end
     @post = Post.new
+    @likes =Like.all
+
+
   end
 
   # GET /posts/1 or /posts/1.json
@@ -34,10 +42,19 @@ class PostsController < ApplicationController
     @post.user_id= current_user.id
     respond_to do |format|
       if @post.save
-        flash[:create_friend] = "Post was successfully created!!"
-        format.html { redirect_to posts_path}    
+        @friends_post= Friend.where("(user_id= '#{current_user.id}' or self_user_id='#{current_user.id}') and status='1'")
+        key_post=[current_user.id]
+
+        @friends_post.each do |f|
+          if f.self_user_id == current_user.id ? key_post << f.user_id : key_post << f.self_user_id
+          end
+        end
+
+        @posts=Post.where(user_id: key_post).order(created_at: :desc)
+        flash[:success] = "Post was successfully created!!"
+        format.js{}  
       else
-        flash[:create_friend] = "Post was fail created!!"
+        flash[:error] = "Post was fail created!!"
         format.html { render :new, status: :unprocessable_entity }
       end
     end
@@ -57,7 +74,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      flash[:destroy_friend] = "Post was successfully destroyed!!"
+      flash[:success] = "Post was successfully destroyed!!"
       format.html { redirect_to posts_url}
 
     end

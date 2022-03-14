@@ -26,10 +26,10 @@ class LikesController < ApplicationController
       @like= Like.new(user_id: params[:user_id], post_id: params[:post_id])
       respond_to do |format|
         if @like.save
-          flash[:like] = "like was successfully created." 
+          flash[:success] = "like was successfully created." 
           format.html { redirect_to posts_path}
         else
-          flash[:like] = "like was fail created." 
+          flash[:error] = "like was fail created." 
           format.html { redirect_to posts_path}
         end
       end
@@ -41,12 +41,12 @@ class LikesController < ApplicationController
     set_like
     if @like.destroy
       respond_to do |format|
-        flash[:like] = "like was successfully destroy" 
+        flash[:success] = "like was successfully destroy" 
           format.html { redirect_to posts_path}
       end
     else
       respond_to do |format|
-        flash[:like] = "like was fail destroy" 
+        flash[:error] = "like was fail destroy" 
         format.html { redirect_to posts_path}
       end
     end

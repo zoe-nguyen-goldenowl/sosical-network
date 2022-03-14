@@ -5,16 +5,18 @@
         <%=f.text_area :content, value: "#{@post.content}"%>
 
         <span class="picture">
-            <%= f.file_field :image, accept: "image/jpeg, image/gif, image/png, image/jpg" %>
+            <%= f.file_field :image, accept: "image/jpeg, image/gif, image/png, image/jpg"%>
         </span>
 
-        <%=f.submit "Update"%>
+        <%=f.submit "Update" %>
         <br>
     
     <%end%>
 
-    <%= link_to 'Show', @post %> |
+    <button type="button" class="btn btn-light"  >
+        Show
+    </button> |
     <%= link_to 'Back', posts_path %> |
-    <%= link_to 'Destroy',@post, method: :delete, data: { confirm: 'Are you sure?' } %>
-    
+    <%= link_to 'Destroy',@post, method: :delete, data: { confirm: 'Are you sure?' } %>  
 </div>|
+

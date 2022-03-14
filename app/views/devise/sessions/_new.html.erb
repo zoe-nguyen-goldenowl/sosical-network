@@ -1,6 +1,5 @@
 <div class="container-fluid">
   <div class="row">
-
     <% flash.each do |key, value| %>
       <%if key=="error"%>
         <div class="alert-danger box_flash" role="alert">
@@ -49,8 +48,7 @@
               <p>Create New Account</p>
             </button>
           </div>
-        <%end %>
-
+        <%end%>
       </div>
     </div>
   </div>
@@ -132,18 +130,20 @@
           <div class="col">
           <label>Date of birth</label>
             <div class="picker validate-input" data-validate = "Date of birth invalidate">
-              <%=f.date_field :date_of_birth, placeholder:"Date of birth", id:"datepicker",class:"picker"%>
-              <%# <script>
+              <%=f.text_field :date_of_birth, placeholder:"Date of birth", id:"datepicker",class:"picker"%>
+              <script>
                 $('#datepicker').datepicker({
                     uiLibrary: 'bootstrap4'
                 });
-              </script> %>
+              </script>
             </div>
           </div>
 
           <div class="w-100"></div>
           <div class="col">
           </div>
+
+          
 
         </div>
 

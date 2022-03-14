@@ -1,37 +1,70 @@
-.container{
+.container_scoll{
     width: 100%;
-    height: 100%;
-    /* background-color: rgb(255, 255, 255); */
-    overflow:auto;
+    
+    height: 500px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;  
+    scrollbar-width: none; 
+    
 }
-.row{
-    border: 0.5px black;
-    width: auto;
-    height: auto;
+
+.container_scoll::-webkit-scrollbar { 
+    display: none;  
+}
+
+.box_center{
+    padding: 20px;
 }
 .conten{
-    width: 500px;
+    width: 100%;
     height: auto;
-    background-color: rgb(244, 244, 250);
+    font-family: 'Poppins Bold', 'Poppins Medium';
+    font-size: 16px;
 }
-.image{
-    background-size: contain;
-    width: 500px;
-    height: 200px;
-    background-color: rgba(214, 214, 224, 0.993);
+.image img{ 
+     max-width: 100%;
+    height: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.image img{
-    width: 500px;
-    height: 200px;
+.create_link{
+    color: rgb(10, 51, 165);
 }
-.count_like{
-    width: 500px;
-    height: 20px;
-    background-color: rgba(201, 245, 225, 0.993);
-    margin-left: 16px;
+.destroy_link{
+    color: rgb(245, 247, 250);
+}
+
+.link:hover{
+    background-color: #496f9a;
 }
 .like{
-    width: 500px;
-    height: 30px;
-    background-color: rgba(244, 208, 245, 0.993);
+    margin-left: 20px;
+}
+.detail{
+    right: 10px;
+    position: relative;
+}
+/* ============== */
+.box_content_center{
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    position: static;
+    
+    margin-bottom: 20px;
+    background-color: #f2fbff9f;
+   
+}
+.top_post{
+    background-color: #496f9a;
+}
+.bottom_post{
+   height: 40px;
+   background-color: #c2d1e4;
+   
+}
+
+.form-input img {
+    width:100%;
+    display:none;
+    margin-bottom:30px;
 }

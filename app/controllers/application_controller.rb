@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
-    before_action :authenticate_user!
     before_action :set_users, :set_friends, :set_comments
-  
+    include Pagy::Backend
     def set_users
         @users= User.all
     end
@@ -13,4 +12,6 @@ class ApplicationController < ActionController::Base
     def set_comments
         @users= User.all
     end
+
+   
 end

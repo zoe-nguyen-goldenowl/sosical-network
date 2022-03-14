@@ -37,7 +37,7 @@ group :development, :test do
 end
 
 group :development do
-  gem 'pry-rails'
+
   gem 'pry-byebug'
   gem 'pry-rails'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
@@ -63,8 +63,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #Gemfile
 gem "devise", "~> 4.1"
 
+gem "pagy"
 
-
-
+gem "redis", "~> 3.0"
 
 

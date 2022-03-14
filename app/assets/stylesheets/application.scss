@@ -14,32 +14,47 @@
  *= require_self
  */
  @import "bootstrap/scss/bootstrap";
- $link-hover-color:           rgb(184, 229, 255); //green
+ $link-hover-color: rgb(184, 229, 255); //green
 body{
-    background-color: #f0f2f5;
+    background-color: #f2f6fc;
+    font-family: 'Poppins Bold', 'Poppins Medium';
     .top_menu{
         background-color: #fff;
+        
         height: 60px;
-        .containers{
-            max-width: 100%;
-            .contain{
-                max-width: 100%;
-            }         
-        }
+        width: 100%;  
     }    
+}
+.menu_top{
+    width: 110%;
+    height: 60px;
+    background-color: #fff;
+   
 }
 .menu_top_center{
     width: 100%;
     position: absolute;
-    z-index: 100;
-    text-align: center;
-    margin-top: 10px;
+    display: flex;
 
 }
-.menu_top_center i{
-    font-size: 25px;
-    margin: 30px;
+.box_flash{
+    width: 100%;
+    height: 80%;
+    text-align: center;
 }
+.icon_menu_top {
+    font-size: 25px;
+    margin-left: 10%;
+    margin-right: 10%;
+    
+}
+.icon_menu_top:hover{
+    background-color: #fff;
+}
+.icon_menu_left:hover{
+    background-color: #f0f2f5;
+}
+
 
 .size_btn{
     width: 40px;
@@ -53,9 +68,10 @@ body{
 }
 .menu_top_left{
     display: flex;
+    margin-top: -10px;
 }
 .current_account{
-    width: 150px;
+    width: auto;
     display: flex;
     border-radius: 10px;
     margin-top: 5px;
@@ -72,54 +88,59 @@ body{
         margin-left: 10px;
     }
 }
-.current_account:hover{
-    background-color: rgb(214, 235, 236);
-}
 
 .content_left{
-    padding: 10px;
-    width: 250px;
+//    background-color: #fff;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
+    margin-top: 10px;
+    // padding-left: -15px;
+    // border-radius: 10px;
     .menu_left{
+        
+        padding: 10px;
         list-style-type: none;
         .item_menu_left{
             height: 40px;
             border-radius: 10px;
-            margin: 10px;
-            left: -35px;
             position: relative;
-            padding: 5px;
             font-size: 15px;
-            i{
-                padding-right: 30px;
-            }
+           
         }
     }
 }
 
 .item_menu_left:hover{
-    background-color: rgba(95, 92, 104, 0.219);
+    background-color:#f0f2f5 ;
 }
 .li_bg:hover{
    list-style: none;
 }
 
 .content_rigth{
-    padding: 10px;
-    width: 270px;
+    background-color: #fff;
+    
     margin-top: 10px;
-    position: relative;
+    border-radius: 10px;
+    margin-right: 5px;
+    height: 100%;
+
     .box_card{
-        overflow: scroll;
+        overflow-y: scroll;
+        -ms-overflow-style: none;  
+        scrollbar-width: none; 
         height: 200px;
         .card{
-            margin: 10px;
+            margin: 5px;
         }
     }
     .box_add_friend{
         position: relative;
         height: 300px;
-        overflow: scroll;
+        overflow-y: scroll;
+        -ms-overflow-style: none;  
+        scrollbar-width: none; 
         font-size: 14px;
         .add_card{
             width: 150px;
@@ -130,10 +151,11 @@ body{
 
 
 .content_center{
-    width: 500px;
-    height: 480px;
-    margin: 20px;
     background-color: #fff;
+
+    width: 100%;
+    height: 100%;
+    margin: 10px;
     overflow: scroll;
     border-radius: 10px;
     scrollbar-width: none;
@@ -142,4 +164,51 @@ body{
 .content_center::-webkit-scrollbar { 
     width: 0 !important;
     display: none; 
-  }
+}
+
+.item_link{
+    font-size: 16px;
+}
+.item_link:hover{
+    background-color: #fff;
+}
+
+/* phone */
+@media only screen and (max-width: 767px) {
+	.form_login{
+		position: relative;
+		top: 40%;
+	}
+	#exampleModalLong{
+		left: -30%;
+	}
+    
+    .content_left{
+        display: none;
+    }
+    .content_rigth{
+        display: none;
+    }
+    .content_center{
+   
+        margin-right: 200px;
+    }	
+} 
+/* tablets */
+@media only screen and (min-width: 768px) {
+	.text{
+		position: static;	
+		font-size: 10px;
+		height: auto;
+		width: auto;
+		line-height: 2.5;
+	}
+
+} 
+/* destop */
+@media only screen and (min-width: 993px) {
+    
+}
+
+
+

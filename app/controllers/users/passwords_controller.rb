@@ -3,7 +3,7 @@
 class Users::PasswordsController < Devise::PasswordsController
   # GET /resource/password/new
   # def new
-  #   super
+    # super
   # end
 
   # POST /resource/password

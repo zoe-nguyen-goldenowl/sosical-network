@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
         end
       else
         respond_to do |format|
-          flash[:comment_create]="Fail"
+          flash[:error]="Fail"
           format.html{redirect_to comments_path}
           
         end
@@ -28,10 +28,10 @@ class CommentsController < ApplicationController
       
       @comment = Comment.find(params[:format])
       if @comment.destroy
-        flash[:comment_destroy]="Comment destroy successful!!"
+        flash[:success]="Comment destroy successful!!"
         redirect_to posts_path
       else
-        flash[:comment_destroy]="Comment destroy fails!!"
+        flash[:error]="Comment destroy fails!!"
         redirect_to posts_path
         
       end

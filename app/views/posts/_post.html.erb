@@ -1,0 +1,59 @@
+
+  <% @posts.each do |post|%>
+ 
+  <div class="box_content_center " id="likes" >
+    <div class="row top_post">
+      <div class="col-sm-11 col-md-11">
+         <div class="current_account btn">
+            <div class="img_user">
+              <i class="bi bi-person-bounding-box" style="font-size: 22px; color: cornflowerblue;"></i>
+            </div>
+
+            <div class="name_user">
+              <%user= User.find(post.user_id)%>
+              <%= user.first_name+" "+user.last_name%>
+            </div>
+          </div>
+      </div>
+    
+      <div class="col-sm-1 col-md-1">
+      
+          <div class="detail">
+            <%if user.id == current_user.id%>
+              <%=link_to '<i class="bi bi-three-dots-vertical" style="font-size: 2rem; color: cornflowerblue;"></i>'.html_safe, edit_post_path(post), class:"link"%>
+            <%end%>
+          </div>
+       
+      </div>
+    </div>
+  
+    <div class="row box_center">
+      <div class="col-md-12">
+        <div class="conten">
+          <%= post.content%>
+        </div>
+
+        <div class="image">
+          <% if post.image.persisted? %>
+            <%= image_tag post.image %>
+          <%end%>
+        </div>
+      </div>
+
+    </div>
+    <div class="row bottom_post">
+      <div class="col-sm-9 col-md-9">
+    
+          <%= link_to 'Like', likes_url(user_id: current_user.id, post_id: post.id), method: :post, class:"like  create_link link" %>  
+       
+      </div>
+
+      <div class="col-sm-3 col-md-3">
+        <%= link_to "Comment", comments_url(post_id: post.id),class:"link " %>
+      </div>
+
+
+    </div>
+  </div>
+
+<%end%>
