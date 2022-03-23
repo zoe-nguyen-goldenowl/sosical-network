@@ -1,65 +1,43 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
 
-  # GET /posts or /posts.json
   def index
-    
-    @friends_post= Friend.where("(user_id= '#{current_user.id}' or self_user_id='#{current_user.id}') and status='1'")
-    key_post=[current_user.id]
-    @friends_post.each do |f|
-      if f.self_user_id == current_user.id ? key_post << f.user_id : key_post << f.self_user_id
-      end
-    end
-    
-    @pagy, @posts = pagy(Post.where(user_id: key_post).order(created_at: :desc))
-    respond_to do |format|
-      format.html
-      format.js{}
-    end
+    id_user_post = set_user_ids
+    @pagy, @posts = pagy(Post.where(user_id: id_user_post).order(created_at: :desc))
     @post = Post.new
   end
 
-  # GET /posts/1 or /posts/1.json
   def show 
   end
 
-  # GET /posts/new
   def new
     @post = Post.new
-
   end
 
-  # GET /posts/1/edit
-  def edit; end
+  def edit
+  end
 
-  # POST /posts or /posts.json
   def create
-    
     @post = Post.new(post_params)
     @post.user_id= current_user.id
-    respond_to do |format|
-      if @post.save
-        @friends_post= Friend.where("(user_id= '#{current_user.id}' or self_user_id='#{current_user.id}') and status='1'")
-        key_post=[current_user.id]
 
-        @friends_post.each do |f|
-          if f.self_user_id == current_user.id ? key_post << f.user_id : key_post << f.self_user_id
-          end
-        end
-
-        @posts=Post.where(user_id: key_post).order(created_at: :desc)
-        flash[:success] = "Post was successfully created!!"
-        format.js{}  
-      else
+    if @post.save
+      id_user_post= set_user_ids
+      @posts=Post.where(user_id: id_user_post).order(created_at: :desc)
+      flash[:success] = "Post was successfully created!!"
+      respond_to do |format|
+        format.js{} 
+      end 
+    else
+      respond_to do |format|
         flash[:error] = "Post was fail created!!"
+        # sua lai
         format.html { render :new, status: :unprocessable_entity }
-      end
+      end 
     end
   end
 
-  # PATCH/PUT /posts/1 or /posts/1.json
   def update
-    
     if @post.update(post_params)
       redirect_to posts_path
     else
@@ -67,26 +45,27 @@ class PostsController < ApplicationController
     end
   end
 
-  # DELETE /posts/1 or /posts/1.json
   def destroy
     @post.destroy
-    respond_to do |format|
-      flash[:success] = "Post was successfully destroyed!!"
-      format.html { redirect_to posts_url}
-
-    end
+    flash[:success] = "Post was successfully destroyed!!"
+    redirect_to posts_url
   end
-#=====like posts=====
-
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def post_params
        params.require(:post).permit(:content, :image)
+    end
+    
+    def set_user_ids
+      @friends_post= Friend.active_friend current_user.id
+      user_id_post=[current_user.id]   
+        @friends_post.each do |f|
+          user_id_post<< f.self_user_id << f.user_id
+        end
+      return user_id_post.uniq
     end
 end

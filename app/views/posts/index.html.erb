@@ -1,30 +1,10 @@
-<div class="container_scoll" id="posts">
-  <div id="page_posts">
+<div class="container_scoll" >
+  <div id="my-posts">
     <%=render 'posts/post' ,locals: { :posts => @posts }%> 
-    <div id="pagination">
-      <%== pagy_bootstrap_nav(@pagy, id:"next_link") %>
-    </div>
-  </div>
-    
+  </div>  
 </div>
 
-<%= form_with model: @post, method: :post, local: false do |f| %>
-    <div class="row">
-      <div class="col-md-5">
-        <div class="field">
-          <%= f.text_area :content, placeholder: "Create content post ..." %>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <span class="picture">
-          <%= f.file_field :image %>
-        </span>
-      </div>
-
-      <div class="col-md-3">
-         <%= f.button "Post" %>
-      </div>
-    </div>
-  
-<%end%>
+<div id="pagination">
+  <%== pagy_bootstrap_nav(@pagy, id:"next_link") %>
+</div>
+<%# dung slim %>

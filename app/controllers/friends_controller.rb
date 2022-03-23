@@ -1,14 +1,15 @@
 class FriendsController < ApplicationController
-  before_action :set_friend, only: %i[ show edit update destroy ]
+  before_action :set_friend, only: %i[ edit update destroy ]
 
   # GET /friends or /friends.json
   def index
     @friends = Friend.all
-    @user= User.all
+    @users= User.all
   end
 
   # GET /friends/1 or /friends/1.json
   def show
+    @friends = Friend.all
   end
 
   # GET /friends/new
@@ -20,12 +21,14 @@ class FriendsController < ApplicationController
   def edit
   end
  
+  
   # POST /friends or /friends.json
   def create
-    if Friend.exists?(self_user_id:params[:self_user_id], user_id: params[:user_id]) || Friend.exists?(self_user_id:params[:user_id], user_id: params[:self_user_id])
+    
+    if check_friend(params[:self_user_id], params[:user_id])
        respond_to do |format|
         flash[:error] = "You have sent this person a friend request before!!"
-        format.html { redirect_to posts_path}
+        format.html { redirect_to  posts_path}
       end
     else
       if params[:self_user_id] != params[:user_id] 
@@ -34,7 +37,7 @@ class FriendsController < ApplicationController
         
           if @friend.save
             flash[:success] = "Friend request has been sent successfully.!!"
-            redirect_to posts_path
+            redirect_to  posts_path
           else
             flash[:error] = "Friend request has been sent unsuccessfully!!"
             redirect_to posts_path, status: :unprocessable_entity 
@@ -75,9 +78,10 @@ class FriendsController < ApplicationController
     def set_friend
       @friend = Friend.find(params[:id])
     end
+    
+    def check_friend(self_user_id, user_id)
+      Friend.exists?(self_user_id: self_user_id, user_id: user_id) || Friend.exists?(self_user_id:user_id, user_id: self_user_id)
+  end
 
-    # Only allow a list of trusted parameters through.
-    def friend_params
-      params.require(:friend).permit(:status, :self_user_id, :user_id)
-    end
+  
 end

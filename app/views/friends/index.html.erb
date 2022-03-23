@@ -1,12 +1,26 @@
+<div class="container_scoll" >
   <%@friends.each do |friend|%>
     <%if (friend.user_id == current_user.id || friend.self_user_id == current_user.id ) && friend.status == 1  %>
         <div class="tag_friend">
           <% if(current_user.id == friend.user_id) ? id=friend.self_user_id : id=friend.user_id %>
           <%end%>
-          <%=id%>
-          <%= link_to "Delete", friends_path(id: friend.id ), data: { confirm: "Are you sure?" }, method: :delete%>
+          <div class="card_user" style="width: 18rem;">
+            <img src="https://freepikpsd.com/file/2019/10/person-logo-png-3.png" class="card-img-user">
+              <div class="card-body">
+              <%user= @users.find(id)%>
+              <h5 class="card-title"> <%=user.first_name+" "+ user.last_name%></h5>
+              <p class="card-text">Email: <%=user.email%></p>
+              <p class="card-text">Phone: <%=user.phone%></p>
+              <% if user.gender=="1" ? gender="Male ": gender="Female" %><%end%>
+              <p class="card-text">Gender: <%=gender%></p>
+
+              <%= link_to "Delete", friends_path(id: friend.id ), class:"btn btn-primary", data: { confirm: "Are you sure?" }, method: :delete%>
+              <%=link_to  "Detail", user_detail_url(id: id), class:"btn_detail btn btn-primary" %>
+            </div>
+          </div>
         </div>
     <%end%>
   <%end%>
+</div>
 
 

@@ -1,2 +1,3 @@
-$("#pagi").remove();
-$("#posts").append("<%= escape_javascript render(:partial => 'posts/post', :locals => { :posts => @posts })%>")
+
+$("#my-posts").remove();
+$(".container_scoll").append("<%= escape_javascript render(:partial => 'posts/post', :locals => { :posts => @posts })%>")

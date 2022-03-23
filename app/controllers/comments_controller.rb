@@ -1,39 +1,46 @@
 class CommentsController < ApplicationController
-  
+  before_action :set_comment , only: %i[destroy ]
+  before_action :set_post , only: %i[ create]
+
+ 
     def index
-      
-      if !params[:post_id].nil? ? @@commentable=Post.find(params[:post_id]) : @@commentable=Post.find(params[:format])
-        params[:post_id] ||= params[:format]
-      end
-      @comments= Comment.where("commentable_id = '#{params[:post_id]}'")
+      @comments= Comment.where(commentable_id: params[:post_id])
       @user= User.all
     end
 
-    def create 
-     
-      if Comment.create(content: params[:content], commentable: @@commentable, owner: current_user)
+    def create   
+      if Comment.create(content: params[:content], commentable: @commentable, owner: current_user)
         respond_to do |format|
-          format.html{redirect_to comments_path(@@commentable)}
+
+          flash[:success]="Comment successful!!"
+          format.html{redirect_to post_comments_url(post_id: @commentable.id)}
         end
+
       else
         respond_to do |format|
           flash[:error]="Fail"
-          format.html{redirect_to comments_path}
+          format.html{redirect_to  post_comments_url(post_id: @commentable.id)}
           
         end
       end           
     end
 
     def destroy
-      
-      @comment = Comment.find(params[:format])
       if @comment.destroy
         flash[:success]="Comment destroy successful!!"
-        redirect_to posts_path
+        redirect_to post_comments_url(post_id: @comment.commentable_id)
       else
         flash[:error]="Comment destroy fails!!"
-        redirect_to posts_path
+        redirect_to  post_comments_url(post_id: @comment.commentable_id)
         
       end
+    end
+
+    private
+    def set_comment   
+      @comment = Comment.find(params[:id])
+    end
+    def set_post  
+      @commentable = Post.find(params[:post_id])
     end
 end

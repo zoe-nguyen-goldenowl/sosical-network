@@ -29,8 +29,8 @@
 .create_link{
     color: rgb(10, 51, 165);
 }
-.destroy_link{
-    color: rgb(245, 247, 250);
+.create_link:hover{
+    background-color: #c2d1e4;
 }
 
 .link:hover{

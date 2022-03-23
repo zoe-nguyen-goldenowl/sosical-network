@@ -59,26 +59,36 @@
                         </div>
                     
                         <div class="row box_center">
-                        <div class="col-md-12">
-                            <div class="conten">
-                            <%= post.content%>
-                            </div>
+                            <div class="col-md-12">
+                                <div class="conten">
+                                <%= post.content%>
+                                </div>
 
-                            <div class="image">
-                            <% if post.image.persisted? %>
-                                <%= image_tag post.image %>
-                            <%end%>
+                                <div class="image">
+                                <% if post.image.persisted? %>
+                                    <%= image_tag post.image %>
+                                <%end%>
+                                </div>
                             </div>
                         </div>
 
+                         <div class="count_like">
+                            <%=(Like.active post.id).size%>
                         </div>
-                        <div class="row bottom_post">
+
+                        <div class="row bottom_post">    
                         <div class="col-sm-8 col-md-8">
-                            <%= link_to 'Like', likes_url(user_id: current_user.id, post_id: post.id), method: :post, class:"like link" %>  
+                            <%@like_exit=Like.exists?(user_id: current_user.id, post_id: post.id)%>
+                                <%if @like_exit%>
+                                <%= link_to '<i class="bi bi-hand-thumbs-up-fill" style="font-size: 26px; color: #1a4eeaf2;"></i>'.html_safe, likes_url(user_id: current_user.id, post_id: post.id), method: :post,remote: true, class:"like  create_link" %>
+
+                                <% else %>
+                                <%= link_to '<i class="bi bi-hand-thumbs-up" style="font-size: 26px; color: cornflowerblue;"></i>'.html_safe, likes_url(user_id: current_user.id, post_id: post.id), method: :post ,remote: true, class:"like  create_link"%>
+                            <%end%>  
                         </div>
 
                         <div class="col-sm-4 col-md-4">
-                            <%= link_to "Comment", comments_url(post_id: post.id),class:"link " %>
+                            <%= link_to "Comment", post_comments_url(post_id: post.id),class:"link " %>
                         </div>
                         </div>
                     </div>

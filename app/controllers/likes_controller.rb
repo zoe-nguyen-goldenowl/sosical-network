@@ -19,20 +19,16 @@ class LikesController < ApplicationController
 
   # POST /likes or /likes.json
   def create
-
     if Like.exists?(user_id: params[:user_id], post_id: params[:post_id])
      destroy
     else
       @like= Like.new(user_id: params[:user_id], post_id: params[:post_id])
-      respond_to do |format|
         if @like.save
-          flash[:success] = "like was successfully created." 
-          format.html { redirect_to posts_path}
+          redirect_to posts_path
+          ActionCable.server.broadcast "like", {count_like: (Like.active params[:post_id]).size, post_id: params[:post_id] }
         else
-          flash[:error] = "like was fail created." 
-          format.html { redirect_to posts_path}
+          render :new
         end
-      end
     end
   end
 
@@ -40,8 +36,11 @@ class LikesController < ApplicationController
   def destroy
     set_like
     if @like.destroy
+      # post = Post.find(params[:post_id])
+
+      ActionCable.server.broadcast "like", { count_like: (Like.active params[:post_id]).size, post_id: params[:post_id] }
+
       respond_to do |format|
-        flash[:success] = "like was successfully destroy" 
           format.html { redirect_to posts_path}
       end
     else

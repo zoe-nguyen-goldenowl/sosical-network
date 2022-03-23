@@ -1,7 +1,6 @@
 
-  <% @posts.each do |post|%>
- 
-  <div class="box_content_center " id="likes" >
+<% @posts.each do |post|%> 
+  <div class="box_content_center "  >
     <div class="row top_post">
       <div class="col-sm-11 col-md-11">
          <div class="current_account btn">
@@ -41,15 +40,24 @@
       </div>
 
     </div>
+
+    <div class="count_like" id="post_<%=post.id %>"> 
+      <%=(Like.active post.id).size%>
+    </div>
+    
     <div class="row bottom_post">
       <div class="col-sm-9 col-md-9">
-    
-          <%= link_to 'Like', likes_url(user_id: current_user.id, post_id: post.id), method: :post, class:"like  create_link link" %>  
-       
+        <%@like_exit=Like.exists?(user_id: current_user.id, post_id: post.id)%>
+        <%if @like_exit%>
+         <%= link_to '<i class="bi bi-hand-thumbs-up-fill" style="font-size: 26px; color: #1a4eeaf2;"></i>'.html_safe, likes_url(user_id: current_user.id, post_id: post.id), method: :post,remote: true, class:"like  create_link" %>
+
+        <% else %>
+         <%= link_to '<i class="bi bi-hand-thumbs-up" style="font-size: 26px; color: cornflowerblue;"></i>'.html_safe, likes_url(user_id: current_user.id, post_id: post.id), method: :post,remote: true , class:"like  create_link"%>
+        <%end%>
       </div>
 
       <div class="col-sm-3 col-md-3">
-        <%= link_to "Comment", comments_url(post_id: post.id),class:"link " %>
+        <%= link_to "Comment", post_comments_url(post_id: post.id),class:"link " %>
       </div>
 
 

@@ -62,9 +62,6 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #Gemfile
 gem "devise", "~> 4.1"
-
 gem "pagy"
-
 gem "redis", "~> 3.0"
-
 

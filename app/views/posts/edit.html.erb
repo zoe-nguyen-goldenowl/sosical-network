@@ -1,16 +1,13 @@
 <div class="edit_content">
     <h1>Editing Post</h1>
 
-    <%=simple_form_for @post, url: post_path(@post), method: :put do |f|%>
-        <%=f.text_area :content, value: "#{@post.content}"%>
-
+    <%= simple_form_for @post, url: post_path(@post), method: :put do |f|%>
+        <%= f.text_area :content, value: "#{@post.content}"%>
         <span class="picture">
             <%= f.file_field :image, accept: "image/jpeg, image/gif, image/png, image/jpg"%>
         </span>
-
-        <%=f.submit "Update" %>
+        <%= f.submit "Update" %>
         <br>
-    
     <%end%>
 
     <button type="button" class="btn btn-light"  >
