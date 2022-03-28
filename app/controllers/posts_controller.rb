@@ -2,9 +2,12 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
 
   def index
-    id_user_post = set_user_ids
-    @pagy, @posts = pagy(Post.where(user_id: id_user_post).order(created_at: :desc))
-    @post = Post.new
+    # id_user_post= set_user_ids
+    # @pagy, @posts= pagy(Post.where(user_id: id_user_post).order(created_at: :desc))
+    @pagy, @posts= pagy(Post.all.order(created_at: :desc))
+
+    @users= User.all
+    @post= Post.new
   end
 
   def show 
@@ -20,7 +23,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id= current_user.id
-
+    
     if @post.save
       id_user_post= set_user_ids
       @posts=Post.where(user_id: id_user_post).order(created_at: :desc)
