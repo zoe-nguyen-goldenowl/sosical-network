@@ -1,0 +1,75 @@
+head
+    title | Facebook
+    = csrf_meta_tags
+    = csp_meta_tag
+    meta[name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"]
+    = stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' 
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    script[src="https://code.jquery.com/jquery-3.3.1.min.js"]
+    script[src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"]
+    link[href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css"]
+    meta[name="viewport" content="width=device-width, initial-scale=1.0"]
+    style| @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400;1,700&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap');
+
+body
+  .menutop
+    - flash.each do |key, value|
+      - if key== "error" || key== "alert"
+        = value
+      - elsif key== "success"|| key== "notice" 
+        = value
+
+    .row
+      .col.col-md-4
+        .menutop__logo
+          img.menutop__logo__logofacebook[src="https://images.vexels.com/media/users/3/137253/isolated/preview/90dd9f12fdd1eefb8c8976903944c026-facebook-icon-logo.png" width="40" height="40"]
+          h3.menutop__logo__name Facebook
+      .col.col-md-5
+        - if !user_signed_in?
+          .menutop__search
+            .menutop__search__box
+              input.menutop__search__box__txt_search[placeholder= " Search account"]
+              p |
+              button.menutop__search__box__btn_search
+                i.bi.bi-search
+        - else
+          .card_user
+            .card_user__avatar        
+              i.bi.bi-person-workspace 
+          
+      .col.col-md-3
+        .menutop__nav
+          a.menutop__nav__link_posts href="#" Posts
+          = button_to " Sign in", new_user_session_path, class: "menutop__nav__btn_signin"
+          i.bi.bi-three-dots-vertical
+
+  .container
+    .row
+      .col.col-md-4.col-sm-4
+        .container__menuleft
+          .container__menuleft__navbar
+            = link_to '<i class="bi bi-house-door-fill"></i>For you '.html_safe, posts_path, class: "container__menuleft__navbar__link"
+            = link_to '<i class="bi bi-person-plus-fill"></i>Friends '.html_safe, posts_path, class: "container__menuleft__navbar__link"
+            = link_to '<i class="bi bi-person-video2"></i>Live'.html_safe, posts_path, class: "container__menuleft__navbar__link"
+            - if !user_signed_in?
+              .container__menuleft__navbar__tag_signin
+                p Log in to add friend, like posts, and view comments.
+                button.btn_signin--red Sign in  
+
+          .container__menuleft__suggested_accounts
+            p Suggested accounts
+            - @users.each do |user|
+              .card_user
+                .card_user__avatar        
+                  i.bi.bi-person-workspace 
+                .card_user__infor
+                  = user.first_name+" "+user.last_name
+            
+          .container__menuleft__request_friends
+            p request_friends
+
+      .col.col-md-8.col-sm-8
+        .container__main
+          == yield
+
+      
