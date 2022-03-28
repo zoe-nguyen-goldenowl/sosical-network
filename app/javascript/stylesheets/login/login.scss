@@ -59,12 +59,12 @@
   }
 
   .create_user{
-    width: auto;
-    max-width: 600px;
+    width: 600px;
     height: auto;
     background-color: white;
     padding: 20px;
-    margin: 10% 15% 0 25%;
+    margin: 10%;
+    margin-right: 20%;
 
     &__tilte{
      display: flex;

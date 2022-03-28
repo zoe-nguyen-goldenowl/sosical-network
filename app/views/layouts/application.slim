@@ -12,13 +12,15 @@ head
     style| @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400;1,700&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap');
 
 body
-  .menutop
-    - flash.each do |key, value|
-      - if key== "error" || key== "alert"
+  - flash.each do |key, value|
+    - if key== "error" || key== "alert"
+      .alert.alert-danger
         = value
-      - elsif key== "success"|| key== "notice" 
+    - elsif key== "success"|| key== "notice" 
+      .alert.alert-success
         = value
 
+  .menutop
     .row
       .col.col-md-4
         .menutop__logo
