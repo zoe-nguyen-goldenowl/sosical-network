@@ -14,11 +14,15 @@ head
 body
   - flash.each do |key, value|
     - if key== "error" || key== "alert"
-      .alert.alert-danger
-        = value
+      .alert.alert-danger.alert-dismissible
+        button.close[type="button" data-dismiss="alert"] x
+        .alert_value--center
+          = value
     - elsif key== "success"|| key== "notice" 
-      .alert.alert-success
-        = value
+      .alert.alert-success.alert-dismissible
+        button.close[type="button" data-dismiss="alert"] x
+        .alert_value--center
+          = value
 
   .menutop
     .row
@@ -38,13 +42,31 @@ body
           - if !user_signed_in?
             = link_to "Upload", new_user_session_path, class: "menutop__nav__link_posts"
           - else
-            = link_to "Upload", new_user_session_path, class: "menutop__nav__link_posts"
-            
+            button.menutop__nav__link_posts.btn[ data-toggle="modal" data-target="#exampleModalCenter"] Upload
+
+            / modal create posts
+            #exampleModalCenter.modal.fade[tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"]
+              .modal-dialog.modal-dialog-centered[role="document"]
+                = form_with model: @post, method: :post, local: false do |f|
+                  .modal-content.modal_create_post
+                    .modal_create_post__header
+                      h3 Upload posts 
+                    .modal_create_post__body 
+                      p Caption:
+                      = f.text_field :content, placeholder: "Caption posts ..."
+                      .modal_create_post__body__imagebox                    
+                      
+                      .btn_loadfile
+                        = f.file_field :image
+                    .modal_create_post__bottom 
+                      = f.button "Post", class: "btn btn-primary"
+
           - if !user_signed_in?
             = button_to " Sign in", new_user_session_path, class: "menutop__nav__btn_signin"
           - else
             .card_user__avatar        
               i.bi.bi-person-workspace
+          /bi bi-three-dots-vertical
           i.bi.bi-three-dots-vertical
 
   .container
@@ -62,15 +84,16 @@ body
 
           .container__menuleft__suggested_accounts
             p Suggested accounts
-            - @users.each do |user|
+            - @users_suggest.each do |user|
               .card_user
                 .card_user__avatar        
                   i.bi.bi-person-workspace 
-                .card_user__infor
+                .card_user__information
                   = user.first_name+" "+user.last_name
             
-          .container__menuleft__request_friends
-            p request_friends
+          .container__menuleft__logout
+            - if user_signed_in?
+              = link_to '<i class="bi bi-box-arrow-left">  Log out</i>'.html_safe, destroy_user_session_path, method: :delete
 
       .col.col-md-8.col-sm-8
         .container__main

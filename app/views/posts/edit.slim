@@ -1,0 +1,19 @@
+.container 
+  .modal_create_post
+    = simple_form_for @post, url: post_path(@post), method: :put do |f|
+      .modal_create_post__header
+        h3 Edit posts 
+      .modal_create_post__body 
+        p Caption:
+        = f.text_field :content, value: "#{@post.content}"
+        .modal_create_post__body__imagebox    
+          - if @post.image.persisted? 
+            = image_tag @post.image, class: "image--cover"   
+      .modal_create_post__bottom 
+        - if current_user.id == @post.user_id
+          = f.file_field :image
+          = f.submit "Update", class: "btn btn-primary"
+          p
+          = link_to 'Back |', posts_path 
+          = link_to '| Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' }   
+

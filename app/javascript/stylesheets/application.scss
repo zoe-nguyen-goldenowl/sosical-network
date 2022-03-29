@@ -108,6 +108,7 @@
     i{
       font-size: 20px;
       font-weight: 500;
+      margin-top: 10px;
     }
   }
 }
@@ -179,6 +180,20 @@
         color:#26242463;
       }
     }
+
+    &__logout{
+      border-top: #2624241a solid 1px;
+      text-align: left;
+      color: black;
+      margin-top: 30px;
+      padding-top: 20px;
+      i{
+        font-size: 20px;
+        color: black;
+        font-weight: 500px;
+        margin-right: 10px; 
+      }  
+    }
   }
 
   .container__main{
@@ -186,6 +201,9 @@
     overflow-y: scroll;
     -ms-overflow-style: none;  
     scrollbar-width: none;
+  }
+  .container__main::-webkit-scrollbar { 
+    display: none;
   }
 }
 

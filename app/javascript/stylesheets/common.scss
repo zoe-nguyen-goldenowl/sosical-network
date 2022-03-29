@@ -39,9 +39,73 @@
       font-size: 20px;
     }
 
-    &__infor{
+    &__information{
       font-weight: 600;
       margin: 10px;
       font-size: 14px;
     }
+}
+
+.alert_value--center{
+  text-align: center;
+}
+
+.button--red{
+  width: 30%;
+  height: 35px;
+  background-color: white;
+  border: red solid 0.5px;
+  border-radius: 5px;
+  font-weight: 550;
+  color: red;
+}
+
+// create posts
+.modal_create_post{
+  width: 100%;
+  &__header{
+    width: 500px;
+    margin: 2%;
+    font-weight: 500;
+  }
+
+  &__body{
+    height: 500px;
+    p{
+      margin-left: 2%;
+    }
+    input{
+      outline: white;
+      width: 80%;
+      border: white;
+      margin-left: 2%;
+    }
+    &__imagebox{
+      height: 400px;
+      width: 200px;
+      border-radius: 3%;
+      background: #f1f1f2;
+      margin: 2%;
+      .image--cover{
+        border-radius: 3%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    .btn_loadfile{
+      width: 80px;
+      height: 80px;
+      outline: blueviolet;
+      margin: 10px;
+    }
+  }
+  &__bottom{
+    text-align: center;
+    margin-bottom: 10px;
+    button{
+      width: 120px;
+      height: 40px;
+    }
+  }
 }

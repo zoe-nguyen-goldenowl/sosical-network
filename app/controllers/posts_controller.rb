@@ -1,20 +1,11 @@
 class PostsController < ApplicationController
+  before_action :require_login, only: %i[ edit update destroy  ]
   before_action :set_post, only: %i[ show edit update destroy ]
 
   def index
-    # id_user_post= set_user_ids
-    # @pagy, @posts= pagy(Post.where(user_id: id_user_post).order(created_at: :desc))
     @pagy, @posts= pagy(Post.all.order(created_at: :desc))
-
     @users= User.all
     @post= Post.new
-  end
-
-  def show 
-  end
-
-  def new
-    @post = Post.new
   end
 
   def edit
@@ -25,17 +16,16 @@ class PostsController < ApplicationController
     @post.user_id= current_user.id
     
     if @post.save
-      id_user_post= set_user_ids
-      @posts=Post.where(user_id: id_user_post).order(created_at: :desc)
+      @posts=Post.all
       flash[:success] = "Post was successfully created!!"
       respond_to do |format|
+        #  chua load dc file js 
         format.js{} 
       end 
     else
       respond_to do |format|
         flash[:error] = "Post was fail created!!"
-        # sua lai
-        format.html { render :new, status: :unprocessable_entity }
+        format.js{} 
       end 
     end
   end
@@ -51,7 +41,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     flash[:success] = "Post was successfully destroyed!!"
-    redirect_to posts_url
+    redirect_to posts_path
   end
 
   private
@@ -62,13 +52,12 @@ class PostsController < ApplicationController
     def post_params
        params.require(:post).permit(:content, :image)
     end
-    
-    def set_user_ids
-      @friends_post= Friend.active_friend current_user.id
-      user_id_post=[current_user.id]   
-        @friends_post.each do |f|
-          user_id_post<< f.self_user_id << f.user_id
-        end
-      return user_id_post.uniq
+
+    def require_login
+      if !user_signed_in?
+        redirect_to new_user_session_path
+      end
     end
+    
+
 end
