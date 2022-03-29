@@ -21,9 +21,23 @@
       .col-md-4
         .container_posts__navbar
           .container_posts__navbar__icon
-            = link_to '<i class="bi bi-hand-thumbs-up-fill"></i> '.html_safe, class: "link--black"
+            - if !user_signed_in?
+              = link_to '<i class= "bi bi-hand-thumbs-up-fill"></i>'.html_safe, likes_path, method: :post, remote: true, class: "link--black"
+              .container_posts__navbar__icon__count_like
+                = (Like.active post.id).size
+            - else
+              - @like_exit= Like.exists?(user_id: current_user.id, post_id: post.id)             
+              - if @like_exit
+                = link_to '<i class= "bi bi-hand-thumbs-up-fill" style= "color: #fe2c55;"></i>'.html_safe, likes_url(user_id: current_user.id, post_id: post.id), method: :post,remote: true, class: "link--black"
+                .container_posts__navbar__icon__count_like               
+                  = (Like.active post.id).size
+              - else 
+                = link_to '<i class= "bi bi-hand-thumbs-up-fill"></i>'.html_safe, likes_url(user_id: current_user.id, post_id: post.id), method: :post,remote: true, class: "link--black"
+                .container_posts__navbar__icon__count_like               
+                  = (Like.active post.id).size
+
           .container_posts__navbar__icon
-            = link_to '<i class="bi bi-chat-left-quote-fill"></i> '.html_safe, class: "link--black"
+            = link_to '<i class= "bi bi-chat-left-quote-fill"></i>'.html_safe, class: "link--black"
 
           
                    
