@@ -4,6 +4,7 @@ class PostsController < ApplicationController
 
   def index
     @pagy, @posts= pagy(Post.all.order(created_at: :desc))
+    #  change to js for User.all
     @users= User.all
     @post= Post.new
   end
@@ -12,20 +13,18 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
-    @post.user_id= current_user.id
+    @post = Post.new(post_params.merge(user_id= current_user.id)
     
     if @post.save
       @posts=Post.all
       flash[:success] = "Post was successfully created!!"
       respond_to do |format|
-        #  chua load dc file js 
         format.js{} 
       end 
     else
       respond_to do |format|
         flash[:error] = "Post was fail created!!"
-        format.js{} 
+        render :new
       end 
     end
   end
