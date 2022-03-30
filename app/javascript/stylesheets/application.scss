@@ -15,14 +15,14 @@
  */
 @import "bootstrap/scss/bootstrap";
 
-.menutop{
+.menu_top{
   font-family: 'Playfair Display', serif;
   height: auto;
   max-height: 70px;
   border-bottom-color: #0000006b;
   border-bottom-style: ridge;
   
-  .menutop__logo{
+  .menu_top__logo{
     display: flex;
     justify-content: right;
     padding-right: 20%;
@@ -39,10 +39,10 @@
     }
   }
 
-  .menutop__search{
+  .menu_top__search{
     margin-top: 8px;
     max-width: 350px;
-    .menutop__search__box{
+    .menu_top__search__box{
       border-radius: 50px;
       background: #f1f1f2;
       height: 45px;
@@ -82,7 +82,7 @@
     }
   }
 
-  .menutop__nav{
+  .menu_top__nav{
     display: flex;
     justify-content: center;
     margin-top: 10px;
@@ -209,7 +209,7 @@
 
 
 @media (max-width: 767px) {
-  .menutop__search{
+  .menu_top__search{
     display: none;
   }
 

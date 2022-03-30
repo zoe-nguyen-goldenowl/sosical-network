@@ -5,7 +5,7 @@
         h3 Edit posts 
       .modal_create_post__body 
         p Caption:
-        = f.text_field :content, value: "#{@post.content}"
+        = f.text_field :content
         .modal_create_post__body__imagebox    
           - if @post.image.persisted? 
             = image_tag @post.image, class: "image--cover"   

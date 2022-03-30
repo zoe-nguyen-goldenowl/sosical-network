@@ -59,17 +59,11 @@
   }
 
   .create_user{
-    width: 600px;
-    height: auto;
     background-color: white;
-    padding: 20px;
-    margin: 10%;
-    margin-right: 20%;
-
     &__tilte{
-     display: flex;
-     justify-content: space-between;
-
+      display: flex;
+      justify-content: space-between;
+      margin-left: 5px; 
      h1{
       font-size: 40px;
       color:#0066ff;
@@ -84,16 +78,22 @@
 
         select{
           display: block;
-          width: 37%;
           height: 40px;
+          width: 48%;
           color: #495057;
           background-color: #fff;
           background-clip: padding-box;
           border: 1px solid #ced4da;
           border-radius: 0.25rem;
           transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-          margin: 0 3% 5% 5%;
+          margin:0 1% 4% 1%;
         }
+      }
+      &__textfield--border{
+        width: 100%;
+        border-top: lightslategrey solid 0.5px;
+        padding: 20px 10px 0px 10px;
+        
       }
     }
   }

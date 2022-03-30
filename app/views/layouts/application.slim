@@ -5,10 +5,6 @@ head
   meta[name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"]
   = stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' 
   = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-  script[src="https://code.jquery.com/jquery-3.3.1.min.js"]
-  script[src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"]
-  link[href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css"]
-  meta[name="viewport" content="width=device-width, initial-scale=1.0"]
   style| @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400;1,700&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap');
 
 body
@@ -24,25 +20,25 @@ body
         .alert_value--center
           = value
 
-  .menutop
+  .menu_top
     .row
       .col.col-md-4
-        .menutop__logo
-          img.menutop__logo__logofacebook[src="https://images.vexels.com/media/users/3/137253/isolated/preview/90dd9f12fdd1eefb8c8976903944c026-facebook-icon-logo.png" width="40" height="40"]
-          h3.menutop__logo__name Facebook
+        .menu_top__logo
+          img.menu_top__logo__logofacebook[src="https://images.vexels.com/media/users/3/137253/isolated/preview/90dd9f12fdd1eefb8c8976903944c026-facebook-icon-logo.png" width="40" height="40"]
+          h3.menu_top__logo__name Facebook
       .col.col-md-5
-        .menutop__search
-          .menutop__search__box
-            input.menutop__search__box__txt_search[placeholder= " Search account"]
+        .menu_top__search
+          .menu_top__search__box
+            input.menu_top__search__box__txt_search[placeholder= " Search account"]
             p |
-            button.menutop__search__box__btn_search
+            button.menu_top__search__box__btn_search
               i.bi.bi-search
       .col.col-md-3
-        .menutop__nav
+        .menu_top__nav
           - if !user_signed_in?
-            = link_to "Upload", new_user_session_path, class: "menutop__nav__link_posts"
+            = link_to "Upload", new_user_session_path, class: "menu_top__nav__link_posts"
           - else
-            button.menutop__nav__link_posts.btn[ data-toggle="modal" data-target="#exampleModalCenter"] Upload
+            button.menu_top__nav__link_posts.btn[ data-toggle="modal" data-target="#exampleModalCenter"] Upload
 
             / modal create posts
             #exampleModalCenter.modal.fade[tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"]
@@ -62,7 +58,7 @@ body
                       = f.button "Post", class: "btn btn-primary"
 
           - if !user_signed_in?
-            = button_to " Sign in", new_user_session_path, class: "menutop__nav__btn_signin"
+            = button_to " Sign in", new_user_session_path, class: "menu_top__nav__btn_signin"
           - else
             .card_user__avatar        
               i.bi.bi-person-workspace

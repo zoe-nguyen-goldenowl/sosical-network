@@ -39,7 +39,6 @@
     }
   }
 
-
   &__btn_detail--right{
     text-align: right;
   }
@@ -82,13 +81,14 @@
       }
 
       &__count_like{
-        color: blue;
+        color: #858591;
         margin-top: 100%;
         text-align: center;
       }
     }
-     &__icon:hover{
+
+    &__icon:hover{
        background: #f1f1f27a;
-     }
+    }
   }
 }

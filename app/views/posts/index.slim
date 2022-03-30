@@ -1,5 +1,6 @@
 .container
-  #my-posts
-    == render 'posts/post' ,locals: { :posts => @posts } 
+  #container--scroll
+    #my-posts
+      == render 'posts/post' ,locals: { :posts => @posts } 
   #pagination
     == pagy_bootstrap_nav(@pagy, id:"next_link")
