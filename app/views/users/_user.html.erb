@@ -11,7 +11,7 @@
                  <%=link_to  "#{user.first_name+" "+user.last_name}", user_detail_url(user.id),class:"item_link" %>
                 </div> 
                 
-                <%= link_to "Add friend", friend_add_url(self_user_id: current_user.id, user_id: user.id),class:"item_link"%>                          
+                <%= link_to "Add friend", friend_add_url(friend_id: current_user.id, user_id: user.id),class:"item_link"%>                          
             </div>
         </div>
     <%end%>

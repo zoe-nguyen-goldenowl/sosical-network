@@ -1,0 +1,17 @@
+.container_friend_edit{
+  display: flex;
+  flex-wrap: wrap;
+  @include card_user; 
+  
+  &__btn--close{
+    color: #e35d5dbd;
+    position: relative;
+    top: -15px;
+    right: -30px;
+  }
+
+  &__btn--close:hover{
+    color: #f01e1e;
+    text-decoration: none;
+  }
+}

@@ -1,0 +1,102 @@
+.container_show{
+  .container_show__header{
+    display: flex;
+    margin: 30px;
+
+    &__avatar_image{
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background-color: tan;
+
+      i{
+        margin: 20px;
+        font-size: 50px;
+        color: white;
+      }
+    }
+
+    &__avatar_name{
+      font-size: 30px;
+      font-weight: 800;
+      margin-left: 5%;
+
+      input{
+        width: 80%;
+        margin-top: 10px;
+        @include btn_add_friend;
+      }
+
+      input:hover{
+        background-color: #ce163b;
+      }
+
+    }
+  } 
+
+  .container_show__center{
+    display: flex;
+
+    &__information{
+      margin-top: -40px;
+      margin-left: 20px;
+      
+      text{
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      lable{
+        color: #c2c2c2;
+        margin-left: 5px;
+      }
+    }   
+  }
+
+  .container__information--detail{
+    text-align: left;
+    padding-bottom: 10px;
+  }
+  
+  .container_show__bottom{
+    padding-top: 20px;
+    border-top: #f1f1f2 solid 1px;
+    display: flex;
+    flex-wrap: wrap;
+    .container_show__bottom__card_post{
+      width: 200px;
+      height: 300px;
+      margin: 10px;
+
+      border-radius: 3%;
+      background-color: darkkhaki;
+      position: relative;
+
+      img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 3%;
+      }
+      
+      .container_show__bottom__card_post--header{
+        position: absolute;
+        margin: 5px;
+        font-weight: 600;
+        color: #060606ba;
+      }
+
+      .container_show__bottom__card_post--bottom{
+        position: absolute;
+        bottom: 10px;
+        font-weight: 500;
+        text{
+          margin-right: 20px;
+          margin-left: 5px;
+        }     
+      }
+    }
+    
+  }
+  
+}

@@ -2,7 +2,7 @@
   .modal_create_post
     = simple_form_for @post, url: post_path(@post), method: :put do |f|
       .modal_create_post__header
-        h3 Edit posts 
+        h3 Detail posts 
       .modal_create_post__body 
         p Caption:
         = f.text_field :content

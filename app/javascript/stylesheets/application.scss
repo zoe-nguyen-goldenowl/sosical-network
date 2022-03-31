@@ -24,14 +24,13 @@
   
   .menu_top__logo{
     display: flex;
-    justify-content: right;
+    justify-content: center;
     padding-right: 20%;
   
     &__name{
       color: #030303;
-      font-weight: 600;
+      font-weight: 900;
       margin-top: 15px;
-      font-family: 'lato';
     }
 
     &__logofacebook{

@@ -1,0 +1,5 @@
+.container_friend_index{
+  display: flex;
+  flex-wrap: wrap;
+  @include card_user;
+}

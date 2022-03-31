@@ -1,0 +1,15 @@
+.container_friend_index
+  - if !@friends.blank?
+    - @friends.each do |friend| 
+      - user= User.set_friend(friend.user_id)
+
+      .user_box 
+        .user_box__header  
+          = user.first[:first_name]+" "+ user.first[:last_name]
+          = link_to "X", friend_path(user.first), method: :delete, class: "container_friend_edit__btn--close", data:{confirm: "Are you sure delete request?"}
+        
+        .user_box__bottom 
+          = button_to "Profile", friend_path(user.first), method: :get, class: "user_box__bottom__btn--red"
+        
+
+

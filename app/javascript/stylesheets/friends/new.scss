@@ -1,0 +1,6 @@
+.container_friend_new{
+  display: flex;
+  flex-wrap: wrap; 
+  @include card_user;
+}
+  

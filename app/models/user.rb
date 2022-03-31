@@ -1,7 +1,5 @@
 
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_many :posts
   has_many :friends
   has_many :likes
@@ -12,8 +10,14 @@ class User < ApplicationRecord
   validates :phone, length: {is: 10}, allow_blank: true, format:{with: /\d/}
   validate :expiration_date 
 
+  scope :user_except, -> (user){ where.not(id: user)}
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  def self.set_friend(friend_id)
+    User.where(id: friend_id)
+  end
 
   private
   def expiration_date  

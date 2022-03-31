@@ -1,0 +1,61 @@
+.container_show 
+  .container_show__header 
+    .container_show__header__avatar_image
+      i.bi.bi-person-workspace
+
+    .container_show__header__avatar_name
+      = @user.first_name+" "+ @user.last_name
+      - if user_signed_in?
+        = button_to "Add friend", friends_path(@user)
+      - else 
+        = button_to "Add friend", new_user_session_path
+        
+  .container_show__center
+    .container_show__center__information
+      text
+        = @user.friends.size
+      lable Friends 
+
+    .container_show__center__information
+      text
+        = @user.likes.size
+      lable Likes
+
+    .container_show__center__information
+      text
+        = @user.posts.size
+      lable Posts
+    
+  .container__information--detail
+    text Date of bith: 
+    = (@user.date_of_birth).to_s.slice(0, 10)
+
+    - if @user.gender==1  
+      p Gender: Male
+    - else 
+      p Gender: Female
+    
+    i.bi.bi-envelope 
+      = @user.email
+
+  .container_show__bottom
+    - posts= @user.posts
+
+    - posts.each do |post|
+      .container_show__bottom__card_post
+        .container_show__bottom__card_post--header 
+          text
+            = post.content
+
+        = image_tag post.image, class: "container_show__bottom__card_posts"
+
+        .container_show__bottom__card_post--bottom 
+          i.bi.bi-hand-thumbs-up 
+          text
+            = post.likes.size
+           
+          i.bi.bi-chat-left-dots-fill
+          text
+            = post.comments.size
+          
+  

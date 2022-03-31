@@ -1,5 +1,5 @@
 head
-  title | Facebook
+  title | Tiktok
   = csrf_meta_tags
   = csp_meta_tag
   meta[name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"]
@@ -14,6 +14,7 @@ body
         button.close[type="button" data-dismiss="alert"] x
         .alert_value--center
           = value
+          
     - elsif key== "success"|| key== "notice" 
       .alert.alert-success.alert-dismissible
         button.close[type="button" data-dismiss="alert"] x
@@ -24,8 +25,9 @@ body
     .row
       .col.col-md-4
         .menu_top__logo
-          img.menu_top__logo__logofacebook[src="https://images.vexels.com/media/users/3/137253/isolated/preview/90dd9f12fdd1eefb8c8976903944c026-facebook-icon-logo.png" width="40" height="40"]
-          h3.menu_top__logo__name Facebook
+          img.menu_top__logo__logofacebook[src="https://seeklogo.com/images/T/tiktok-logo-B9AC5FE794-seeklogo.com.png" width="40" height="40"]
+          h3.menu_top__logo__name Tiktok
+
       .col.col-md-5
         .menu_top__search
           .menu_top__search__box
@@ -33,6 +35,7 @@ body
             p |
             button.menu_top__search__box__btn_search
               i.bi.bi-search
+
       .col.col-md-3
         .menu_top__nav
           - if !user_signed_in?
@@ -62,7 +65,7 @@ body
           - else
             .card_user__avatar        
               i.bi.bi-person-workspace
-          /bi bi-three-dots-vertical
+              
           i.bi.bi-three-dots-vertical
 
   .container
@@ -71,21 +74,27 @@ body
         .container__menuleft
           .container__menuleft__navbar
             = link_to '<i class="bi bi-house-door-fill"></i>For you '.html_safe, posts_path, class: "container__menuleft__navbar__link"
-            = link_to '<i class="bi bi-person-plus-fill"></i>Friends '.html_safe, posts_path, class: "container__menuleft__navbar__link"
-            = link_to '<i class="bi bi-person-video2"></i>Live'.html_safe, posts_path, class: "container__menuleft__navbar__link"
+            = link_to '<i class="bi bi-person-plus-fill"></i>Friends '.html_safe, new_friend_path, class: "container__menuleft__navbar__link"
+      
             - if !user_signed_in?
+              = link_to '<i class="bi bi-person-video2"></i>Request friends'.html_safe, new_user_session_path, class: "container__menuleft__navbar__link"
               .container__menuleft__navbar__tag_signin
-                p Log in to add friend, like posts, and view comments.
+                p Log in to add friends, like posts, and view comments.
                 = button_to " Sign in", new_user_session_path, class:" btn_signin--red" 
-
+            
+            - else 
+              = link_to '<i class="bi bi-person-video2"></i>Request friends'.html_safe, edit_friend_path(current_user), class: "container__menuleft__navbar__link"
+              
           .container__menuleft__suggested_accounts
             p Suggested accounts
-            - @users_suggest.each do |user|
+            
+            - @users= @users_suggest
+            - @users.each do |user|
               .card_user
                 .card_user__avatar        
                   i.bi.bi-person-workspace 
                 .card_user__information
-                  = user.first_name+" "+user.last_name
+                  = link_to "#{user.first_name+" "+user.last_name}", friend_path(user), method: :get               
             
           .container__menuleft__logout
             - if user_signed_in?

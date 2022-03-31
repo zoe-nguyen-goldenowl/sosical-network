@@ -1,5 +1,5 @@
 class LikesController < ApplicationController
-  before_action :require_login, only: :create, :destroy
+  before_action :require_login, only: %i[create destroy]
 
   def create
     if Like.exists?(user_id: params[:user_id], post_id: params[:post_id])
