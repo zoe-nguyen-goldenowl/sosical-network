@@ -1,9 +1,57 @@
 .container 
-  .row 
-    .col
-      p user information 
-  .row 
-    .col 
-      .container__posts
-        p posts
+  .container__header 
+    .container__header__avatar_image
+      i.bi.bi-person-workspace
 
+    .container__header__avatar_name
+      = User.full_name(@user)
+      = button_to "Edit profile"
+  .container__center
+    .container__center__information
+      text
+        = Friend.active_friend(@user).size
+      lable Friends 
+
+    .container__center__information
+      text
+        = @user.likes.size
+      lable Likes
+
+    .container__center__information
+      text
+        = @user.posts.size
+      lable Posts
+    
+  .container__information--detail
+    text Date of bith: 
+    = (@user.date_of_birth).to_s.slice(0, 10)
+
+    - if @user.male?  
+      p Gender: Male
+    - else 
+      p Gender: Female
+    
+    i.bi.bi-envelope 
+      = @user.email
+
+  .container__bottom
+    - posts= @user.posts
+
+    - posts.each do |post|
+      .container__bottom__card_post
+        .container__bottom__card_post--header 
+          text
+            = post.content
+
+        = image_tag post.image, class: "container__bottom__card_posts"
+
+        .container__bottom__card_post--bottom 
+          i.bi.bi-hand-thumbs-up 
+          text
+            = post.likes.size
+           
+          i.bi.bi-chat-left-dots-fill
+          text
+            = post.comments.size
+          
+  

@@ -25,7 +25,8 @@ body
     .row
       .col.col-md-4
         .menu_top__logo
-          img.menu_top__logo__logofacebook[src="https://seeklogo.com/images/T/tiktok-logo-B9AC5FE794-seeklogo.com.png" width="40" height="40"]
+          .menu_top__logo__logo_tiktok
+            = image_pack_tag "tiktok-logo-B9AC5FE794-seeklogo.com.png"
           h3.menu_top__logo__name Tiktok
 
       .col.col-md-5
@@ -64,7 +65,8 @@ body
             = button_to " Sign in", new_user_session_path, class: "menu_top__nav__btn_signin"
           - else
             .card_user__avatar        
-              i.bi.bi-person-workspace
+              / i.bi.bi-person-workspace
+              = link_to '<i class="bi bi-person-workspace"></i>'.html_safe, users_path
               
           i.bi.bi-three-dots-vertical
 
@@ -87,14 +89,13 @@ body
               
           .container__menuleft__suggested_accounts
             p Suggested accounts
-            
-            - @users= @users_suggest
-            - @users.each do |user|
+   
+            - @users_suggest.each do |user|
               .card_user
                 .card_user__avatar        
                   i.bi.bi-person-workspace 
                 .card_user__information
-                  = link_to "#{user.first_name+" "+user.last_name}", friend_path(user), method: :get               
+                  = link_to "#{User.full_name(user)}", friend_path(user), method: :get               
             
           .container__menuleft__logout
             - if user_signed_in?

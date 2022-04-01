@@ -15,8 +15,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  def self.set_friend(friend_id)
-    User.where(id: friend_id)
+  enum gender: {male: 1, female: 2}
+
+  def self.set_friend(friend_id)  
+    where(id: friend_id)
+  end
+
+  def self.full_name(user)
+    user.first_name+ " "+ user.last_name
   end
 
   private

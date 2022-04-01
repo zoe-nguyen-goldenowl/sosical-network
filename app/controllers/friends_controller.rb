@@ -3,7 +3,6 @@ class FriendsController < ApplicationController
   before_action :set_friend, only: %i[ update destroy ]
 
   def index
-    # @friends= Friend.where(friend_id: current_user.id).where(status: 1)
     @friends= Friend.active_friend(current_user.id)
   end
 
@@ -12,7 +11,7 @@ class FriendsController < ApplicationController
   end
 
   def edit
-   @friends = Friend.where(friend_id: current_user.id).where(status: 0)
+   @friends = Friend.where(friend_id: current_user.id, status: :unfriend)
   end
 
   def show

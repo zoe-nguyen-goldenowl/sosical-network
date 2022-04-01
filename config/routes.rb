@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   end
 
   post "likes" => "likes#create"
+  get "users" => "users#index"
+  
   devise_for :users, controllers: {:registrations => 'users/registrations', :sessions => 'users/sessions'}
   root "posts#index"
 end
