@@ -6,7 +6,11 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-  post "likes" => "likes#create"
+  resources :posts do
+    resources :likes, only: %i[create]
+  end
+
+  # post "likes" => "likes#create"
   get "users" => "users#index"
   
   devise_for :users, controllers: {:registrations => 'users/registrations', :sessions => 'users/sessions'}

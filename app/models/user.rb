@@ -25,6 +25,10 @@ class User < ApplicationRecord
     user.first_name+ " "+ user.last_name
   end
 
+  def self.self_user(user_id)
+    find(user_id)
+  end
+
   private
   def expiration_date  
     errors.add(:date_of_birth, 'date of birth incorrect') if !self.date_of_birth.past? 

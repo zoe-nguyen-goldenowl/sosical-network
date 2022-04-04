@@ -53,6 +53,7 @@ class PostsController < ApplicationController
 
     def require_login
       if !user_signed_in?
+        flash[:error]="Log in to add friends, like posts, and create comments!!"
         redirect_to new_user_session_path
       end
     end

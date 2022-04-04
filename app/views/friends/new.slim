@@ -2,7 +2,7 @@
   - @users.each do |user|
     .user_box 
       .user_box__header 
-        = user.first_name+" "+ user.last_name
+        = User.full_name(user)
       .user_box__bottom 
         = button_to "Add friend", friends_path(user), method: :post, class: "user_box__bottom__btn--red"
         

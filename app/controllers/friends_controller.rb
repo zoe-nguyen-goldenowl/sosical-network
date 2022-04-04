@@ -18,7 +18,7 @@ class FriendsController < ApplicationController
     @user= User.find(params[:id])
   end
 
-  def create
+  def create 
     if Friend.exist_friend(current_user.id, params[:format])   
       flash[:error] = "You have sent this person a friend request before!!"
       redirect_to  friends_path 

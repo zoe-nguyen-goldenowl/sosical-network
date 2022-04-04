@@ -5,7 +5,7 @@
 
       .user_box 
         .user_box__header  
-          = user.first[:first_name]+" "+ user.first[:last_name]
+          = User.full_name(user.first)
           = link_to "X", friend_path(user.first), method: :delete, class: "container_friend_edit__btn--close", data:{confirm: "Are you sure delete request?"}
         
         .user_box__bottom 
