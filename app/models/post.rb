@@ -5,17 +5,17 @@ class Post < ApplicationRecord
 
   belongs_to :user 
 
-  def self.count_like(post_id)
+  def count_like(post_id)
     Like.count_likes(post_id).size
   end
 
-  def self.count_comment(post_id)
+  def count_comment(post_id)
     Comment.count_comments(post_id).size
   end
 
-  def self.user_full_name(user_id)
+  def user_full_name(user_id)
     user= User.find(user_id)
-    User.full_name(user)
+    user.full_name
   end
 
 end

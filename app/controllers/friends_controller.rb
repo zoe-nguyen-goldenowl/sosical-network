@@ -24,7 +24,7 @@ class FriendsController < ApplicationController
       redirect_to  friends_path 
 
     else   
-      @friend = Friend.new(status: 0, friend_id: params[:format], user_id: current_user.id)
+      @friend = Friend.new(status: :unfriend, friend_id: params[:format], user_id: current_user.id)
 
       if @friend.save
         flash[:success] = "Friend request has been sent successfully.!!"
@@ -37,27 +37,30 @@ class FriendsController < ApplicationController
   end
 
   def update
-    if @friend.update(status: 1)
+    if @friend.update(status: :friend)
       flash[:success]= "successfully added friend!!"
       render :edit
+
     else
       flash[:error]= "Fail added friend!!"
       render :edit
     end
   end
 
-  def destroy
-    @friend.destroy
+  def destroy  
+    if @friend.destroy
+      flash[:success]= "Friend was successfully destroyed!!"
+      redirect_to friends_path
 
-    respond_to do |format|
-      format.html { redirect_to friends_path, notice: "Friend was successfully destroyed." }
-      format.json { head :no_content }
+    else
+      flash[:success]= "Friend was faild destroyed!!"
+      redirect_to friends_path
     end
   end
 
   private
-    def set_friend
-      @friend = Friend.find_by(user_id: params[:id])
+    def set_friend    
+      @friend = Friend.find_by(friend_id: params[:id])
     end
 
     def require_login

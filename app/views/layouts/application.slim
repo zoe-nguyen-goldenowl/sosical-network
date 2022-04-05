@@ -96,7 +96,7 @@ body
                 .card_user__avatar        
                   i.bi.bi-person-workspace 
                 .card_user__information
-                  = link_to "#{User.full_name(user)}", friend_path(user), method: :get               
+                  = link_to "#{user.full_name}", friend_path(user), method: :get               
             
           .container__menuleft__logout
             - if user_signed_in?

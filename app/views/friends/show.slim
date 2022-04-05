@@ -4,7 +4,7 @@
       i.bi.bi-person-workspace
 
     .container_show__header__avatar_name
-      = User.full_name(@user)
+      = @user.full_name
       - if user_signed_in?
         = button_to "Add friend", friends_path(@user)
       - else 

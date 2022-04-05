@@ -4,7 +4,7 @@
       i.bi.bi-person-workspace
 
     .container__header__avatar_name
-      = User.full_name(@user)
+      = @user.full_name
       = button_to "Edit profile"
   .container__center
     .container__center__information

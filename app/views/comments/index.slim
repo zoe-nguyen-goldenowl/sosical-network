@@ -23,7 +23,7 @@
             i.bi.bi-person-workspace
 
           .container_comments--right__content__avatar_name
-            = Post.user_full_name(@post.user_id)
+            = @post.user_full_name(@post.user_id)
           
           .container_comments--right__content__add_friend 
             = button_to "Add friend", friends_path(@post.id), method: :post, class: "button--red"
@@ -39,13 +39,13 @@
               = link_to '<i class= "bi bi-hand-thumbs-up-fill" style= "color: #000000;"></i>'.html_safe, post_likes_path(@post.id), method: :post, remote: true, class: "link--black"
               
           lable 
-            = Post.count_like(@post.id)
+            = @post.count_like(@post.id)
 
           .container_comments--right__count--ball
             i.bi.bi-chat-left-quote-fill
 
           lable
-            = Post.count_comment(@post.id)
+            = @post.count_comment(@post.id)
 
         .container_comments--right__comment
           - @comments.each do |comment|
@@ -53,7 +53,7 @@
               .comment_card__user
                 .comment_card__user__ball
                   i.bi.bi-person-workspace
-                = Post.user_full_name(comment.owner_id)
+                = @post.user_full_name(comment.owner_id)
                 
                 - if current_user.id == comment.owner_id
                   = button_to "X", post_comment_path(@post.id, comment.id), method: :delete, data:{confirm:"Are you sure?"}
