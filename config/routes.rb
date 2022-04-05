@@ -8,11 +8,10 @@ Rails.application.routes.draw do
 
   resources :posts do
     resources :likes, only: %i[create]
+    delete "like" => "likes#destroy"
   end
-
-  # post "likes" => "likes#create"
-  get "users" => "users#index"
   
+  get "users" => "users#index"
   devise_for :users, controllers: {:registrations => 'users/registrations', :sessions => 'users/sessions'}
   root "posts#index"
 end

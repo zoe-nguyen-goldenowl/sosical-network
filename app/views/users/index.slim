@@ -10,7 +10,8 @@
     .container__center__information
       text
         = Friend.active_friend(@user).size
-      lable Friends 
+      label
+        = link_to 'Friends ', friends_path
 
     .container__center__information
       text

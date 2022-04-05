@@ -37,6 +37,11 @@ class CommentsController < ApplicationController
 
   def set_comment
     @comment= Comment.find(params[:id])
+
+    if @comment.owner_id != current_user.id
+      flash[:error]="Delete comment fail!!"
+      redirect_to post_comments_path(@comment.commentable_id)
+    end
   end
 
   def require_login

@@ -26,26 +26,26 @@
             - if !user_signed_in?
               = link_to '<i class= "bi bi-hand-thumbs-up-fill"></i>'.html_safe, post_likes_path(post.id), method: :post, remote: true, class: "link--black"
               .container_posts__navbar__icon__count
-                = Like.count_like(post.id)
+                = Post.count_like(post.id)
 
             - else
               - @like_exit= Like.exists?(user_id: current_user.id, post_id: post.id)     
 
               - if @like_exit
-                = link_to '<i class= "bi bi-hand-thumbs-up-fill" style= "color: #fe2c55;"></i>'.html_safe, post_likes_path(post.id), method: :post, remote: true, class: "link--black"
+                = link_to '<i class= "bi bi-hand-thumbs-up-fill" style= "color: #fe2c55;"></i>'.html_safe, post_like_path(post.id), method: :delete, remote: true, class: "link--black"
                 .container_posts__navbar__icon__count             
-                  = Like.count_like(post.id)
+                  = Post.count_like(post.id)
 
               - else 
-                = link_to '<i class= "bi bi-hand-thumbs-up-fill"></i>'.html_safe, post_likes_path(post.id), method: :post,remote: true, class: "link--black"
+                = link_to '<i class= "bi bi-hand-thumbs-up-fill"></i>'.html_safe, post_likes_path(post.id), method: :post, remote: true, class: "link--black"
                 .container_posts__navbar__icon__count               
-                  = Like.count_like(post.id)
+                  = Post.count_like(post.id)
 
           .container_posts__navbar__icon
             = link_to '<i class= "bi bi-chat-left-quote-fill"></i>'.html_safe, post_comments_path(post.id)
 
             .container_posts__navbar__icon__count
-                = Comment.count_comment(post.id)
+                = Post.count_comment(post.id)
  
       
 
