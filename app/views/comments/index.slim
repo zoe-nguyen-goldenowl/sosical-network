@@ -18,13 +18,12 @@
           = image_tag @post.image 
     .col
       .container_comments--right
-        - user= User.self_user(@post.user_id)
         .container_comments--right__content
           .container_comments--right__content__avatar_image
             i.bi.bi-person-workspace
 
           .container_comments--right__content__avatar_name
-            = User.full_name(user)
+            = Post.user_full_name(@post.user_id)
           
           .container_comments--right__content__add_friend 
             = button_to "Add friend", friends_path(@post.id), method: :post, class: "button--red"
@@ -54,7 +53,7 @@
               .comment_card__user
                 .comment_card__user__ball
                   i.bi.bi-person-workspace
-                = User.full_name(User.self_user(comment.owner_id))
+                = Post.user_full_name(comment.owner_id)
                 
                 - if current_user.id == comment.owner_id
                   = button_to "X", post_comment_path(@post.id, comment.id), method: :delete, data:{confirm:"Are you sure?"}

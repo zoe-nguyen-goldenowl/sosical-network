@@ -13,4 +13,9 @@ class Post < ApplicationRecord
     Comment.count_comments(post_id).size
   end
 
+  def self.user_full_name(user_id)
+    user= User.find(user_id)
+    User.full_name(user)
+  end
+
 end
