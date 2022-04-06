@@ -1,4 +1,5 @@
 - @posts.each do |post|
+  - debugger
   - user= post.user
   .container_posts
     .row
@@ -7,7 +8,7 @@
           .container_posts__information_user__avatar        
             i.bi.bi-person-workspace 
           .container_posts__information_user__name
-            p = user.first_name+" "+user.last_name
+            p = user.full_name
             label = post.content
 
       .col-md-6

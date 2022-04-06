@@ -10,8 +10,9 @@
         = f.text_field :content
         
         .modal_create_post__body__imagebox    
-          - if @post.image.persisted? 
-            = image_tag @post.image, class: "image--cover"  
+          - if @post.image.persisted?
+            .img-preview 
+              = image_tag @post.image, class: "image--cover"  
 
       .modal_create_post__bottom 
         - if current_user.id == @post.user_id

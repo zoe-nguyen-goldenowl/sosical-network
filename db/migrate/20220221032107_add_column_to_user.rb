@@ -4,6 +4,6 @@ class AddColumnToUser < ActiveRecord::Migration[6.1]
     add_column :users, :last_name, :string
     add_column :users, :phone, :string
     add_column :users, :date_of_birth, :datetime
-    add_column :users, :gender, :string
+    add_column :users, :gender, :integer
   end
 end

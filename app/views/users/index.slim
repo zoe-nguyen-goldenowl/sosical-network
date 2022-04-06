@@ -1,11 +1,13 @@
 .container 
   .container__header 
-    .container__header__avatar_image
-      i.bi.bi-person-workspace
+    .container__header__avatar_image   
+      - if !@user.avatar.blank?
+        = image_tag @user.avatar
 
     .container__header__avatar_name
       = @user.full_name
-      = button_to "Edit profile"
+      button.btn[data-toggle="modal" data-target="#exampleModalCenterUser"] Edit profile
+
   .container__center
     .container__center__information
       text
@@ -55,4 +57,38 @@
           text
             = post.comments.size
           
-  
+/ <-- modal edit user -->
+#exampleModalCenterUser.modal.fade[tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"]
+  .modal-dialog.modal-dialog-centered[role="document"]
+    .modal-content.user_edit
+      = form_with model: @user, method: :put  do |f|
+        .user_edit__header 
+          .user_edit__header__avatar 
+            #review_avatar.review_avatar
+            
+          label for="input_avatar"                
+            = f.file_field :avatar, id: "input_avatar", accept: "image/*"
+            | Choose image ...
+
+        .user_edit__center 
+          .user_edit__center__item
+            h5 first name: 
+            = f.text_field :first_name
+          
+          .user_edit__center__item
+            h5 Last name: 
+            = f.text_field :last_name
+          
+          .user_edit__center__item
+            h5 Phone: 
+            = f.text_field :phone
+          
+          .user_edit__center__item
+            h5 Gender: 
+            label.select_gender for="user_gender" 
+              = f.select :gender, options_for_select(User.genders.map{ |key, value| [key.humanize, key] }), class:"select_gender form-control"
+          
+        .user_edit__bottom
+          = f.submit "Update", class: "btn btn-success"
+        
+      

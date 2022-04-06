@@ -8,7 +8,7 @@
       - if user_signed_in?
         = button_to "Add friend", friends_path(@user)
       - else 
-        = button_to "Add friend", new_user_session_path
+        = button_to "Add friend", new_user_session_path, method: :get
         
   .container_show__center
     .container_show__center__information

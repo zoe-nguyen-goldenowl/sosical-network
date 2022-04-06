@@ -60,9 +60,11 @@
   
   .container_show__bottom{
     padding-top: 20px;
-    border-top: #f1f1f2 solid 1px;
     display: flex;
     flex-wrap: wrap;
+    border-top: #f1f1f2 solid 1px;
+
+
     .container_show__bottom__card_post{
       width: 200px;
       height: 300px;
@@ -73,10 +75,7 @@
       position: relative;
 
       img{
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 3%;
+        @include img_obj-fit--cover;
       }
       
       .container_show__bottom__card_post--header{
@@ -90,6 +89,7 @@
         position: absolute;
         bottom: 10px;
         font-weight: 500;
+
         text{
           margin-right: 20px;
           margin-left: 5px;

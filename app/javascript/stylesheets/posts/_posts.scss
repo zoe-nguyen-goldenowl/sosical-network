@@ -2,6 +2,7 @@
     margin: 20px;
     height: auto;
     border-bottom: #2624241a  solid 0.5px;
+    
   &__information_user{
     width: 100%;
     height: 60px;
@@ -10,12 +11,15 @@
     &__avatar{
       height: 50px;
       width: 50px;
-      position: relative;
-      background-color: floralwhite;
       border-radius: 50%;
+
       font-size: 20px;
-      color: deeppink;
       justify-content: start;
+      position: relative;
+
+      background-color: floralwhite; 
+      color: deeppink;
+
       i{
         position: absolute;
         margin: 8px;
@@ -26,6 +30,7 @@
         height: auto;
         min-height: 100px;
         width: 100%;
+
       p{
         font-size: 16px;
         font-weight: 600;
@@ -47,13 +52,12 @@
     width: 300px;
     height: 500px;
     border-radius: 3%;
+
     background-color: #d4aeae54;
     margin: 5% 0% 5% 20%;
+
     img{
-      width: 100%;
-      height: 100%;
-      border-radius: 3%;
-      object-fit:cover;
+      @include img_obj-fit--cover;
     }
   }
 
@@ -67,9 +71,11 @@
       margin: 10px 0px 20px 20px;
       height: 50px;
       width: 50px;
+
       border-radius: 50%;
       background: #f1f1f2;
       display: flex;
+
       flex-direction: column;
       position: relative;
       

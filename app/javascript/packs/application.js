@@ -11,6 +11,8 @@ import "channels"
 import 'bootstrap'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import '../stylesheets'
+import '../packs/posts.js'
+import '../packs/users.js'
 
 const images = require.context('../images', true)
 

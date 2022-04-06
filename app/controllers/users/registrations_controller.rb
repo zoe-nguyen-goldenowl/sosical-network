@@ -2,14 +2,10 @@
 class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
-    build_resource(sign_up_params)
-    if  resource.save  
-      self.resource = warden.authenticate!(auth_options)
-      yield resource if block_given?
-      redirect_to home_index_path
-    else
-      flash[:error]= "check your infomation!!"
-      redirect_to new_user_session_path
+    build_resource(sign_up_params) 
+    if resource.save  
+      flash[:success]="Create user successful!!"
+      redirect_to posts_path
     end
   end
 

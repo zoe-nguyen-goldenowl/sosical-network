@@ -17,7 +17,7 @@ class PostsController < ApplicationController
       # @posts=Post.all
       flash[:success] = "Post was successfully created!!"
       respond_to do |format|
-        redirect_to :index
+        redirect_to posts_path
         format.js{} 
       end 
     else
@@ -48,7 +48,7 @@ class PostsController < ApplicationController
     end
 
     def post_params
-       params.require(:post).permit(:content, :image)
+      params.require(:post).permit(:content, :image)
     end
 
     def require_login

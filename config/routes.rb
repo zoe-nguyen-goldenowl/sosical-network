@@ -11,7 +11,8 @@ Rails.application.routes.draw do
     delete "like" => "likes#destroy"
   end
   
-  get "users" => "users#index"
+  resources :users, only: %i[index update]
+  
   devise_for :users, controllers: {:registrations => 'users/registrations', :sessions => 'users/sessions'}
   root "posts#index"
 end
