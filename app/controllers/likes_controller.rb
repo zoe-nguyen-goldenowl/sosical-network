@@ -1,42 +1,34 @@
 class LikesController < ApplicationController
   before_action :require_login, only: %i[create destroy]
+  before_action :set_like, only: %i[destroy]
+  before_action :set_post ,only: %i[create destroy]
 
   def create
     @like= Like.new(user_id: current_user.id, post_id: params[:post_id])
-
+    
     if @like.save  
       ActionCable.server.broadcast "like", {count_like: @post.likes.size, post_id: params[:post_id] }
-      redirect_to posts_path
-
-    else
-      @like= Like.new(user_id: params[:user_id], post_id: params[:post_id])
-        if @like.save
-          redirect_to posts_path
-          ActionCable.server.broadcast "like", {count_like: (Like.active params[:post_id]).size, post_id: params[:post_id] }
-        else
-          flash[:error]= "like fail!"
-          redirect_to posts_path
-        end
     end
   end
 
   def destroy
-    set_like
     if @like.destroy
       ActionCable.server.broadcast "like", { count_like: @post.likes.size, post_id: params[:post_id] }     
-      redirect_to posts_path
-      
-    else
-      respond_to do |format|
-        flash[:error] = "like was fail destroy" 
-        format.html { redirect_to posts_path}
-      end
+  
+    else    
+      flash[:error] = "like was fail destroy" 
+      redirect_to posts_path 
     end
   end
 
   private
-    def set_like
-      @like = Like.find_by(user_id: params[:user_id], post_id: params[:post_id])
+    def set_like     
+      @like = Like.find_by( post_id: params[:post_id], user_id: current_user.id )
+    end
+    
+
+    def set_post
+      @post = Post.find(params[:post_id])
     end
 
     def require_login

@@ -1,6 +1,6 @@
 class FriendsController < ApplicationController
   before_action :require_login, only: %i[ create destroy update]
-  before_action :set_friend, only: %i[ update destroy ]
+  before_action :set_friend, only: %i[ update]
 
   def index
     @friends= Friend.active_friend(current_user.id)
@@ -19,7 +19,7 @@ class FriendsController < ApplicationController
   end
 
   def create
-    if Friend.exist_friend(current_user.id, params[:format])   
+    if !Friend.exist_friends(current_user.id, params[:format]).blank?   
       flash[:error] = "You have sent this person a friend request before!!"
       redirect_to  new_friend_path 
 
@@ -37,7 +37,7 @@ class FriendsController < ApplicationController
   end
 
   def update
-    if @friend.update(status: 1)
+    if @friend.update(status: "friend")
       flash[:success]= "successfully added friend!!"
       redirect_to friends_path
     else
@@ -47,11 +47,15 @@ class FriendsController < ApplicationController
   end
 
   def destroy
-    @friend.destroy
+    @friend= Friend.exist_friends(current_user.id, params[:id]).first
 
-    respond_to do |format|
-      format.html { redirect_to friends_path, notice: "Friend was successfully destroyed." }
-      format.json { head :no_content }
+    if @friend.destroy
+      flash[:success]= "destroy success!!"
+      redirect_to new_friend_path
+
+    else
+      flash[:error]= "destroy Fail!!"
+      redirect_to new_friend_path
     end
   end
 

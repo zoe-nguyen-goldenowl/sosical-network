@@ -1,7 +1,6 @@
 .container 
   .container__header 
     .container__header__avatar_image
-<<<<<<< HEAD
       - if !@user.avatar.blank?
         = image_tag @user.avatar
       - else
@@ -9,19 +8,13 @@
 
     .container__header__avatar_name
       = @user.full_name
-      button.btn[ data-toggle="modal" data-target="#exampleModalCenterUser"] Edit profile
-=======
-      i.bi.bi-person-workspace
-
-    .container__header__avatar_name
-      = User.full_name(@user)
-      = button_to "Edit profile"
->>>>>>> 7bcb44cc77f2405d3f7dc11d11dc0facf1e5db12
+      button.btn[ data-toggle="modal" data-target="#exampleModalCenterUser"] 
+        i.bi.bi-three-dots-vertical
   .container__center
     .container__center__information
       text
         = Friend.active_friend(@user).size
-      lable Friends 
+      = link_to ' Friends', friends_path
 
     .container__center__information
       text
@@ -51,7 +44,8 @@
     - posts.each do |post|
       .container__bottom__card_post
         .container__bottom__card_post--header 
-        = image_tag post.image, class: "container__bottom__card_posts"
+        - if !post.image.blank?
+          = image_tag post.image, class: "container__bottom__card_posts"
 
         .container__bottom__card_post--bottom 
           i.bi.bi-hand-thumbs-up 
@@ -96,4 +90,3 @@
         .modal_edit_frofile__bottom
           = f.submit "Update profile"
           
-                

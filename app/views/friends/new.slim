@@ -7,14 +7,18 @@
         = user.full_name
 
       .user_box__bottom
-        
         - if user_signed_in?
-          - if friend.status == "friend"
-            = button_to " Unfriend", friend_path(user), method: :delete, class: "user_box__bottom__btn--red", data:{confirm: "Are you sure delete request?"}
+          - friend= Friend.exist_friends(current_user.id, user.id).first
+          - if friend
+            - if friend.status =="friend"
+              = button_to " Unfriend", friend_path(current_user), method: :delete, class: "user_box__bottom__btn--red", data:{confirm: "Are you sure delete request?"}
+            - else
+              = button_to " Delete request", friend_path(user), method: :delete, class: "user_box__bottom__btn--red", data:{confirm: "Are you sure delete request?"}
+          
           - else
-            = button_to " Delete request", friend_path(user), method: :delete, class: "user_box__bottom__btn--red", data:{confirm: "Are you sure delete request?"}
-        - else
-          = button_to "Add friend", friends_path(user), method: :post, class: "user_box__bottom__btn--red"
+            = button_to "Add friend", friends_path(user), method: :post, class: "user_box__bottom__btn--red"
         
-     
+        - else
+          = button_to "Add friend", new_user_session_path, method: :get, class: "user_box__bottom__btn--red"
+        
     

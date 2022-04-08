@@ -5,11 +5,13 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments
   end
-
-  post "likes" => "likes#create"
   
-  get "users" => "users#index"
-  put "user" => "users#update"
+  resources :posts do
+    resources :likes, only: :create 
+    delete "like" => "likes#destroy"
+  end
+  
+  resources :users, only: %i[index update]
   
   devise_for :users, controllers: {:registrations => 'users/registrations', :sessions => 'users/sessions'}
   root "posts#index"

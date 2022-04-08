@@ -149,6 +149,61 @@
   object-fit: cover;
 }
 
+// Comment card in posts
+
+.comment_card{
+  display: flex;
+  flex-direction: column;
+  height: 80px;
+
+  margin: 10px;
+  margin-bottom: 20px;
+  position: relative;
+
+  &__user{
+    font-size: 20px;
+    font-weight: 500;
+    display: flex;
+    &__ball{
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+
+      margin-right: 10px;
+      background-color: #e9e9ff;
+
+      i{
+        font-size: 30px;
+        position: absolute;
+      }
+      
+      img{
+        @include avatar;
+        border-radius: 50%;
+      }
+    }
+
+    input{
+      position: absolute;
+      right: 10px;
+      font-size: 14px;
+      border: none;
+      color: #921414;
+    }
+  }
+
+  &__content{
+    font-size: 17px;
+    position: absolute;
+    bottom: 2px;
+    margin-left: 80px;
+  }
+}
+
+.comment_card::-webkit-scrollbar { 
+  display: none;
+}
+
 
   
 

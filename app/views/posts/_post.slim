@@ -9,7 +9,7 @@
               = image_tag user.avatar
 
           .container_posts__information_user__name
-            p = user.first_name+" "+user.last_name
+            p = user.full_name
             label = post.content
 
       .col-md-6
@@ -24,27 +24,30 @@
         .container_posts__navbar
           .container_posts__navbar__icon
             - if !user_signed_in?
-              = link_to '<i class= "bi bi-hand-thumbs-up-fill"></i>'.html_safe, likes_path, method: :post, remote: true, class: "link--black"
+              = link_to '<i class= "bi bi-hand-thumbs-up-fill"></i>'.html_safe, new_user_session_path , method: :get, class: "link--black"
               .container_posts__navbar__icon__count
-                = post.likes.size
-
-            - else
-              - @like_exit= Like.exists?(user_id: current_user.id, post_id: post.id)             
-              - if @like_exit
-                = link_to '<i class= "bi bi-hand-thumbs-up-fill" style= "color: #fe2c55;"></i>'.html_safe, post_like_path(post.id), method: :delete, remote: true, class: "link--black"
-                .container_posts__navbar__icon__count             
+                label
                   = post.likes.size
-
+                
+            - else      
+              - if !Like.user_like_exist(post.id, current_user.id).blank?             
+                = link_to '<i class= "bi bi-hand-thumbs-up-fill" style= "color: #fe2c55;" ></i>'.html_safe, post_like_path(post.id), method: :delete, remote: true, class: "link--black"
+                
+                .container_posts__navbar__icon__count
+                  label[id= "post_#{post.id}"]             
+                    = post.likes.size
 
               - else 
-                = link_to '<i class= "bi bi-hand-thumbs-up-fill" style= "color: #fe2c55;"></i>'.html_safe, likes_url(user_id: current_user.id, post_id: post.id), method: :post,remote: true, class: "link--black"
+                = link_to '<i class= "bi bi-hand-thumbs-up-fill" ></i>'.html_safe, post_likes_path(post.id), method: :post, remote: true, class: "link--black"
                 .container_posts__navbar__icon__count               
-                  = post.likes.size
+                  label[id= "post_#{post.id}"] 
+                    = post.likes.size
 
           .container_posts__navbar__icon
             = link_to '<i class= "bi bi-chat-left-quote-fill"></i>'.html_safe, post_comments_path(post.id)
 
             .container_posts__navbar__icon__count
+              label 
                 = post.comments.size
  
       

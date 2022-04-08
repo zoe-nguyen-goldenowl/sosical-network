@@ -3,8 +3,12 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
 
   def index
-    @pagy, @posts= pagy(Post.all.order(created_at: :desc))
+    @pagy, @posts= pagy(Post.all, items: 5)
     @post= Post.new
+    respond_to do |format|
+      format.html
+      format.json { render json: { entries: render_to_string(partial: 'posts/post', locals: { posts: @posts }, formats: [:html]), pagination: view_context.pagy_bootstrap_nav(@pagy)}}
+    end
   end
 
   def edit
@@ -14,17 +18,12 @@ class PostsController < ApplicationController
     @post= Post.new(post_params.merge(user_id: current_user.id))
     
     if @post.save
-      # @posts=Post.all
       flash[:success] = "Post was successfully created!!"
-      respond_to do |format|
-        redirect_to :index
-        format.js{} 
-      end 
+      redirect_to posts_path
+      
     else
-      respond_to do |format|
-        flash[:error] = "Post was fail created!!"
-        render :index
-      end 
+      flash[:success] = "Post was successfully created!!"
+      redirect_to posts_path
     end
   end
 

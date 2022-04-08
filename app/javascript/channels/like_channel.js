@@ -11,6 +11,8 @@ consumer.subscriptions.create("LikeChannel", {
 
   received(data) {
     console.log(data)
+    location.reload()
     $(`#post_${data['post_id']}`).html(data['count_like'])
+    
   }
 });

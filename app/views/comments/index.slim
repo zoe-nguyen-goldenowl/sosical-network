@@ -11,24 +11,33 @@
         button.close[type="button" data-dismiss="alert"] x
         .alert_value--center
           = value
+
   .row 
     .col
       .container_comments__image
         .container_comments__image--center 
           = image_tag @post.image 
+
     .col
       .container_comments--right
         .container_comments--right__content
+
           .container_comments--right__content__avatar_image
-            i.bi.bi-person-workspace
+            - if !@user.avatar.blank?
+              = image_tag @user.avatar
+            
+            - else
+              i.bi.bi-person-workspace
 
           .container_comments--right__content__avatar_name
              = @post.user.full_name
           
           .container_comments--right__content__add_friend 
-            = button_to "Add friend", friends_path(@post.id), method: :post, class: "button--red"
+            = button_to "View profile", users_path(@user.id), method: :get, class: "button--red"
+
         p 
           = @post.content
+
         .container_comments--right__count 
           
           .container_comments--right__count--ball
@@ -51,8 +60,12 @@
           - @comments.each do |comment|
             .comment_card
               .comment_card__user
+
                 .comment_card__user__ball
-                  i.bi.bi-person-workspace
+                  - if comment.owner.avatar 
+                    = image_tag comment.owner.avatar 
+                  - else
+                    i.bi.bi-person-workspace
       
                 = @post.name_user_comment(comment.owner_id)
                     

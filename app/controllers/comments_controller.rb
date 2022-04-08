@@ -1,46 +1,53 @@
 class CommentsController < ApplicationController
-  before_action :set_comment , only: %i[destroy ]
-  before_action :set_post , only: %i[ create]
-
+  before_action :require_login, only: %i[ create destroy];
+  before_action :set_post, only: %i[index create destroy];
+  before_action :set_comment,only: %i[destroy]
  
-    def index
-      @comments= Comment.where(commentable_id: params[:post_id])
-      @user= User.all
-    end
+  def index
+    @comments= @post.comments
+    @user= User.find(@post.user_id)
+  end
 
-    def create   
-      if Comment.create(content: params[:content], commentable: @commentable, owner: current_user)
-        respond_to do |format|
+  def create 
+    if Comment.create(content: params[:content], commentable: @post, owner: current_user)
+      flash[:success]="Comment successful!!"
+      redirect_to post_comments_path(@post.id)
 
-          flash[:success]="Comment successful!!"
-          format.html{redirect_to post_comments_url(post_id: @commentable.id)}
-        end
+    else
+      flash[:error]="Fail"
+      redirect_to post_comments_path(@post.id)
+    end           
+  end
 
-      else
-        respond_to do |format|
-          flash[:error]="Fail"
-          format.html{redirect_to  post_comments_url(post_id: @commentable.id)}
-          
-        end
-      end           
-    end
+  def destroy
+    if @comment.destroy
+      flash[:success]="Comment destroy successful!!"
+      redirect_to post_comments_path(@post.id)
 
-    def destroy
-      if @comment.destroy
-        flash[:success]="Comment destroy successful!!"
-        redirect_to post_comments_url(post_id: @comment.commentable_id)
-      else
-        flash[:error]="Comment destroy fails!!"
-        redirect_to  post_comments_url(post_id: @comment.commentable_id)
-        
-      end
-    end
+    else
+      flash[:error]="Comment destroy fails!!"
+      redirect_to post_comments_path(@post.id)
 
-    private
-    def set_comment   
-      @comment = Comment.find(params[:id])
     end
-    def set_post  
-      @commentable = Post.find(params[:post_id])
+  end
+
+  private
+  def set_post   
+    @post = Post.find(params[:post_id])
+  end
+
+  def set_comment
+    @comment= Comment.find(params[:id])
+  end
+  
+
+
+  def require_login
+    if !user_signed_in?
+      flash[:error]="Log in to add friends, like posts, and create comments!!"
+      set_post 
+      redirect_to post_comments_path(@post.id)
     end
+  end
 end
+

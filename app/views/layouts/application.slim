@@ -71,7 +71,6 @@ body
             = button_to " Sign in", new_user_session_path, method: :get, class: "menu_top__nav__btn_signin"
           - else
             .card_user__avatar        
-              / i.bi.bi-person-workspace
               = link_to '<i class="bi bi-person-workspace"></i>'.html_safe, users_path
               
           i.bi.bi-three-dots-vertical
@@ -82,7 +81,7 @@ body
         .container__menuleft
           .container__menuleft__navbar
             = link_to '<i class="bi bi-house-door-fill"></i>For you '.html_safe, posts_path, class: "container__menuleft__navbar__link"
-            = link_to '<i class="bi bi-person-plus-fill"></i>Friends '.html_safe, new_friend_path, class: "container__menuleft__navbar__link"
+            = link_to '<i class="bi bi-person-plus-fill"></i>Friends '.html_safe, new_friend_path, method: :get, class: "container__menuleft__navbar__link"
       
             - if !user_signed_in?
               = link_to '<i class="bi bi-person-video2"></i>Request friends'.html_safe, new_user_session_path, class: "container__menuleft__navbar__link"
@@ -105,11 +104,7 @@ body
                     i.bi.bi-person-workspace
 
                 .card_user__information
-<<<<<<< HEAD
                   = link_to "#{user.full_name}", friend_path(user), method: :get               
-=======
-                  = link_to "#{User.full_name(user)}", friend_path(user), method: :get               
->>>>>>> 7bcb44cc77f2405d3f7dc11d11dc0facf1e5db12
             
           .container__menuleft__logout
             - if user_signed_in?

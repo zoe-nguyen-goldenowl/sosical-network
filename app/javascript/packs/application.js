@@ -14,10 +14,9 @@ import '../stylesheets'
 import '../packs/posts'
 import '../packs/users'
 
-const images = require.context('../images', true)
+import logo from "../images/tiktok-logo-B9AC5FE794-seeklogo.com.png"
 
-const images = require.context('../images', true)
-
+require("packs/infinite_scroll")
 
 Rails.start()
 Turbolinks.start()
