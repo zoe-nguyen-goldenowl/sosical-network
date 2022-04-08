@@ -16,6 +16,8 @@ import '../packs/users'
 
 const images = require.context('../images', true)
 
+const images = require.context('../images', true)
+
 
 Rails.start()
 Turbolinks.start()

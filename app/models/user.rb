@@ -20,9 +20,18 @@ class User < ApplicationRecord
 
   enum gender: {male: 1, female: 2}
 
+<<<<<<< HEAD
   
   def full_name
     self.first_name+ " "+ self.last_name
+=======
+  def self.set_friend(friend_id)  
+    where(id: friend_id)
+  end
+
+  def self.full_name(user)
+    user.first_name+ " "+ user.last_name
+>>>>>>> 7bcb44cc77f2405d3f7dc11d11dc0facf1e5db12
   end
 
 

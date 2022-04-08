@@ -105,7 +105,11 @@ body
                     i.bi.bi-person-workspace
 
                 .card_user__information
+<<<<<<< HEAD
                   = link_to "#{user.full_name}", friend_path(user), method: :get               
+=======
+                  = link_to "#{User.full_name(user)}", friend_path(user), method: :get               
+>>>>>>> 7bcb44cc77f2405d3f7dc11d11dc0facf1e5db12
             
           .container__menuleft__logout
             - if user_signed_in?
