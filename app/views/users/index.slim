@@ -1,9 +1,91 @@
 .container 
-  .row 
-    .col
-      p user information 
-  .row 
-    .col 
-      .container__posts
-        p posts
+  .container__header 
+    .container__header__avatar_image
+      - if !@user.avatar.blank?
+        = image_tag @user.avatar
+      - else
+        i.bi.bi-person-workspace
 
+    .container__header__avatar_name
+      = @user.full_name
+      button.btn[ data-toggle="modal" data-target="#exampleModalCenterUser"] Edit profile
+  .container__center
+    .container__center__information
+      text
+        = Friend.active_friend(@user).size
+      lable Friends 
+
+    .container__center__information
+      text
+        = @user.likes.size
+      lable Likes
+
+    .container__center__information
+      text
+        = @user.posts.size
+      lable Posts
+    
+  .container__information--detail
+    text Date of bith: 
+    = (@user.date_of_birth).to_s.slice(0, 10)
+
+    - if @user.male?  
+      p Gender: Male
+    - else 
+      p Gender: Female
+    
+    i.bi.bi-envelope 
+      = @user.email
+
+  .container__bottom
+    - posts= @user.posts
+
+    - posts.each do |post|
+      .container__bottom__card_post
+        .container__bottom__card_post--header 
+        = image_tag post.image, class: "container__bottom__card_posts"
+
+        .container__bottom__card_post--bottom 
+          i.bi.bi-hand-thumbs-up 
+          text
+            = post.likes.size
+           
+          i.bi.bi-chat-left-dots-fill
+          text
+            = post.comments.size
+
+  /<--modal edit profile-->
+#exampleModalCenterUser.modal.fade[tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"]
+  .modal-dialog.modal-dialog-centered[role="document"]       
+    .modal-content.modal_edit_frofile
+      = form_with model: @user, method: :put do |f|
+        .modal_edit_frofile__header
+          #review_avatar.review_avatar
+
+          .modal_edit_frofile__header__btn_chosse_image
+            label for="input_avatar"                
+              = f.file_field :avatar, id: "input_avatar", accept: "image/*", class: "input_image"
+              | Choose image ...
+              
+        .modal_edit_frofile__center 
+          .modal_edit_frofile__center__txt_input
+            lable First name: 
+            = f.text_field :first_name
+
+          .modal_edit_frofile__center__txt_input
+            lable Last name: 
+            = f.text_field :last_name
+
+          .modal_edit_frofile__center__txt_input
+            lable phone: 
+            = f.text_field :phone
+          
+          .modal_edit_frofile__center__txt_input
+            lable Gender: 
+            = f.select :gender, options_for_select(User.genders.map{ |key, value| [key.humanize, key] }), class:"form-control"
+
+
+        .modal_edit_frofile__bottom
+          = f.submit "Update profile"
+          
+                

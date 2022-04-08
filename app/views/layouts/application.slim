@@ -25,7 +25,8 @@ body
     .row
       .col.col-md-4
         .menu_top__logo
-          img.menu_top__logo__logofacebook[src="https://seeklogo.com/images/T/tiktok-logo-B9AC5FE794-seeklogo.com.png" width="40" height="40"]
+          .menu_top__logo__logo_tiktok
+            = image_pack_tag "tiktok-logo-B9AC5FE794-seeklogo.com.png"
           h3.menu_top__logo__name Tiktok
 
       .col.col-md-5
@@ -43,28 +44,35 @@ body
           - else
             button.menu_top__nav__link_posts.btn[ data-toggle="modal" data-target="#exampleModalCenter"] Upload
 
-            / modal create posts
+            / <-- modal create posts -->
             #exampleModalCenter.modal.fade[tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"]
               .modal-dialog.modal-dialog-centered[role="document"]
                 = form_with model: @post, method: :post, local: false do |f|
                   .modal-content.modal_create_post
                     .modal_create_post__header
                       h3 Upload posts 
-                    .modal_create_post__body 
+                    .modal_create_post__center 
                       p Caption:
-                      = f.text_field :content, placeholder: "Caption posts ..."
-                      .modal_create_post__body__imagebox                    
-                      
-                      .btn_loadfile
-                        = f.file_field :image
+                      = f.text_field :content, placeholder: "Caption posts ...", class: "txt_content"
+                    
+                      .modal_create_post__center__imagebox 
+                        #img-review.img-review   
+
+                      .modal_create_post__center__btn_loadfile
+                        label for="input_image"                
+                          = f.file_field :image, id: "input_image", accept: "image/*", class: "input_image"
+                          | Choose image ...
+                        
                     .modal_create_post__bottom 
                       = f.button "Post", class: "btn btn-primary"
-
+            / <-- end modal create posts -->
+            
           - if !user_signed_in?
-            = button_to " Sign in", new_user_session_path, class: "menu_top__nav__btn_signin"
+            = button_to " Sign in", new_user_session_path, method: :get, class: "menu_top__nav__btn_signin"
           - else
             .card_user__avatar        
-              i.bi.bi-person-workspace
+              / i.bi.bi-person-workspace
+              = link_to '<i class="bi bi-person-workspace"></i>'.html_safe, users_path
               
           i.bi.bi-three-dots-vertical
 
@@ -80,21 +88,24 @@ body
               = link_to '<i class="bi bi-person-video2"></i>Request friends'.html_safe, new_user_session_path, class: "container__menuleft__navbar__link"
               .container__menuleft__navbar__tag_signin
                 p Log in to add friends, like posts, and view comments.
-                = button_to " Sign in", new_user_session_path, class:" btn_signin--red" 
+                = button_to " Sign in", new_user_session_path, method: :get, class:" btn_signin--red" 
             
             - else 
               = link_to '<i class="bi bi-person-video2"></i>Request friends'.html_safe, edit_friend_path(current_user), class: "container__menuleft__navbar__link"
               
           .container__menuleft__suggested_accounts
             p Suggested accounts
-            
-            - @users= @users_suggest
-            - @users.each do |user|
+   
+            - @users_suggest.each do |user|
               .card_user
                 .card_user__avatar        
-                  i.bi.bi-person-workspace 
+                  - if !user.avatar.blank?
+                    = image_tag user.avatar
+                  - else 
+                    i.bi.bi-person-workspace
+
                 .card_user__information
-                  = link_to "#{user.first_name+" "+user.last_name}", friend_path(user), method: :get               
+                  = link_to "#{user.full_name}", friend_path(user), method: :get               
             
           .container__menuleft__logout
             - if user_signed_in?
@@ -103,5 +114,3 @@ body
       .col.col-md-8.col-sm-8
         .container__main
           == yield
-
-      

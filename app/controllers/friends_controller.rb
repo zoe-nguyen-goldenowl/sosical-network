@@ -3,7 +3,6 @@ class FriendsController < ApplicationController
   before_action :set_friend, only: %i[ update destroy ]
 
   def index
-    # @friends= Friend.where(friend_id: current_user.id).where(status: 1)
     @friends= Friend.active_friend(current_user.id)
   end
 
@@ -12,7 +11,7 @@ class FriendsController < ApplicationController
   end
 
   def edit
-   @friends = Friend.where(friend_id: current_user.id).where(status: 0)
+   @friends = Friend.where(friend_id: current_user.id, status: :unfriend)
   end
 
   def show
@@ -22,17 +21,17 @@ class FriendsController < ApplicationController
   def create
     if Friend.exist_friend(current_user.id, params[:format])   
       flash[:error] = "You have sent this person a friend request before!!"
-      redirect_to  friends_path 
+      redirect_to  new_friend_path 
 
     else   
       @friend = Friend.new(status: 0, friend_id: params[:format], user_id: current_user.id)
 
       if @friend.save
         flash[:success] = "Friend request has been sent successfully.!!"
-        redirect_to  friends_path
+        redirect_to  new_friend_path
       else
         flash[:error] = "Friend request has been sent unsuccessfully!!"
-        redirect_to friends_path, status: :unprocessable_entity 
+        redirect_to new_friend_path, status: :unprocessable_entity 
       end
     end
   end
@@ -40,7 +39,7 @@ class FriendsController < ApplicationController
   def update
     if @friend.update(status: 1)
       flash[:success]= "successfully added friend!!"
-      render :edit
+      redirect_to friends_path
     else
       flash[:error]= "Fail added friend!!"
       render :edit

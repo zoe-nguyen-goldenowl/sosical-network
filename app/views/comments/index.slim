@@ -1,0 +1,71 @@
+.container_comments
+  - flash.each do |key, value|
+    - if key== "error" || key== "alert"
+      .alert.alert-danger.alert-dismissible
+        button.close[type="button" data-dismiss="alert"] x
+        .alert_value--center
+          = value
+          
+    - elsif key== "success"|| key== "notice" 
+      .alert.alert-success.alert-dismissible
+        button.close[type="button" data-dismiss="alert"] x
+        .alert_value--center
+          = value
+  .row 
+    .col
+      .container_comments__image
+        .container_comments__image--center 
+          = image_tag @post.image 
+    .col
+      .container_comments--right
+        .container_comments--right__content
+          .container_comments--right__content__avatar_image
+            i.bi.bi-person-workspace
+
+          .container_comments--right__content__avatar_name
+             = @post.user.full_name
+          
+          .container_comments--right__content__add_friend 
+            = button_to "Add friend", friends_path(@post.id), method: :post, class: "button--red"
+        p 
+          = @post.content
+        .container_comments--right__count 
+          
+          .container_comments--right__count--ball
+            - like_exit= Like.exists?(user_id: current_user.id, post_id: @post.id)
+            - if like_exit
+              = link_to '<i class= "bi bi-hand-thumbs-up-fill" style= "color: #fe2c55;"></i>'.html_safe, post_like_path(@post.id), method: :delete, remote: true, class: "link--black"
+            - else
+              = link_to '<i class= "bi bi-hand-thumbs-up-fill" style= "color: #000000;"></i>'.html_safe, post_likes_path(@post.id), method: :post, remote: true, class: "link--black"
+              
+          lable 
+            = @post.likes.size
+
+          .container_comments--right__count--ball
+            i.bi.bi-chat-left-quote-fill
+
+          lable
+            = @post.comments.size
+
+        .container_comments--right__comment
+          - @comments.each do |comment|
+            .comment_card
+              .comment_card__user
+                .comment_card__user__ball
+                  i.bi.bi-person-workspace
+      
+                = @post.name_user_comment(comment.owner_id)
+                    
+                - if current_user.id == comment.owner_id
+                  = button_to "X", post_comment_path(@post.id, comment.id), method: :delete, data:{confirm:"Are you sure?"}
+              
+              .comment_card__content
+                = comment.content
+        
+
+        .container_comments--right__create_content
+          = form_with model: @comment, method: :post do |form|
+            = form.text_field :content, placeholder: "Add comment",class: "txt_content"
+            = form.submit "Post", class: "btn_post"
+
+    

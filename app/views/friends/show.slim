@@ -29,8 +29,8 @@
   .container__information--detail
     text Date of bith: 
     = (@user.date_of_birth).to_s.slice(0, 10)
-
-    - if @user.gender==1  
+    
+    - if @user.male?  
       p Gender: Male
     - else 
       p Gender: Female

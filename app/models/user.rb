@@ -1,9 +1,11 @@
 
 class User < ApplicationRecord
-  has_many :posts
-  has_many :friends
-  has_many :likes
-  has_many :comments , as: :owner
+  has_one_attached :avatar
+  has_many :posts, dependent: :destroy
+
+  has_many :friends, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :comments , as: :owner, dependent: :destroy
     
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -11,13 +13,18 @@ class User < ApplicationRecord
   validate :expiration_date 
 
   scope :user_except, -> (user){ where.not(id: user)}
-
+  scope :set_friend, ->(friend_id) { where(id: friend_id)}
+ 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  def self.set_friend(friend_id)
-    User.where(id: friend_id)
+  enum gender: {male: 1, female: 2}
+
+  
+  def full_name
+    self.first_name+ " "+ self.last_name
   end
+
 
   private
   def expiration_date  

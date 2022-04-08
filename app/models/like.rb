@@ -4,7 +4,4 @@ class Like < ApplicationRecord
     
     scope :active, ->(id_post) {where(:post_id => id_post)}
 
-    def count_like
-        active.size
-    end
 end

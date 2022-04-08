@@ -3,16 +3,25 @@
     = simple_form_for @post, url: post_path(@post), method: :put do |f|
       .modal_create_post__header
         h3 Detail posts 
-      .modal_create_post__body 
+      .modal_create_post__center
         p Caption:
-        = f.text_field :content
-        .modal_create_post__body__imagebox    
-          - if @post.image.persisted? 
-            = image_tag @post.image, class: "image--cover"   
+        = f.text_field :content, class: "txt_content"
+        
+        .modal_create_post__center__imagebox   
+          - if @post.image.persisted?
+            #post-img-review.img-review 
+              = image_tag @post.image
+
+        - if current_user.id == @post.user_id
+        .modal_create_post__body__btn_loadfile
+          label for="post_image"                
+            = f.file_field :image, id: "post_image", accept: "image/*", class: "input_image"
+            | Choose image ...
+
       .modal_create_post__bottom 
         - if current_user.id == @post.user_id
-          = f.file_field :image
           = f.submit "Update", class: "btn btn-primary"
+
           p
           = link_to 'Back |', posts_path 
           = link_to '| Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' }   
