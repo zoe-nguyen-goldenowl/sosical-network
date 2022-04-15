@@ -1,4 +1,6 @@
 class Like < ApplicationRecord
+    validates :post_id, uniqueness: {scope: :user_id}
+
     has_many :post
     has_many :user
 

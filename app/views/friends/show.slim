@@ -1,19 +1,34 @@
 .container_show 
   .container_show__header 
     .container_show__header__avatar_image
-      i.bi.bi-person-workspace
+      - if !@user.avatar.blank?
+        = image_tag @user.avatar 
+      - else 
+        i.bi.bi-person-workspace
 
     .container_show__header__avatar_name
       = @user.full_name
       - if user_signed_in?
-        = button_to "Add friend", friends_path(@user)
+        - friend= Friend.exist_friends(current_user.id, @user.id).first
+
+        - if friend
+
+          - if friend.status =="friend"
+            = button_to " Unfriend", friend_path(current_user), method: :delete, class: "user_box__bottom__btn--red", data:{confirm: "Are you sure delete request?"}
+          - else
+            = button_to " Delete request", friend_path(@user), method: :delete, class: "user_box__bottom__btn--red", data:{confirm: "Are you sure delete request?"}
+        -elsif current_user.id == @user.id
+          
+        - else
+          = button_to "Add friend", friends_path(@user), method: :post, class: "user_box__bottom__btn--red"
+
       - else 
-        = button_to "Add friend", new_user_session_path
-        
+        = button_to "Add friend", new_user_session_path, method: :get
+      
   .container_show__center
     .container_show__center__information
       text
-        = @user.friends.size
+        = @user.friends.active_friend(@user.id).size
       lable Friends 
 
     .container_show__center__information
@@ -36,7 +51,8 @@
       p Gender: Female
     
     i.bi.bi-envelope 
-      = @user.email
+      label
+        = @user.email
 
   .container_show__bottom
     - posts= @user.posts
@@ -44,9 +60,7 @@
     - posts.each do |post|
       .container_show__bottom__card_post
         .container_show__bottom__card_post--header 
-          text
-            = post.content
-
+          
         = image_tag post.image, class: "container_show__bottom__card_posts"
 
         .container_show__bottom__card_post--bottom 

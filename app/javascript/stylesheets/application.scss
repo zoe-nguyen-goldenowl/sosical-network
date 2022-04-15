@@ -16,7 +16,7 @@
 @import "bootstrap/scss/bootstrap";
 
 .menu_top{
-  font-family: 'Playfair Display', serif;
+  font-family: 'Lato', sans-serif;
   height: auto;
   max-height: 70px;
   border-bottom-color: #0000006b;
@@ -137,9 +137,10 @@
 
       &__link{
         margin: 2px;
-        font-size: 16px;
-        font-weight: 600;
+        font-size: 20px;
         width: 100%;
+        padding-left: 10px;
+        
         height: 50px;
         padding-top: 10px;
         border-radius: 5px;
@@ -189,11 +190,13 @@
     }
 
     &__logout{
-      border-top: #2624241a solid 1px;
       text-align: left;
-      color: black;
       margin-top: 30px;
       padding-top: 20px;
+      
+      border-top: #2624241a solid 1px;
+      color: black;
+
       i{
         font-size: 20px;
         color: black;
@@ -201,16 +204,6 @@
         margin-right: 10px; 
       }  
     }
-  }
-
-  .container__main{
-    height: 600px;
-    overflow-y: scroll;
-    -ms-overflow-style: none;  
-    scrollbar-width: none;
-  }
-  .container__main::-webkit-scrollbar { 
-    display: none;
   }
 }
 

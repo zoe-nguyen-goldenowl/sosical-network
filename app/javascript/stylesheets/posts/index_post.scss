@@ -1,0 +1,12 @@
+.container{
+  .infinity-scroll-target{
+    height: 600px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;  
+    scrollbar-width: none;
+    
+  }
+  .pagination{
+    display: none;
+  }
+}

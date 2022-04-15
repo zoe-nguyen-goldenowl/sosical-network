@@ -36,7 +36,8 @@
       p Gender: Female
     
     i.bi.bi-envelope 
-      = @user.email
+      label  
+        = @user.email
 
   .container__bottom
     - posts= @user.posts
@@ -88,5 +89,5 @@
 
 
         .modal_edit_frofile__bottom
-          = f.submit "Update profile"
+          = f.submit "Update profile", class:"btn btn-primary btn-sm"
           

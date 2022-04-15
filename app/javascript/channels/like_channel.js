@@ -10,8 +10,10 @@ consumer.subscriptions.create("LikeChannel", {
   },
 
   received(data) {
-    console.log(data)
-    location.reload()
+    $(`#like_icon_${data['post_id']} a`).remove();
+    $(`#like_icon_${data['post_id']}`).append(data['icon_like'])
+    $(`#like_icon_${data['post_id']} a`).attr("href", data['href'])
+
     $(`#post_${data['post_id']}`).html(data['count_like'])
     
   }

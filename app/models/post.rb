@@ -3,7 +3,7 @@ class Post < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :comments , as: :commentable, dependent: :destroy
 
-  belongs_to :user 
+belongs_to :user 
 
   def name_user_comment(user_id)
     user= User.find(user_id)

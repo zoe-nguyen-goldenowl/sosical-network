@@ -16,12 +16,12 @@ import '../packs/users'
 
 import logo from "../images/tiktok-logo-B9AC5FE794-seeklogo.com.png"
 
-require("packs/infinite_scroll")
+import '../packs/infinite_scroll'
+window.jQuery = window.$ = require('jquery')
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
-// import './pagination.js'
 
 

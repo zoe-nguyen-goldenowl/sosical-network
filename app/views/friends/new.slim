@@ -10,6 +10,7 @@
         - if user_signed_in?
           - friend= Friend.exist_friends(current_user.id, user.id).first
           - if friend
+          
             - if friend.status =="friend"
               = button_to " Unfriend", friend_path(current_user), method: :delete, class: "user_box__bottom__btn--red", data:{confirm: "Are you sure delete request?"}
             - else

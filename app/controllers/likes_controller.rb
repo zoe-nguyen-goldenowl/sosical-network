@@ -7,13 +7,14 @@ class LikesController < ApplicationController
     @like= Like.new(user_id: current_user.id, post_id: params[:post_id])
     
     if @like.save  
-      ActionCable.server.broadcast "like", {count_like: @post.likes.size, post_id: params[:post_id] }
+      ActionCable.server.broadcast "like", {count_like: @post.likes.size, post_id: params[:post_id], icon_like: '<a data-method= "delete" data-remote= "true"> <i class= "bi bi-hand-thumbs-up-fill" style= "color: #fe2c55;"></i> </a>', href: post_like_path( params[:post_id])} 
     end
   end
 
   def destroy
     if @like.destroy
-      ActionCable.server.broadcast "like", { count_like: @post.likes.size, post_id: params[:post_id] }     
+      ActionCable.server.broadcast "like", {count_like: @post.likes.size, post_id: params[:post_id], icon_like: '<a data-method= "post" data-remote= "true"> <i class= "bi bi-hand-thumbs-up-fill"></i> </a>', href: post_likes_path( params[:post_id])} 
+
   
     else    
       flash[:error] = "like was fail destroy" 
@@ -22,7 +23,7 @@ class LikesController < ApplicationController
   end
 
   private
-    def set_like     
+    def set_like   
       @like = Like.find_by( post_id: params[:post_id], user_id: current_user.id )
     end
     

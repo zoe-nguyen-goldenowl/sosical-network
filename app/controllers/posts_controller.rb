@@ -1,14 +1,16 @@
 class PostsController < ApplicationController
   before_action :require_login, only: %i[ edit update destroy  ]
+  before_action :set_user, only: %i[update destroy  ]
   before_action :set_post, only: %i[ show edit update destroy ]
 
   def index
-    @pagy, @posts= pagy(Post.all, items: 5)
+    @pagy, @posts= pagy(Post.all.order(created_at: :desc), items: 2, link_extra: 'data-remote="true"')
     @post= Post.new
+
     respond_to do |format|
       format.html
-      format.json { render json: { entries: render_to_string(partial: 'posts/post', locals: { posts: @posts }, formats: [:html]), pagination: view_context.pagy_bootstrap_nav(@pagy)}}
-    end
+      format.js { render 'index', layout: false, content_type: 'text/javascript' }
+    end 
   end
 
   def edit
@@ -42,17 +44,25 @@ class PostsController < ApplicationController
   end
 
   private
-    def set_post
-      @post = Post.find(params[:id])
-    end
+  def set_post
+    @post = Post.find(params[:id])
+  end
 
-    def post_params
-       params.require(:post).permit(:content, :image)
+  def set_user
+    set_post
+    if @post.user_id != current_user.id
+      flash[:error]= "You can't edit other people's posts"
+      redirect_to posts_path
     end
+  end
 
-    def require_login
-      if !user_signed_in?
-        redirect_to new_user_session_path
-      end
+  def post_params
+    params.require(:post).permit(:content, :image)
+  end
+
+  def require_login
+    if !user_signed_in?
+      redirect_to new_user_session_path
     end
+  end
 end

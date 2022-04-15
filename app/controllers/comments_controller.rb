@@ -1,7 +1,8 @@
 class CommentsController < ApplicationController
-  before_action :require_login, only: %i[ create destroy];
-  before_action :set_post, only: %i[index create destroy];
-  before_action :set_comment,only: %i[destroy]
+  before_action :require_login, only: %i[ create destroy]
+  before_action :set_post, only: %i[index create destroy]
+  before_action :set_user, only: :destroy
+  before_action :set_comment, only: :destroy
  
   def index
     @comments= @post.comments
@@ -9,8 +10,7 @@ class CommentsController < ApplicationController
   end
 
   def create 
-    if Comment.create(content: params[:content], commentable: @post, owner: current_user)
-      flash[:success]="Comment successful!!"
+    if @post.comments.create(content: params[:content], owner: current_user)
       redirect_to post_comments_path(@post.id)
 
     else
@@ -40,7 +40,14 @@ class CommentsController < ApplicationController
     @comment= Comment.find(params[:id])
   end
   
+  def set_user
+    set_comment
 
+    if @comment.owner_id != current_user.id
+      flash[:error]= "You can't destroy other people's comments"
+      redirect_to posts_path
+    end
+  end
 
   def require_login
     if !user_signed_in?

@@ -27,7 +27,7 @@ Pagy::DEFAULT[:size]       = [1,2,2,1]                       # default
 # Pagy::DEFAULT[:fragment]   = '#fragment'                     # example
 # Pagy::DEFAULT[:link_extra] = 'data-remote="true"'            # example
 # Pagy::DEFAULT[:i18n_key]   = 'pagy.item_name'                # default
-Pagy::DEFAULT[:cycle]      = true                            # example
+# Pagy::DEFAULT[:cycle]      = true                            # example
 
 
 # Extras
@@ -179,7 +179,7 @@ require 'pagy/extras/bootstrap'
 
 # Support extra: Extra support for features like: incremental, infinite, auto-scroll pagination
 # See https://ddnexus.github.io/pagy/extras/support
-# require 'pagy/extras/support'
+require 'pagy/extras/support'
 
 # Trim extra: Remove the page=1 param from links
 # See https://ddnexus.github.io/pagy/extras/trim

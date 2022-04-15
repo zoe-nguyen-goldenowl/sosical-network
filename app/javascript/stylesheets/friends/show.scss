@@ -14,6 +14,11 @@
         font-size: 50px;
         color: white;
       }
+
+      img{
+        border-radius: 50%;
+        @include avatar;
+      }
     }
 
     &__avatar_name{
@@ -36,10 +41,13 @@
 
   .container_show__center{
     display: flex;
+    width: 30%;
+
+    justify-content: space-around;
+    position: relative;
+    bottom: 25px;
 
     &__information{
-      margin-top: -40px;
-      margin-left: 20px;
       
       text{
         font-size: 18px;
@@ -56,6 +64,12 @@
   .container__information--detail{
     text-align: left;
     padding-bottom: 10px;
+
+    i{
+      label{
+        margin-left: 5px;
+      }
+    }
   }
   
   .container_show__bottom{
@@ -84,12 +98,15 @@
         margin: 5px;
         font-weight: 600;
         color: #060606ba;
+        
       }
 
       .container_show__bottom__card_post--bottom{
         position: absolute;
         bottom: 10px;
         font-weight: 500;
+        margin-left: 10px;
+        
         text{
           margin-right: 20px;
           margin-left: 5px;

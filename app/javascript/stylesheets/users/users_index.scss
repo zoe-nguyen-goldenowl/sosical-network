@@ -44,7 +44,11 @@
     display: flex;
 
     &__information{
-      margin-top: -40px;
+      display: flex;
+      justify-content: space-around;
+      
+      position: relative;
+      bottom: 25px;
       
       text{
         font-size: 18px;
@@ -62,6 +66,12 @@
   .container__information--detail{
     text-align: left;
     padding-bottom: 10px;
+
+    i{
+      label{
+        margin-left: 5px;
+      }
+    }
   }
   
   .container__bottom{
@@ -96,6 +106,8 @@
         position: absolute;
         bottom: 10px;
         font-weight: 500;
+        margin-left: 10px;
+        
         text{
           margin-right: 20px;
           margin-left: 5px;
@@ -167,11 +179,24 @@
       lable{
         margin-top: 5px;
       } 
+
+      select{
+        height: 40px;
+        float: right;
+
+        width: 120px;
+        margin-right: 120px;
+      }
     }
   }
 
   &__bottom{
+    text-align: center;
+    margin-top: 20px;
 
+    input{
+      width: 200px;
+    }
   }
 }
     
