@@ -29,15 +29,19 @@
               .create_user__body__textfield
                 = f.text_field :first_name , placeholder: "First name", autofocus: true, autocomplete: "first name", class: "txt_create_user"
                 = f.text_field :last_name, placeholder: "Last name", autofocus: true, autocomplete: "last name", class: "txt_create_user"
+              
               .create_user__body__textfield
                 = f.email_field :email, placeholder: "Email", autofocus: true, autocomplete: "email", class: "txt_create_user"
                 = f.text_field :phone, placeholder: "phone", autofocus: true, autocomplete: "phone", class: "txt_create_user"          
+              
               .create_user__body__textfield
                 = f.password_field :password, placeholder: "password", autocomplete: "new-password", class: "txt_create_user"
                 = f.password_field :password_confirmation, placeholder: "password confirm", autocomplete: "new-password", class: "txt_create_user"
+              
               .create_user__body__textfield
                 = f.select :gender, options_for_select(User.genders.map{ |key, value| [key.humanize, key] }), class:"form-control"
                 = f.date_field :date_of_birth, placeholder:"Date of birth", id:"datepicker", class: "txt_create_user"
+              
               .create_user__body__textfield
                 .create_user__body__textfield--border
                   = f.submit "Sign up", class:"btn btn-primary btn-lg btn-block"

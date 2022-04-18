@@ -26,6 +26,7 @@
         height: auto;
         min-height: 100px;
         width: 100%;
+
       p{
         font-size: 16px;
         font-weight: 600;
@@ -47,13 +48,12 @@
     width: 300px;
     height: 500px;
     border-radius: 3%;
+
     background-color: #d4aeae54;
     margin: 5% 0% 5% 20%;
+
     img{
-      width: 100%;
-      height: 100%;
-      border-radius: 3%;
-      object-fit:cover;
+      @include img_obj-fit--cover;
     }
   }
 
@@ -67,9 +67,11 @@
       margin: 10px 0px 20px 20px;
       height: 50px;
       width: 50px;
+
       border-radius: 50%;
       background: #f1f1f2;
       display: flex;
+
       flex-direction: column;
       position: relative;
       

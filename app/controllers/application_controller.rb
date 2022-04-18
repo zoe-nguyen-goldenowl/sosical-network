@@ -4,7 +4,12 @@ class ApplicationController < ActionController::Base
   include Pundit
   
   def set_users
-    @users_suggest= User.limit(8).order("RANDOM()")
+    if user_signed_in?
+      @users_suggest= User.user_except(current_user.id).limit(8).order("RANDOM()")
+
+    else
+      @users_suggest= User.limit(8).order("RANDOM()")
+    end
   end
 
   def new_post

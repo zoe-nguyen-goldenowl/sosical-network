@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
   if (document.querySelector("#footer") == null) 
     $(".infinity-scroll-target ").unbind("scroll");

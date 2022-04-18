@@ -22,7 +22,7 @@
   border: red solid 0.5px;
 }
 
-// suggestes account
+// <--suggestes account -->
 .card_user{
   width: 100%;
   height: 40px;
@@ -78,7 +78,7 @@
   border: red solid 0.5px;
 }
 
-// button add friends
+// <-- button add friends -->
 @mixin btn_add_friend{
   height: 40px;
   font-weight: 600;
@@ -90,7 +90,7 @@
   border: none;
 }
 
-// card user
+// <-- card user -->
 @mixin card_user{
   .user_box{
     width: 200px;

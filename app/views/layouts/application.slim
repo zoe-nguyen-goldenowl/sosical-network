@@ -40,7 +40,7 @@ body
       .col.col-md-3
         .menu_top__nav
           - if !user_signed_in?
-            = link_to "Upload", new_user_session_path, class: "menu_top__nav__link_posts"
+            = link_to "Upload", new_user_session_path, class: "menu_top__nav__link_posts"        
           - else
             button.menu_top__nav__link_posts.btn[ data-toggle="modal" data-target="#exampleModalCenter"] Upload
 
@@ -94,7 +94,7 @@ body
               
           .container__menuleft__suggested_accounts
             p Suggested accounts
-   
+          
             - @users_suggest.each do |user|
               .card_user
                 .card_user__avatar        
