@@ -18,13 +18,18 @@ class FriendsController < ApplicationController
     @user= User.find(params[:id])
   end
 
+<<<<<<< HEAD
   def create
     if !Friend.exist_friends(current_user.id, params[:format]).blank?   
+=======
+  def create 
+    if Friend.exist_friend(current_user.id, params[:format])   
+>>>>>>> comments
       flash[:error] = "You have sent this person a friend request before!!"
       redirect_to  new_friend_path 
 
     else   
-      @friend = Friend.new(status: 0, friend_id: params[:format], user_id: current_user.id)
+      @friend = Friend.new(status: :unfriend, friend_id: params[:format], user_id: current_user.id)
 
       if @friend.save
         flash[:success] = "Friend request has been sent successfully.!!"
@@ -60,8 +65,8 @@ class FriendsController < ApplicationController
   end
 
   private
-    def set_friend
-      @friend = Friend.find_by(user_id: params[:id])
+    def set_friend    
+      @friend = Friend.find_by(friend_id: params[:id])
     end
 
     def require_login

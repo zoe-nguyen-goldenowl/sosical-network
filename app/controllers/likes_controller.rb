@@ -9,6 +9,7 @@ class LikesController < ApplicationController
     if @like.save  
       ActionCable.server.broadcast "like", {count_like: @post.likes.size, post_id: params[:post_id], like_icon: '<a data-method= "delete" data-remote= "true"> <i class= "bi bi-hand-thumbs-up-fill" style= "color: #fe2c55;"></i> </a>', href: post_like_path( params[:post_id])} 
     end
+    
   end
 
   def destroy
@@ -32,9 +33,10 @@ class LikesController < ApplicationController
       @post = Post.find(params[:post_id])
     end
 
-    def require_login
-      if !user_signed_in?
-        redirect_to new_user_session_path
-      end
+  def require_login
+    if !user_signed_in?
+      flash[:error]="Log in to add friends, like posts, and create comments!!"
+      redirect_to new_user_session_path
     end
+  end
 end

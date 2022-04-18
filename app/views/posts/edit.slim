@@ -1,5 +1,6 @@
 .container 
   .modal_create_post
+
     = simple_form_for @post, url: post_path(@post), method: :put do |f|
       .modal_create_post__header
         h3 Detail posts 
