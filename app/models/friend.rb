@@ -1,6 +1,7 @@
 class Friend < ApplicationRecord
-  has_many :user
-  
+  has_many :users
+  has_many :users, class_name: "Friend"
+
   validates :friend_id, presence: true
   validates :user_id, presence: true
   validate :cannot_add_self
@@ -10,6 +11,9 @@ class Friend < ApplicationRecord
   scope :active_friend, -> (user_id) {Friend.where(friend_id: user_id, status: :friend).or(Friend.where(user_id: user_id, status: :friend)) }
   scope :exist_friends, -> (friend_id, user_id){where(friend_id: friend_id, user_id: user_id).or(where(friend_id: user_id, user_id: friend_id))}
   
+  def set_friend(friend_id)
+    User.find(friend_id)
+  end
  
   private
   def cannot_add_self

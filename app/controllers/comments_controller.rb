@@ -1,7 +1,6 @@
 class CommentsController < ApplicationController
   before_action :require_login, only: %i[ create destroy]
   before_action :set_post, only: %i[index create destroy]
-  before_action :set_user, only: :destroy
   before_action :set_comment, only: :destroy
  
   def index
@@ -20,6 +19,8 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    authorize @comment
+    
     if @comment.destroy
       flash[:success]="Comment destroy successful!!"
       redirect_to post_comments_path(@post.id)
@@ -38,15 +39,6 @@ class CommentsController < ApplicationController
 
   def set_comment
     @comment= Comment.find(params[:id])
-  end
-  
-  def set_user
-    set_comment
-
-    if @comment.owner_id != current_user.id
-      flash[:error]= "You can't destroy other people's comments"
-      redirect_to posts_path
-    end
   end
 
   def require_login

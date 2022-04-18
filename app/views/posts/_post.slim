@@ -31,7 +31,7 @@
                 
             - else      
               - if !Like.user_like_exist(post.id, current_user.id).blank?       
-                .like_icon[id= "like_icon_#{post.id}"]
+                .like_icon[id= "like-icon_#{post.id}"]
                   = link_to '<i class= "bi bi-hand-thumbs-up-fill " style= "color: #fe2c55;" ></i>'.html_safe, post_like_path(post.id), method: :delete, remote: true, class: "link--black"
                    
 
@@ -40,7 +40,7 @@
                     = post.likes.size
 
               - else 
-                .like_icon[id= "like_icon_#{post.id}"]
+                .like_icon[id= "like-icon_#{post.id}"]
                   = link_to '<i class= "bi bi-hand-thumbs-up-fill " ></i>'.html_safe, post_likes_path(post.id), method: :post, remote: true, class: "link--black"
                 
                 .container_posts__navbar__icon__count               

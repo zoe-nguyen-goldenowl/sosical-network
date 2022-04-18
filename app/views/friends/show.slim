@@ -17,8 +17,11 @@
             = button_to " Unfriend", friend_path(current_user), method: :delete, class: "user_box__bottom__btn--red", data:{confirm: "Are you sure delete request?"}
           - else
             = button_to " Delete request", friend_path(@user), method: :delete, class: "user_box__bottom__btn--red", data:{confirm: "Are you sure delete request?"}
+        
         -elsif current_user.id == @user.id
-          
+          button.btn[ data-toggle="modal" data-target="#exampleModalCenterUser"] 
+            i.bi.bi-three-dots-vertical
+        
         - else
           = button_to "Add friend", friends_path(@user), method: :post, class: "user_box__bottom__btn--red"
 
@@ -71,5 +74,39 @@
           i.bi.bi-chat-left-dots-fill
           text
             = post.comments.size
+
+/<---------modal edit profile user------->     
+#exampleModalCenterUser.modal.fade[tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"]
+  .modal-dialog.modal-dialog-centered[role="document"]       
+    .modal-content.modal_edit_frofile
+      = form_with model: @user, method: :put do |f|
+        .modal_edit_frofile__header
+          #review_avatar.review_avatar
+
+          .modal_edit_frofile__header__btn_chosse_image
+            label for="input_avatar"                
+              = f.file_field :avatar, id: "input_avatar", accept: "image/*", class: "input_image"
+              | Choose image ...
+              
+        .modal_edit_frofile__center 
+          .modal_edit_frofile__center__txt_input
+            lable First name: 
+            = f.text_field :first_name
+
+          .modal_edit_frofile__center__txt_input
+            lable Last name: 
+            = f.text_field :last_name
+
+          .modal_edit_frofile__center__txt_input
+            lable phone: 
+            = f.text_field :phone
+          
+          .modal_edit_frofile__center__txt_input
+            lable Gender: 
+            = f.select :gender, options_for_select(User.genders.map{ |key, value| [key.humanize, key] }), class:"form-control"
+
+
+        .modal_edit_frofile__bottom
+          = f.submit "Update profile", class:"btn btn-primary btn-sm"
           
   

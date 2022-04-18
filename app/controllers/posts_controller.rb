@@ -1,10 +1,11 @@
 class PostsController < ApplicationController
+  include Pundit
+  
   before_action :require_login, only: %i[ edit update destroy  ]
-  before_action :set_user, only: %i[update destroy  ]
   before_action :set_post, only: %i[ show edit update destroy ]
 
   def index
-    @pagy, @posts= pagy(Post.all.order(created_at: :desc), items: 2, link_extra: 'data-remote="true"')
+    @pagy, @posts= pagy(Post.all.order(created_at: :desc), items: 5, link_extra: 'data-remote="true"')
     @post= Post.new
 
     respond_to do |format|
@@ -30,6 +31,8 @@ class PostsController < ApplicationController
   end
 
   def update
+    authorize @post
+
     if @post.update(post_params)
       redirect_to posts_path
     else
@@ -38,6 +41,8 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    authorize @post
+    
     @post.destroy
     flash[:success] = "Post was successfully destroyed!!"
     redirect_to posts_path
@@ -46,14 +51,6 @@ class PostsController < ApplicationController
   private
   def set_post
     @post = Post.find(params[:id])
-  end
-
-  def set_user
-    set_post
-    if @post.user_id != current_user.id
-      flash[:error]= "You can't edit other people's posts"
-      redirect_to posts_path
-    end
   end
 
   def post_params

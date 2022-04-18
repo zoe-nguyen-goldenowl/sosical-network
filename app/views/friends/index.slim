@@ -1,11 +1,12 @@
 .container_friend_index
   - if !@friends.blank?
     - @friends.each do |friend| 
-      - user= User.set_friend(friend.friend_id).first
-      
+      - user= friend.set_friend(friend.friend_id) 
+
       .user_box 
         - if !user.avatar.blank?
           = image_tag user.avatar
+          
         .user_box__header  
           = user.full_name
           = link_to "X", friend_path(user), method: :delete, class: "container_friend_edit__btn--close", data:{confirm: "Are you sure delete request?"}
