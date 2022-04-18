@@ -23,14 +23,6 @@ class User < ApplicationRecord
     self.first_name+ " "+ self.last_name
   end
 
-  def owner_of_(name_product)
-    if self.id == name_product.user_id
-      true
-    else
-      false
-    end
-  end
-
   private
   def expiration_date  
     errors.add(:date_of_birth, 'date of birth incorrect') if !self.date_of_birth.past? 

@@ -7,10 +7,11 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.owner_of_(comment)
+    user.id == comment.owner_id ? true : false
   end   
 
   def update?
-    user.owner_of_(comment)
+    user.id == comment.owner_id ? true : false
   end
+
 end

@@ -1,7 +1,7 @@
 .container_friend_index
   - if !@friends.blank?
     - @friends.each do |friend| 
-      - user= friend.set_friend(friend.friend_id) 
+      - user= friend.find_user(friend.friend_id)
 
       .user_box 
         - if !user.avatar.blank?

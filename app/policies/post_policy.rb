@@ -7,11 +7,11 @@ class PostPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.owner_of_(post)
+    user.id == post.user_id ? true : false
   end   
 
   def update?
-    user.owner_of_(post)
+    user.id == post.user_id ? true : false
   end
   
 end
