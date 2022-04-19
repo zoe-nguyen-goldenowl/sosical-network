@@ -65,3 +65,18 @@ gem "redis", "~> 3.0"
 gem "slim"
 gem "pundit"
 
+group :development, :test do
+  # There may be other lines in this block already. Simply append the following after:
+  %w[rspec-core rspec-expectations rspec-mocks rspec-rails rspec-support].each do |lib|
+      gem lib, git: "https://github.com/rspec/#{lib}.git", branch: 'main' # Previously '4-0-dev' or '4-0-maintenance' branch
+  end
+end
+
+group :test do
+  # Might be other lines here, so simply add after them
+  gem 'factory_bot_rails'
+  gem 'database_cleaner-active_record'
+  gem 'database_cleaner-redis'
+end
+
+
