@@ -64,6 +64,7 @@ gem "redis", "~> 3.0"
 
 gem "slim"
 gem "pundit"
+gem "ransack"
 
 group :development, :test do
   # There may be other lines in this block already. Simply append the following after:

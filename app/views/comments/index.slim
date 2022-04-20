@@ -11,6 +11,7 @@
         button.close[type="button" data-dismiss="alert"] x
         .alert_value--center
           = value
+          
   .row 
     .col
       .container_comments__image
@@ -52,32 +53,15 @@
           .container_comments--right__count--ball
             i.bi.bi-chat-left-quote-fill
 
-          lable
+          lable[id= "count-comment_#{@post.id}"]
             = @post.comments.size
 
         .container_comments--right__comment
-          - @comments.each do |comment|
-            .comment_card
-              .comment_card__user
-
-                .comment_card__user__ball
-                  - if comment.owner.avatar 
-                    = image_tag comment.owner.avatar 
-                  - else
-                    i.bi.bi-person-workspace
+          #list-comments
+            == render "comments/index", locals: {comments: @comment}
       
-                = @post.name_user_comment(comment.owner_id)
-                    
-                - if current_user.id == comment.owner_id
-                  = button_to "X", post_comment_path(@post.id, comment.id), method: :delete, data:{confirm:"Are you sure?"}
-              
-              .comment_card__content
-                = comment.content
-        
-
         .container_comments--right__create_content
-          = form_with model: @comment, method: :post do |form|
+          = form_with model: @comment, local: false, method: :post do |form|
             = form.text_field :content, placeholder: "Add comment",class: "txt_content"
-            = form.submit "Post", class: "btn_post"
-
-    
+            = form.submit "Post",id: "btn-create-comment", class: "btn_post"
+ 

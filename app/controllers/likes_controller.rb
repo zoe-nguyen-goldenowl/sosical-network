@@ -5,17 +5,24 @@ class LikesController < ApplicationController
 
   def create
     @like= Like.new(user_id: current_user.id, post_id: params[:post_id])
-    
-    if @like.save  
-      ActionCable.server.broadcast "like", {count_like: @post.likes.size, post_id: params[:post_id], like_icon: '<a data-method= "delete" data-remote= "true"> <i class= "bi bi-hand-thumbs-up-fill" style= "color: #fe2c55;"></i> </a>', href: post_like_path( params[:post_id])} 
+    @href= post_like_path( params[:post_id])
+    if @like.save
+      respond_to do |format|
+        format.js { render "create", layout: false, content_type: 'text/javascript' }
+      end
+      ActionCable.server.broadcast "like", {count_like: @post.likes.size, post_id: params[:post_id]} 
+     
     end
     
   end
 
   def destroy
     if @like.destroy
-      ActionCable.server.broadcast "like", {count_like: @post.likes.size, post_id: params[:post_id], like_icon: '<a data-method= "post" data-remote= "true"> <i class= "bi bi-hand-thumbs-up-fill"></i> </a>', href: post_likes_path( params[:post_id])} 
-
+      ActionCable.server.broadcast "like", {count_like: @post.likes.size, post_id: params[:post_id]} 
+      @href= post_likes_path( params[:post_id])
+      respond_to do |format|
+        format.js { render "destroy", layout: false, content_type: 'text/javascript' }
+      end
   
     else    
       flash[:error] = "like was fail destroy" 

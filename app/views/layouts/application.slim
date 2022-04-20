@@ -32,10 +32,9 @@ body
       .col.col-md-5
         .menu_top__search
           .menu_top__search__box
-            input.menu_top__search__box__txt_search[placeholder= " Search account"]
-            p |
-            button.menu_top__search__box__btn_search
-              i.bi.bi-search
+            = form_tag(posts_path, local: true, method: :get) do
+              = text_field_tag :content
+              = submit_tag "Search", class: "menu_top__search__box__btn_search"
 
       .col.col-md-3
         .menu_top__nav

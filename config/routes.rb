@@ -10,7 +10,6 @@ Rails.application.routes.draw do
     resources :likes, only: :create 
     delete "like" => "likes#destroy"
   end
-  
   resources :users, only: %i[index update]
   
   get "users" => "users#index"

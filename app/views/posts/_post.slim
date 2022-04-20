@@ -57,7 +57,7 @@
               = link_to '<i class= "bi bi-chat-left-quote-fill"></i>'.html_safe, new_user_session_path
               
             .container_posts__navbar__icon__count
-              label 
+              label[id= "post-comment_#{post.id}"] 
                 = post.comments.size
 #footer 
       

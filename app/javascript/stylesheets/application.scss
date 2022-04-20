@@ -51,26 +51,22 @@
     max-width: 350px;
     .menu_top__search__box{
       border-radius: 50px;
-      background: #f1f1f2;
       height: 45px;
       display: flex;
+      
+      padding-top: 10px;
       justify-content: center;
+      background: #f1f1f2;
 
-      &__txt_search{
+
+      #content{
         border: none;
         outline: none;
         background: #f1f1f2;
       }
 
-      p{
-        margin-top: 3px;
-        font-size: 20px;
-        color: #15151c30;
-      }
-
       &__btn_search{
-        width: 10%;
-        border-radius: 50px;
+        width: auto;
         outline: none;
         border: none;
         background: #f1f1f2;
@@ -83,7 +79,7 @@
 
       &__btn_search:hover{
         i{
-          color: #6060ecab;
+          color: #3ec6fcfb;
         }
       }
     }

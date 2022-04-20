@@ -5,9 +5,15 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
 
   def index
-    @pagy, @posts= pagy(Post.all.order(created_at: :desc), items: 5, link_extra: 'data-remote="true"')
+    if params[:content].blank?
+      posts = Post.all
+    else 
+      posts = Post.ransack(content_cont: "#{params[:content]}").result
+    end
+    
+    @pagy, @posts= pagy(posts.order(created_at: :desc), items: 5, link_extra: 'data-remote="true"')
     @post= Post.new
-
+  
     respond_to do |format|
       format.html
       format.js { render 'index', layout: false, content_type: 'text/javascript' }

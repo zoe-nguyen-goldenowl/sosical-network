@@ -6,12 +6,21 @@ class CommentsController < ApplicationController
   def index
     @comments= @post.comments
     @user= User.find(@post.user_id)
+      respond_to do |format|
+        format.html
+        format.js{render "index", layout: false, content_type: 'text/javascript'}
+      end
   end
 
   def create 
     if @post.comments.create(content: params[:content], owner: current_user)
-      redirect_to post_comments_path(@post.id)
+      ActionCable.server.broadcast "comment",{count_comment: @post.comments.size()}
+      @comments= @post.comments
+      respond_to do |format|
+        format.js{render "create", layout: false, content_type: 'text/javascript'}
+      end
 
+      # redirect_to post_comments_path
     else
       flash[:error]="Fail"
       redirect_to post_comments_path(@post.id)

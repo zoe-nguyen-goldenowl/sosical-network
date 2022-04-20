@@ -159,7 +159,7 @@
 
 .comment_card{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   height: 80px;
 
   margin: 10px;
@@ -189,10 +189,11 @@
       }
     }
 
-    input{
+    .comment_card-delete{
       position: absolute;
       right: 10px;
       font-size: 14px;
+
       border: none;
       color: #921414;
     }
@@ -207,5 +208,9 @@
 }
 
 .comment_card::-webkit-scrollbar { 
+  display: none;
+}
+
+.next_link{
   display: none;
 }

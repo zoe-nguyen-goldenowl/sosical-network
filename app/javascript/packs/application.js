@@ -17,6 +17,7 @@ import '../packs/users'
 import logo from "../images/tiktok-logo-B9AC5FE794-seeklogo.com.png"
 
 import '../packs/infinite_scroll'
+
 window.jQuery = window.$ = require('jquery')
 
 Rails.start()
