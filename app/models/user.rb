@@ -9,6 +9,12 @@ class User < ApplicationRecord
   
   validates :first_name, presence: true
   validates :last_name, presence: true
+  validates :date_of_birth, presence: true
+  validates :gender, presence: true
+  validates :email, presence: true
+  validates :password, presence: true
+  validates :email, uniqueness: true
+
   validates :phone, length: {is: 10}, allow_blank: true, format:{with: /\d/}
   validate :expiration_date 
 

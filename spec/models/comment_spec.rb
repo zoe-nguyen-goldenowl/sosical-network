@@ -1,0 +1,7 @@
+require 'rails_helper'
+
+RSpec.describe Comment, type: :model do
+  byebug
+  it {should belong_to(:commentable)}
+  it {should belong_to(:owner)}
+end
