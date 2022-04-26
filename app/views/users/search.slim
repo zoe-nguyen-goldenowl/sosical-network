@@ -1,0 +1,17 @@
+- if !@users.blank?
+  - @users.each do |user|
+    .contain_user
+      .contain_user__card
+        .contain_user__card__avatar        
+          - if !user.avatar.blank?
+              = image_tag user.avatar
+          - else 
+              i.bi.bi-person-workspace
+
+        .contain_user__card__information
+          = link_to "#{user.full_name}", friend_path(user), method: :get 
+          br
+
+          = user.email
+          label Follow:
+          = user.likes.size()

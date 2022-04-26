@@ -32,9 +32,11 @@ body
       .col.col-md-5
         .menu_top__search
           .menu_top__search__box
-            = form_tag(posts_path, local: true, method: :get) do
-              = text_field_tag :content
-              = submit_tag "Search", class: "menu_top__search__box__btn_search"
+            = form_tag(search_path, local: true, method: :get) do
+              = text_field_tag :name_user , nil, placeholder: 'Name user or email...'
+  
+              = button_tag(type: "submit", class: "menu_top__search__box__btn_search") do 
+                <i class="bi bi-search"></i>
 
       .col.col-md-3
         .menu_top__nav
@@ -74,22 +76,22 @@ body
               
           i.bi.bi-three-dots-vertical
 
-  .container
+  .container1
     .row
       .col.col-md-4.col-sm-4
         .container__menuleft
           .container__menuleft__navbar
             = link_to '<i class="bi bi-house-door-fill"></i>For you '.html_safe, posts_path, class: "container__menuleft__navbar__link"
-            = link_to '<i class="bi bi-person-plus-fill"></i>Friends '.html_safe, new_friend_path, method: :get, class: "container__menuleft__navbar__link"
+            = link_to '<i class="bi bi-person-plus-fill"></i>Follow '.html_safe, new_friend_path, method: :get, class: "container__menuleft__navbar__link"
       
             - if !user_signed_in?
-              = link_to '<i class="bi bi-person-video2"></i>Request friends'.html_safe, new_user_session_path, class: "container__menuleft__navbar__link"
+              = link_to '<i class="bi bi-person-video2"></i>Request follow'.html_safe, new_user_session_path, class: "container__menuleft__navbar__link"
               .container__menuleft__navbar__tag_signin
                 p Log in to add friends, like posts, and view comments.
                 = button_to " Sign in", new_user_session_path, method: :get, class:" btn_signin--red" 
             
             - else 
-              = link_to '<i class="bi bi-person-video2"></i>Request friends'.html_safe, edit_friend_path(current_user), class: "container__menuleft__navbar__link"
+              = link_to '<i class="bi bi-person-video2"></i>Request follow'.html_safe, edit_friend_path(current_user), class: "container__menuleft__navbar__link"
               
           .container__menuleft__suggested_accounts
             p Suggested accounts

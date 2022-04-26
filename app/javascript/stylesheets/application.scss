@@ -58,8 +58,7 @@
       justify-content: center;
       background: #f1f1f2;
 
-
-      #content{
+      #name_user{
         border: none;
         outline: none;
         background: #f1f1f2;
@@ -69,11 +68,16 @@
         width: auto;
         outline: none;
         border: none;
+
         background: #f1f1f2;
         margin-left: 20px;
+
         i{
           font-size: 20px;
-          color: #15151c30;    
+          border-left: solid #00000033 0.5px;
+          
+          padding-left: 20px;
+          color: #828787; 
         }
       }
 
@@ -121,9 +125,12 @@
     flex-direction: column;
     width: auto;
     max-width: 320px;
+
     margin-top: 10px;
     padding-right: 5%;
     height: 600px;
+
+    margin-left: 15%;
     overflow-y: scroll;
 
     &__navbar{

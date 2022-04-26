@@ -13,6 +13,14 @@ class UsersController < ApplicationController
       redirect_to users_path
     end
   end
+
+  def search
+    if params[:name_user].blank?
+      @users = User.all
+    else 
+      @users = User.ransack(first_name_or_email_cont: "#{params[:name_user]}").result
+    end
+  end
   
   private
   def set_user

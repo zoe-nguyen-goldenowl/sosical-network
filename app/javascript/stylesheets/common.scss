@@ -69,6 +69,7 @@
 
 .button--red{
   width: 30%;
+  min-width: 130px;
   height: 35px;
   border-radius: 5px;
   font-weight: 550;
@@ -81,8 +82,8 @@
 // <-- button add friends -->
 @mixin btn_add_friend{
   height: 40px;
-  font-weight: 600;
-  font-size: 14px;
+  font-weight: 900;
+  font-size: 16px;
   border-radius: 5%;
 
   color: white;   
@@ -170,6 +171,7 @@
     font-size: 20px;
     font-weight: 500;
     display: flex;
+    
     &__ball{
       width: 60px;
       height: 60px;
@@ -213,4 +215,12 @@
 
 .next_link{
   display: none;
+}
+
+@mixin content_post{
+  width: 450px;
+  max-height: 100px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

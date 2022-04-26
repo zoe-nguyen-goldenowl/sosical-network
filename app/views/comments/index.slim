@@ -35,7 +35,7 @@
           .container_comments--right__content__add_friend 
             = button_to "View profile", users_path(@user.id), method: :get, class: "button--red"
 
-        p 
+        .container_comments__content
           = @post.content
 
         .container_comments--right__count 

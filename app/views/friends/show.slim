@@ -12,9 +12,8 @@
         - friend= Friend.exist_friends(current_user.id, @user.id).first
 
         - if friend
-
           - if friend.status =="friend"
-            = button_to " Unfriend", friend_path(current_user), method: :delete, class: "user_box__bottom__btn--red", data:{confirm: "Are you sure delete request?"}
+            = button_to " Unfollow", friend_path(current_user), method: :delete, class: "user_box__bottom__btn--red", data:{confirm: "Are you sure delete request?"}
           - else
             = button_to " Delete request", friend_path(@user), method: :delete, class: "user_box__bottom__btn--red", data:{confirm: "Are you sure delete request?"}
         
@@ -23,10 +22,10 @@
             i.bi.bi-three-dots-vertical
         
         - else
-          = button_to "Add friend", friends_path(@user), method: :post, class: "user_box__bottom__btn--red"
+          = button_to "Follow", friends_path(@user), method: :post, class: "user_box__bottom__btn--red"
 
       - else 
-        = button_to "Add friend", new_user_session_path, method: :get
+        = button_to "Follow", new_user_session_path, method: :get
       
   .container_show__center
     .container_show__center__information
@@ -74,6 +73,8 @@
           i.bi.bi-chat-left-dots-fill
           text
             = post.comments.size
+        .container_show__bottom__card_post__content
+          = post.content
 
 /<---------modal edit profile user------->     
 #exampleModalCenterUser.modal.fade[tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"]

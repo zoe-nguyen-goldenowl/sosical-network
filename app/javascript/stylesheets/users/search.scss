@@ -1,0 +1,62 @@
+.contain_user{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  .contain_user__card{
+    display: flex;
+    flex-direction: row;
+
+    padding: 20 0 20 0px ;
+    border-bottom: solid #dedede 0.5px;
+
+    &__avatar{
+      width: 70px;
+      height: 70px;
+
+      border-radius: 50%;
+      position: relative;
+
+        img{
+          width: 100%;
+          height:100%;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+
+        i{
+          width: 100%;
+          height:100%;
+          border-radius: 50%;
+
+          object-fit: cover;
+          font-size: 30px;
+          position: absolute;
+
+          padding: 20px;
+          background-color: #8a2be214;
+        }
+    }
+
+    &__information{
+      padding-left: 10px;
+      font-style: italic;
+      font-size: 17px;
+    
+      a{
+        font-size: 20px;
+        color: black;
+
+        font-weight: 700;
+        font-style: normal;
+      }
+
+      label{
+        padding: 0 0 0 10px;
+      }
+    }
+  }
+
+  .contain_user__card:hover{
+    background-color: #f1f1f14f;
+  }
+}

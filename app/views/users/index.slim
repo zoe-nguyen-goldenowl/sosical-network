@@ -8,37 +8,30 @@
 
     .container__header__avatar_name
       = @user.full_name
-      button.btn[ data-toggle="modal" data-target="#exampleModalCenterUser"] 
-        i.bi.bi-three-dots-vertical
-  .container__center
-    .container__center__information
-      text
-        = Friend.active_friend(@user).size
-      = link_to ' Friends', friends_path
-
-    .container__center__information
-      text
-        = @user.likes.size
-      lable Likes
-
-    .container__center__information
-      text
-        = @user.posts.size
-      lable Posts
-    
-  .container__information--detail
-    text Date of bith: 
-    = (@user.date_of_birth).to_s.slice(0, 10)
-
-    - if @user.male?  
-      p Gender: Male
-    - else 
-      p Gender: Female
-    
-    i.bi.bi-envelope 
-      label  
+     
+    .container__header__information 
+      text Date of bith: 
+      = (@user.date_of_birth).to_s.slice(0, 10)
+      
+      - if @user.male?  
+        label Gender: Male
+      - else 
+        label Gender: Female
+      
+      i.bi.bi-envelope 
         = @user.email
 
+    .container__header--bottom
+      .container__header--bottom--value
+        label = Friend.active_friend(@user).size
+        label = @user.likes.size
+        label = @user.posts.size
+
+      .container__header--bottom--key
+        label Follow 
+        label Like 
+        label Posts
+    
   .container__bottom
     - posts= @user.posts
 
@@ -56,6 +49,9 @@
           i.bi.bi-chat-left-dots-fill
           text
             = post.comments.size
+        
+        .container__bottom__card_post__content 
+          = post.content
 
   /<--modal edit profile-->
 #exampleModalCenterUser.modal.fade[tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"]

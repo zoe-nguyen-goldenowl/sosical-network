@@ -80,8 +80,8 @@
 
 
     .container_show__bottom__card_post{
-      width: 200px;
-      height: 300px;
+      width: 300px;
+      height: 400px;
       margin: 10px;
 
       border-radius: 3%;
@@ -113,6 +113,11 @@
           margin-right: 20px;
           margin-left: 5px;
         }     
+      }
+
+      .container_show__bottom__card_post__content{
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
     

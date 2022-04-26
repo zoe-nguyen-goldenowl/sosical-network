@@ -12,14 +12,14 @@
           - if friend
           
             - if friend.status =="friend"
-              = button_to " Unfriend", friend_path(current_user), method: :delete, class: "user_box__bottom__btn--red", data:{confirm: "Are you sure delete request?"}
+              = button_to " Unfollow", friend_path(current_user), method: :delete, class: "user_box__bottom__btn--red", data:{confirm: "Are you sure delete request?"}
             - else
               = button_to " Delete request", friend_path(user), method: :delete, class: "user_box__bottom__btn--red", data:{confirm: "Are you sure delete request?"}
           
           - else
-            = button_to "Add friend", friends_path(user), method: :post, class: "user_box__bottom__btn--red"
+            = button_to "Follow", friends_path(user), method: :post, class: "user_box__bottom__btn--red"
         
         - else
-          = button_to "Add friend", new_user_session_path, method: :get, class: "user_box__bottom__btn--red"
+          = button_to "Follow", new_user_session_path, method: :get, class: "user_box__bottom__btn--red"
         
     
