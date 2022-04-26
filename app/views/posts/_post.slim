@@ -16,7 +16,6 @@
 
       .col-md-6
         .container_posts__btn_detail--right
-          / = button_to 'detail', edit_post_path(post), method: :get, class: "button--red"
           - if user_signed_in?
             - friend= Friend.exist_friends(current_user.id, user.id).first
 

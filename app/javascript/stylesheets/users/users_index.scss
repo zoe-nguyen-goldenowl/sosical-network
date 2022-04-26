@@ -1,12 +1,22 @@
 .container{
+  overflow-y: scroll;
+  -ms-overflow-style: none;
 
   .container__header{
-   display: flex;
-   flex-direction: column ;
-   align-items: center;
+    display: flex;
+    flex-direction: column ;
+    align-items: center;
 
-   padding-top: 50px;
-   background-image: url("/assets/bg.jpg");
+    padding-top: 20px;
+    background-image: url("/assets/bg.jpg");
+    position: relative;
+
+    button{
+      position: absolute;
+      float: right;
+      font-size: 25px;
+      right: 5px;
+    }
 
     &__avatar_image{
       width: 150px;
@@ -23,7 +33,7 @@
 
     &__avatar_name{
       font-size: 25px;
-      font-weight: 900;
+      font-weight: 700;
 
       label{
         font-size: 18px;
@@ -48,7 +58,7 @@
 
         label{
           font-size: 25px;
-          font-weight: 900;
+          font-weight: 700;
           margin: 0 30 0 30px;
         }
       }
@@ -68,23 +78,20 @@
     }
   } 
 
-
-
   .container__bottom{
     padding-top: 20px;
     border-top: #f1f1f2 solid 1px;
     display: flex;
 
     flex-wrap: wrap;
+    justify-content: start;
     height: 650px;
 
-    overflow-y: scroll;
-    -ms-overflow-style: none;
-
     .container__bottom__card_post{
-      width: 200px;
-      height: 250px;
-      margin: 10 10 30 10px;
+      width: 250px;
+      height: 350px;
+      margin: 10px;
+      margin-bottom: 30px;
 
       border-radius: 3%;
       background-color: darkkhaki;
@@ -122,10 +129,10 @@
       }
     } 
   }
+}
 
-  .container__bottom::-webkit-scrollbar{
-    display: none;
-  }
+.container::-webkit-scrollbar{
+  display: none;
 }
 
 // <--- modal edit profile --->

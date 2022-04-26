@@ -1,5 +1,8 @@
 .container 
   .container__header 
+    button.btn[ data-toggle="modal" data-target="#exampleModalCenterUser"] 
+      i.bi.bi-three-dots-vertical
+
     .container__header__avatar_image
       - if !@user.avatar.blank?
         = image_tag @user.avatar
@@ -36,12 +39,12 @@
     - posts= @user.posts
 
     - posts.each do |post|
-      .container__bottom__card_post
+      .container__bottom__card_post[id= "comment_post_#{post.id}"]
         .container__bottom__card_post--header 
         - if !post.image.blank?
           = image_tag post.image, class: "container__bottom__card_posts"
 
-        .container__bottom__card_post--bottom 
+        .container__bottom__card_post--bottom
           i.bi.bi-hand-thumbs-up 
           text
             = post.likes.size
@@ -82,7 +85,6 @@
           .modal_edit_frofile__center__txt_input
             lable Gender: 
             = f.select :gender, options_for_select(User.genders.map{ |key, value| [key.humanize, key] }), class:"form-control"
-
 
         .modal_edit_frofile__bottom
           = f.submit "Update profile", class:"btn btn-primary btn-sm"

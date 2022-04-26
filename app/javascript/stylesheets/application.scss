@@ -19,6 +19,7 @@
   font-family: 'Lato', sans-serif;
   height: auto;
   max-height: 70px;
+
   border-bottom-color: #0000006b;
   border-bottom-style: ridge;
   
@@ -47,14 +48,14 @@
   }
 
   .menu_top__search{
-    margin-top: 8px;
+    margin-top: 5px;
     max-width: 350px;
     .menu_top__search__box{
       border-radius: 50px;
       height: 45px;
       display: flex;
       
-      padding-top: 10px;
+      padding-top: 5px;
       justify-content: center;
       background: #f1f1f2;
 
@@ -95,7 +96,6 @@
     margin-top: 10px;
 
     &__link_posts{
-      margin: 10px;
       color: black;
       font-weight: 600;
       font-size: 14px;
@@ -215,7 +215,6 @@
   .menu_top__search{
     display: none;
   }
-
 }
     
 
