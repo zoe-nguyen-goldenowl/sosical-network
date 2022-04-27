@@ -4,6 +4,8 @@ class UsersController < ApplicationController
   end
 
   def update
+    # binding.pry
+  
     if @user.update(user_params)
       flash[:success]= "Edit profile successful!!"
       redirect_to users_path
@@ -11,6 +13,15 @@ class UsersController < ApplicationController
     else
       flash[:error]= "Edit profile fail!!"
       redirect_to users_path
+    end
+  end
+
+  def search
+    if params[:name_user].blank?
+      @users = User.all
+    else 
+      @users = User.search_full_name("#{params[:name_user]}")
+      @users = User.ransack(first_name_or_email_cont: "#{params[:name_user]}").result if @users.blank?
     end
   end
   

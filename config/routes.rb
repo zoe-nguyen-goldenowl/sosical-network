@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :users, only: %i[index update]
   
   get "users" => "users#index"
+  get "search" => "users#search"
+  
   devise_for :users, controllers: {:registrations => 'users/registrations', :sessions => 'users/sessions'}
   root "posts#index"
 end

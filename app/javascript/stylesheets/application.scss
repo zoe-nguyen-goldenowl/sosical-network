@@ -19,6 +19,7 @@
   font-family: 'Lato', sans-serif;
   height: auto;
   max-height: 70px;
+
   border-bottom-color: #0000006b;
   border-bottom-style: ridge;
   
@@ -47,19 +48,18 @@
   }
 
   .menu_top__search{
-    margin-top: 8px;
+    margin-top: 5px;
     max-width: 350px;
     .menu_top__search__box{
       border-radius: 50px;
       height: 45px;
       display: flex;
       
-      padding-top: 10px;
+      padding-top: 5px;
       justify-content: center;
       background: #f1f1f2;
 
-
-      #content{
+      #name_user{
         border: none;
         outline: none;
         background: #f1f1f2;
@@ -69,11 +69,16 @@
         width: auto;
         outline: none;
         border: none;
+
         background: #f1f1f2;
         margin-left: 20px;
+
         i{
           font-size: 20px;
-          color: #15151c30;    
+          border-left: solid #00000033 0.5px;
+          
+          padding-left: 20px;
+          color: #828787; 
         }
       }
 
@@ -91,7 +96,6 @@
     margin-top: 10px;
 
     &__link_posts{
-      margin: 10px;
       color: black;
       font-weight: 600;
       font-size: 14px;
@@ -121,9 +125,12 @@
     flex-direction: column;
     width: auto;
     max-width: 320px;
+
     margin-top: 10px;
     padding-right: 5%;
     height: 600px;
+
+    margin-left: 15%;
     overflow-y: scroll;
 
     &__navbar{
@@ -208,7 +215,6 @@
   .menu_top__search{
     display: none;
   }
-
 }
     
 

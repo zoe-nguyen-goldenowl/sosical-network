@@ -9,10 +9,16 @@ class User < ApplicationRecord
   
   validates :first_name, presence: true
   validates :last_name, presence: true
+  validates :date_of_birth, presence: true
+  validates :gender, presence: true
+  validates :email, presence: true
+  validates :email, uniqueness: true
+
   validates :phone, length: {is: 10}, allow_blank: true, format:{with: /\d/}
   validate :expiration_date 
 
   scope :user_except, -> (user){ where.not(id: user)}
+  scope :search_full_name,-> (name){ where("CONCAT_WS(' ',first_name, last_name) iLIKE ?","%#{name}")}
  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable

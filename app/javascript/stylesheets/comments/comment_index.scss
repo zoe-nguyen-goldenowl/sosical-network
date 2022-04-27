@@ -85,6 +85,11 @@
       }
     }
 
+    .container_comments__content{
+      @include content_post;
+      padding: 15 0 15 0px;
+    }
+
     .container_comments--right__count {
       display: flex;
       padding-bottom: 20px;
@@ -101,14 +106,21 @@
         height: 40px;
         border-radius: 50%;
 
-        text-align: center;
         background-color: #babaff52;
         margin-right: 5%;
 
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        text-align: center;
+
         i{
           font-size: 25px;
-          margin-top: 40px;
+          margin-top: 10px;
+        }
 
+        a{
+          margin-top: 15%;
         }
 
       }

@@ -10,11 +10,29 @@
 
           .container_posts__information_user__name
             p = user.full_name
-            label = post.content
+
+            label
+              = post.content
 
       .col-md-6
         .container_posts__btn_detail--right
-          = button_to 'detail', edit_post_path(post), method: :get, class: "button--red"
+          - if user_signed_in?
+            - friend= Friend.exist_friends(current_user.id, user.id).first
+
+            - if friend
+              - if friend.status =="friend"
+                = button_to " Unfollow", friend_path(current_user), method: :delete, class: "button--red", data:{confirm: "Are you sure delete request?"}
+              - else
+                = button_to " Delete request", friend_path(user), method: :delete, class: "button--red", data:{confirm: "Are you sure delete request?"}
+            
+            -elsif current_user.id == user.id
+              = link_to "<i class= 'bi bi-three-dots-vertical'></i>".html_safe, edit_post_path(post), method: :get
+            
+            - else
+              = button_to "Follow", friends_path(user), method: :post, class: "button--red"
+
+          - else 
+            = button_to "Follow", new_user_session_path, method: :get, class: "button--red"
           
     .row
       .col-md-7
