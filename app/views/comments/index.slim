@@ -15,6 +15,7 @@
   .row 
     .col
       .container_comments__image
+        = image_tag @post.image 
         .container_comments__image--center 
           = image_tag @post.image 
 
@@ -30,7 +31,8 @@
               i.bi.bi-person-workspace
 
           .container_comments--right__content__avatar_name
-             = @post.user.full_name
+             = link_to friend_path(@user), method: :get, class: "link_full_name"
+                = @post.user.full_name
           
           .container_comments--right__content__add_friend 
             = button_to "View profile", friend_path(@user), method: :get, class: "button--red"

@@ -107,7 +107,7 @@ body
             
           .container__menuleft__logout
             - if user_signed_in?
-              = link_to '<i class="bi bi-box-arrow-left">  Log out</i>'.html_safe, destroy_user_session_path, method: :delete
+              = link_to '<i class="bi bi-box-arrow-left">  Exit </i>'.html_safe, destroy_user_session_path, method: :delete
 
       .col.col-md-8.col-sm-8
         .container__main

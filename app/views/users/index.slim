@@ -39,7 +39,9 @@
     - posts= @user.posts
 
     - posts.each do |post|
-      .container__bottom__card_post[id= "comment_post_#{post.id}"]
+      .container__bottom__card_post
+        = button_to "", post_comments_path(post.id), method: :get, class: "detail_post"
+
         .container__bottom__card_post--header 
         - if !post.image.blank?
           = image_tag post.image, class: "container__bottom__card_posts"

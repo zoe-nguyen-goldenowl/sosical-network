@@ -3,13 +3,14 @@
     .comment_card__user
 
       .comment_card__user__ball
-        - if comment.owner.avatar 
+        - if comment.owner.avatar.attached? 
           = image_tag comment.owner.avatar 
 
         - else
           i.bi.bi-person-workspace
 
-      = @post.name_user_comment(comment.owner_id)
+      = link_to friend_path(comment.owner), method: :get, class: "link_full_name"
+        = @post.name_user_comment(comment.owner_id)
           
       - if current_user.id == comment.owner_id
         = button_to "X",  post_comment_path(@post.id, comment.id), class:"comment_card-delete", method: :delete, data:{confirm:"Are you sure?"}

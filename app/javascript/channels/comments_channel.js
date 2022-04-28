@@ -20,9 +20,12 @@ consumer.subscriptions.create("CommentsChannel", {
       type: "GET",
       url: url,
       dataType: "script",
+      success: function(data) {
+        $(form).fadeOut(800, function(){
+            form.html(data).fadeIn().delay(2000);
+        });
+    }
     });
-    window.location.reload()
-   
   }
   
 });

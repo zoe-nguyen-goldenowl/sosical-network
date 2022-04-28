@@ -16,14 +16,16 @@ class CommentsController < ApplicationController
     if @post.comments.create(content: params[:content], owner: current_user)
       ActionCable.server.broadcast "comment",{count_comment: @post.comments.size()}
       @comments= @post.comments
+
       respond_to do |format|
         format.js{render "create", layout: false, content_type: 'text/javascript'}
       end
 
-      # redirect_to post_comments_path
     else
       flash[:error]="Fail"
-      redirect_to post_comments_path(@post.id)
+      respond_to do |format|
+        format.js{render "create", layout: false, content_type: 'text/javascript'}
+      end
     end           
   end
 
@@ -31,13 +33,13 @@ class CommentsController < ApplicationController
     authorize @comment
     
     if @comment.destroy
-      flash[:success]="Comment destroy successful!!"
+      ActionCable.server.broadcast "comment",{count_comment: @post.comments.size()}
       redirect_to post_comments_path(@post.id)
 
     else
       flash[:error]="Comment destroy fails!!"
+      ActionCable.server.broadcast "create",{count_comment: @post.comments.size()}    
       redirect_to post_comments_path(@post.id)
-
     end
   end
 

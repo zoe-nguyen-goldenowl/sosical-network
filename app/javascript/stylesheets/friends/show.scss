@@ -7,12 +7,22 @@
       width: 90px;
       height: 90px;
       border-radius: 50%;
-      background-color: tan;
+
+      position: relative;
+      background-color: #d1e7e1;
 
       i{
-        margin: 20px;
+        width: 90px;
+        height: 90px;
         font-size: 50px;
-        color: white;
+
+        position: absolute;
+        text-align: center;
+        display: flex;
+
+        justify-content: center;
+        flex-direction: column;
+        color: #e09de2;
       }
 
       img{
@@ -80,12 +90,12 @@
 
 
     .container_show__bottom__card_post{
-      width: 300px;
-      height: 400px;
+      width: 250px;
+      height: 350px;
       margin: 10px;
-
+      
+      margin-bottom: 30px;
       border-radius: 3%;
-      background-color: darkkhaki;
       position: relative;
 
       img{

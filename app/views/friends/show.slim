@@ -31,7 +31,7 @@
     .container_show__center__information
       text
         = @user.friends.active_friend(@user.id).size
-      lable Friends 
+      lable Follow 
 
     .container_show__center__information
       text
@@ -61,8 +61,9 @@
 
     - posts.each do |post|
       .container_show__bottom__card_post
-        .container_show__bottom__card_post--header 
-          
+        = button_to "", post_comments_path(post.id),method: :get, class: "detail_post"
+
+        .container_show__bottom__card_post--header   
         = image_tag post.image, class: "container_show__bottom__card_posts"
 
         .container_show__bottom__card_post--bottom 
