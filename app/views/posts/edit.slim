@@ -6,7 +6,7 @@
         h3 Detail posts 
       .modal_create_post__center
         p Caption:
-        = f.text_area :content, class: "txt_content"
+        = f.text_area :content, class: "txt_content", placeholder: "Write content..."
         
         .modal_create_post__center__imagebox   
           - if @post.image.persisted?

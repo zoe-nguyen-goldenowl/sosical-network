@@ -143,13 +143,14 @@
       justify-content: space-around;
 
       &__link{
-        margin: 2px;
-        font-size: 20px;
-        width: 100%;
-        padding-left: 10px;
-        
         height: 50px;
+        width: 100%;
+        font-size: 20px;
+        
+        margin: 2px;
+        padding-left: 10px;
         padding-top: 10px;
+        
         border-radius: 5px;
         color: black;
         
@@ -187,6 +188,7 @@
     &__suggested_accounts{
       border-top: #2624241a solid 1px;
       width: 100%;
+
       margin-top: 20px;
       padding-top: 20px;
 
@@ -209,6 +211,7 @@
         margin-right: 10px; 
       }  
     }
+
     &__logout i:hover{
       color:#f3364f;
       list-style-type: none;

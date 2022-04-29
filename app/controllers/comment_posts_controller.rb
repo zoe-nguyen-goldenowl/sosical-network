@@ -7,7 +7,7 @@ class CommentPostsController < ApplicationController
       ActionCable.server.broadcast "comment",{count_comment: @post.comments.size()}
       @comment= @post.comments.last 
      
-      redirect_to posts_path
+      redirect_to post_comments_path(@post.id)
 
     else
       flash[:error]="Fail"   
