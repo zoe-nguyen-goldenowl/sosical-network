@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
   def index
     @comments= @post.comments
     @user= User.find(@post.user_id)
+
       respond_to do |format|
         format.html
         format.js{render "index", layout: false, content_type: 'text/javascript'}
@@ -16,13 +17,15 @@ class CommentsController < ApplicationController
     if @post.comments.create(content: params[:content], owner: current_user)
       ActionCable.server.broadcast "comment",{count_comment: @post.comments.size()}
       @comments= @post.comments
-
+      
       respond_to do |format|
+        format.html{redirect_to post_comments_path(@post.id)}
         format.js{render "create", layout: false, content_type: 'text/javascript'}
       end
 
     else
       flash[:error]="Fail"
+
       respond_to do |format|
         format.js{render "create", layout: false, content_type: 'text/javascript'}
       end
@@ -38,6 +41,7 @@ class CommentsController < ApplicationController
 
     else
       flash[:error]="Comment destroy fails!!"
+
       ActionCable.server.broadcast "create",{count_comment: @post.comments.size()}    
       redirect_to post_comments_path(@post.id)
     end
@@ -55,6 +59,7 @@ class CommentsController < ApplicationController
   def require_login
     if !user_signed_in?
       flash[:error]="Log in to add friends, like posts, and create comments!!"
+      
       set_post 
       redirect_to post_comments_path(@post.id)
     end

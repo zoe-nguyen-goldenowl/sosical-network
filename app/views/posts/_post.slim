@@ -37,9 +37,17 @@
     .row
       .col-md-7
         - if post.image.persisted? 
+
           .container_posts__image
             = image_tag post.image
 
+        .container_posts__create_comment
+          = form_with url:"/create_comment/#{post.id}", local: true, method: :post do |form|
+
+            = form.text_field :content, placeholder: "Add comment", class: "txt_comment"
+            = form.submit "Post",id: "btn-create-comment", class: "btn_post btn btn-light"
+          .create_comment_post[id= "create_comment_post_#{post.id}"]
+            
       .col-md-4
         .container_posts__navbar
           .container_posts__navbar__icon

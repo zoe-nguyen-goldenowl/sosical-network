@@ -68,6 +68,34 @@
     }
   }
 
+  .container_posts__create_comment{
+    display: flex;
+    flex-direction: row;
+
+    margin-left: 20px;
+    justify-content: center;
+
+    .txt_comment{
+      width: 70%;
+      height: 40px;
+      border-radius: 5px;
+
+      margin: 5px;
+      margin-left: 20px;
+      border: solid 0.5px #8174746e;
+
+    }
+
+    .btn_post{
+      width: 20%;
+      height: 40px;
+      float: right;
+
+      margin-top: 5px;
+      border: solid 0.5px #536e7e;
+    }
+  }
+
   .container_posts__navbar{
     display: flex;
     flex-direction: column-reverse;

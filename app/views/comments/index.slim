@@ -3,12 +3,14 @@
     - if key== "error" || key== "alert"
       .alert.alert-danger.alert-dismissible
         button.close[type="button" data-dismiss="alert"] x
+        
         .alert_value--center
           = value
           
     - elsif key== "success"|| key== "notice" 
       .alert.alert-success.alert-dismissible
         button.close[type="button" data-dismiss="alert"] x
+    
         .alert_value--center
           = value
           
@@ -16,6 +18,7 @@
     .col
       .container_comments__image
         = image_tag @post.image 
+
         .container_comments__image--center 
           = image_tag @post.image 
 
@@ -44,8 +47,10 @@
           
           .container_comments--right__count--ball
             - like_exit= Like.exists?(user_id: current_user.id, post_id: @post.id)
+
             - if like_exit
               = link_to '<i class= "bi bi-hand-thumbs-up-fill" style= "color: #fe2c55;"></i>'.html_safe, post_like_path(@post.id), method: :delete, remote: true, class: "link--black"
+            
             - else
               = link_to '<i class= "bi bi-hand-thumbs-up-fill" style= "color: #000000;"></i>'.html_safe, post_likes_path(@post.id), method: :post, remote: true, class: "link--black"
               
@@ -64,6 +69,7 @@
       
         .container_comments--right__create_content
           = form_with model: @comment, local: false, method: :post do |form|
+
             = form.text_field :content, placeholder: "Add comment",class: "txt_content"
             = form.submit "Post",id: "btn-create-comment", class: "btn_post"
  

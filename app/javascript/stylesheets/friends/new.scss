@@ -1,6 +1,17 @@
 .container_friend_new{
   display: flex;
   flex-wrap: wrap; 
+
   @include card_user;
+  position: relative;
+
+  label{
+    color: white;
+  }
+}
+
+.container_friend_new label:hover{
+  color: #e94663;
+
 }
   

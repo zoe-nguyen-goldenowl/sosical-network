@@ -31,7 +31,8 @@
         label = @user.posts.size
 
       .container__header--bottom--key
-        label Follow 
+         
+        = link_to "Follow", friends_path, method: :get
         label Like 
         label Posts
     

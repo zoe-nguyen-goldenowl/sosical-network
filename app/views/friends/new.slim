@@ -1,10 +1,14 @@
 .container_friend_new 
   - @users.each do |user|
-    .user_box
+
+    .user_box      
       - if !user.avatar.blank?
         = image_tag user.avatar
+
       .user_box__header 
-        = user.full_name
+        = link_to friend_path(user), method: :get, class: "link_full_name"
+          label
+            = user.full_name
 
       .user_box__bottom
         - if user_signed_in?
@@ -12,7 +16,7 @@
           - if friend
           
             - if friend.status =="friend"
-              = button_to " Unfollow", friend_path(current_user), method: :delete, class: "user_box__bottom__btn--red", data:{confirm: "Are you sure delete request?"}
+              = button_to " Unfollow", friend_path(user), method: :delete, class: "user_box__bottom__btn--red", data:{confirm: "Are you sure delete request?"}
             - else
               = button_to " Delete request", friend_path(user), method: :delete, class: "user_box__bottom__btn--red", data:{confirm: "Are you sure delete request?"}
           

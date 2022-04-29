@@ -160,33 +160,7 @@
     }
     
     .container_comments--right__create_content{
-      height:200px;
-      width: 100%;
-      margin-left: 10px;
-
-      padding-top: 20px;
-      border-top: steelblue solid 1px;
-
-      .txt_content{
-        width: 70%;
-        height: 50px;
-        border-radius: 10px;
-
-        padding-left: 10px;
-        border: none;
-        background-color: #f1f1f2;
-      }
-
-      .btn_post{
-        margin-left: 20px;
-        width: 120px;
-        height: 50px;
-
-        border: none;
-        font-weight: 500;
-        border-radius: 5%;
-
-      }
+     @include create_comment;
     }
   }
 }
